@@ -5,6 +5,7 @@ import Shop from './pages/Shop'
 import Product from './pages/Product'
 import Footer from './components/Footer'
 import Login from './pages/Login'
+import Header from './components/Header'
 
 import {
   BrowserRouter as Router,
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
       <Router>
+        <Header />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/Shop' element={<Shop />} />
@@ -32,7 +34,7 @@ function App() {
 export default App;
 
 // Home
-// Cart 
+// Cart
 // Shop
 // Update Products
 // Delivery

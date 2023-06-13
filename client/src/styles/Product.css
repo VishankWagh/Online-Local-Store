@@ -1,0 +1,35 @@
+.product {
+    padding: 5rem 7rem;
+}
+
+.prod-img img {
+    max-width: 100%;
+}
+
+.prod-details {
+    padding-left: 3rem;
+}
+
+.prod-name h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.prod-name .shop-name {
+    color: grey;
+    /* font-style: 1rem; */
+}
+
+.prod-desc {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.prod-price p {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.similar-prods {
+    margin-top: 2rem;
+}

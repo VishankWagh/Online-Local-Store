@@ -1,0 +1,32 @@
+.shop {
+    padding: 5rem 7rem;
+}
+
+.shop-img {
+    width: 100%;
+    height: 50vh;
+    background-image: url(../images/carousel.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 3rem 2rem;
+}
+
+.shop-name h2 {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.shop-area {
+    color: grey;
+}
+
+.shop-desc {
+    padding-top: 1rem;
+}
+
+.pin-code-inp {
+    width: fit-content;
+    height: 2.5rem;
+    margin: 1rem;
+}

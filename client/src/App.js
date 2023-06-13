@@ -1,25 +1,40 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import UpdateProduct from './components/UpdateProduct';
-import CreateProduct from './components/CreateProduct';
-import Merchant from './pages/Merchant';
-import Delivery from './pages/Delivery';
-import CRegister from './pages/CRegister';
-import SRegister from './pages/SRegister';
-import DRegister from './pages/DRegister';
+import Home from './pages/Home'
+import Shop from './pages/Shop'
+import Product from './pages/Product'
+import Footer from './components/Footer'
+import Login from './pages/Login'
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
+
 
 function App() {
   return (
     <>
-      <Header />
-      {/* <Merchant /> */}
-      {/* <Delivery /> */}
-      {/* <CRegister /> */}
-      {/* <SRegister /> */}
-      <DRegister />
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/Shop' element={<Shop />} />
+          <Route path='/Product' element={<Product />} />
+          <Route path='/Login' element={<Login />} />
+        </Routes>
+        <Footer />
+      </Router>
     </>
   );
 }
 
 export default App;
+
+// Home
+// Cart
+// Shop
+// Update Products
+// Delivery
+// Orders
+// Feedback

@@ -1,0 +1,9 @@
+.login {
+    padding: 10rem 25rem;
+}
+
+.login form {
+    border: 2px solid rgb(0, 106, 255);
+    border-radius: 20px;
+    padding: 2rem;
+}

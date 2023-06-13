@@ -1,0 +1,30 @@
+.home {
+    padding: 5rem 7rem;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.carousel-item {
+    height: 50vh;
+    background-color: blue;
+    color: white;
+    padding: 8rem 9rem;
+}
+
+.home-txt {
+    font-size: 2rem;
+}
+
+.drop-downs {
+    margin-top: 2rem;
+}
+
+.css-b62m3t-container {
+    margin: 1rem 1rem 2rem;
+    /* margin-left: auto; */
+}
+
+.load-more {
+    width: 20%;
+    height: fit-content;
+}

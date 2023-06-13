@@ -6,7 +6,9 @@
 
 .carousel-item {
     height: 50vh;
-    background-color: blue;
+    /* background-color: blue; */
+    background-image: url('../images/bgi2.png');
+    background-position: contain;
     color: white;
     padding: 8rem 9rem;
 }

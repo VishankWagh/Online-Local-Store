@@ -44,7 +44,7 @@ function Home() {
                             <div className="home-desc">
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur totam maxime a voluptates, ea neque expedita alias placeat suscipit optio.
                             </div>
-                            <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." />
+                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
                         </div>
                         <div className="carousel-item">
                             <div className="home-txt">
@@ -53,7 +53,7 @@ function Home() {
                             <div className="home-desc">
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur totam maxime a voluptates, ea neque expedita alias placeat suscipit optio.
                             </div>
-                            <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." />
+                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

@@ -1,3 +1,13 @@
+.navbar .logo img {
+    height: 70px;
+    margin-left: 3rem;
+    mix-blend-mode: multiply;
+}
+
+.navbar {
+    padding: 0 !important;
+}
+
 .footer {
     background-color: #2b2b2b;
     padding: 2rem 6rem;

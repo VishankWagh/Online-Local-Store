@@ -68,6 +68,7 @@ function Home() {
                 <div className="drop-downs d-flex">
                     <DropDown data={area} />
                     <DropDown data={area} />
+                    <DropDown data={area} />
                 </div>
                 <div className="shops d-flex container row">
                     <ShopCard />

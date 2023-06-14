@@ -5,7 +5,7 @@
 .shop-img {
     width: 100%;
     height: 50vh;
-    background-image: url(../images/carousel.png);
+    background-image: url(../images/bgi1.png);
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
@@ -25,8 +25,37 @@
     padding-top: 1rem;
 }
 
-.pin-code-inp {
+.pin-code-inp,
+.pro-srch-label {
     width: fit-content;
     height: 2.5rem;
     margin: 1rem;
+}
+
+.product-srch {
+    border: none;
+    outline: none;
+    width: 15rem;
+    margin-right: 3rem;
+}
+
+.pro-srch-label {
+    padding: 10px;
+    position: relative;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.bi-search {
+    position: absolute;
+    right: 10%;
+    top: 35%;
+}
+
+.category {
+    padding: 2rem 0;
+}
+
+.category-name {
+    padding-left: 1rem;
 }

@@ -1,5 +1,5 @@
 .product {
-    padding: 5rem 7rem;
+    padding: 7rem;
 }
 
 .prod-img img {
@@ -31,5 +31,10 @@
 }
 
 .similar-prods {
-    margin-top: 2rem;
+    margin-top: 4rem;
+}
+
+.category-name {
+    /* padding-left: 2rem; */
+    padding-bottom: 1rem;
 }

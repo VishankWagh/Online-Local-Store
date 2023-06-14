@@ -6,7 +6,7 @@ import Product from './pages/Product'
 import Footer from './components/Footer'
 import Login from './pages/Login'
 import Header from './components/Header'
-
+import Merchant from './pages/Merchant'
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,6 +24,7 @@ function App() {
           <Route path='/Shop' element={<Shop />} />
           <Route path='/Product' element={<Product />} />
           <Route path='/Login' element={<Login />} />
+          <Route path='/Merchant' element={<Merchant />} />
         </Routes>
         <Footer />
       </Router>

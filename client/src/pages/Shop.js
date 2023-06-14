@@ -39,13 +39,29 @@ function Shop() {
                     <DropDown data={category} />
                     <DropDown data={category} />
                 </div>
-                <div className="products row">
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                <div className="all-products">
+                    <div className="category">
+                        <div className="category-name"><h3>Electronics</h3></div>
+                        <div className="products row">
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                        </div>
+                    </div>
+                    <div className="category">
+                        <div className="category-name"><h3>Groceries</h3></div>
+                        <div className="products row">
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

@@ -24,6 +24,7 @@ try {
     // });
 
     // databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+    // databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 
 } catch (e) {
     console.error(e);
@@ -32,6 +33,6 @@ try {
 }
 // }
 
-// main().catch(console.error);
+//main().catch(console.error);
 
 export default qbDB;

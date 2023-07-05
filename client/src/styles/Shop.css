@@ -62,6 +62,7 @@
 }
 
 .pin-code-inp,
+.manage-cat-inp,
 .pro-srch-label {
     width: fit-content;
     height: 2.5rem;

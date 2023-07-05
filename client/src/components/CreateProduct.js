@@ -3,25 +3,34 @@ import React from 'react'
 const CreateProduct = () => {
     return (
         <form className="m-5 col">
-            <h2 className="mb-4">Create Product</h2>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Product Name</label>
-                <input type="text" class="form-control bg-body-secondary" id="exampleInputEmail1" ></input>
+            <div className="mb-3">
+                <label htmlFor="productName" className="form-label b">Product Name</label>
+                <input type="text" className="form-control bg-body-secondary" id="productName" ></input>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="inputGroupFile01">Product image</label>
-                <input type="file" class="form-control bg-body-secondary" id="inputGroupFile01"></input>
+            <div className="mb-3">
+                <label htmlFor="category" className="form-label b">Select Category</label>
+                <input list="brow" className="px-3 form-control bg-body-secondary" id="category" />
+                <datalist id="brow">
+                    <option value="Internet Explorer" />
+                    <option value="Firefox" />
+                    <option value="Chrome" />
+                    <option value="Opera" />
+                    <option value="Safari" />
+                </datalist>
             </div>
-            <div class="mb-3">
-                <label for="floatingTextarea" class="form-label">description</label>
-                <textarea class="form-control bg-body-secondary" placeholder="Enter Product description" id="floatingTextarea"></textarea>
+            <div className="mb-3">
+                <label className="form-label b" htmlFor="productImg">Product image</label>
+                <input type="file" className="form-control bg-body-secondary" id="productImg"></input>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Price</label>
-                <input type="number" class="form-control bg-body-secondary" id="exampleInputEmail1" ></input>
+            <div className="mb-3">
+                <label htmlFor="description" className="form-label b">description</label>
+                <textarea className="form-control bg-body-secondary" id="description"></textarea>
             </div>
-            dropdown <br />
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div className="mb-3">
+                <label htmlFor="price" className="form-label b">Price</label>
+                <input type="number" className="form-control bg-body-secondary" id="price" ></input>
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
     )
 }

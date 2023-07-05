@@ -6,6 +6,7 @@ function DropDown(props) {
             // className="basic-single"
             // classNamePrefix="select"
             defaultValue={props.data[0]}
+            onChange={(e) => { props.updSrchd(props.name, e.value) }}
             // isDisabled={isDisabled}
             // isLoading={isLoading}
             // isClearable={isClearable}

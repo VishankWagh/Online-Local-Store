@@ -1,7 +1,39 @@
+import axios from "axios";
 import ProductCard from "../components/ProductCard";
-import "../styles/Product.css"
+import "../styles/Product.css";
+import { useEffect, useState } from 'react';
+
 
 function Product() {
+
+    const [product, setProduct] = useState([]);
+    const [similarProducts, setSimilarProducts] = useState();
+    const [shopName, setShopName] = useState();
+
+    useEffect(() => {
+        async function fetchProdDetails() {
+            const queryParameters = new URLSearchParams(window.location.search)
+            const pname = queryParameters.get("pname");
+            const sname = queryParameters.get("sname");
+            setShopName(sname);
+
+            const response = await axios.get(`http://localhost:5050/products/singleproduct/${pname}`);
+            console.log("repn " + JSON.stringify(response));
+            setProduct(response.data.product);
+            console.log("shpName " + shopName);
+
+            // fetch similar products
+            const cname = response.data.product.category;
+            console.log("sn cn " + JSON.stringify(response.data), cname);
+            const res = await axios.get(`http://localhost:5050/products/similarproducts/${sname}/${cname}/${pname}`);
+            setSimilarProducts(res.data.prodList);
+        }
+
+        fetchProdDetails();
+    }, [shopName])
+    console.log("sim " + JSON.stringify(similarProducts));
+
+
     return (
         <>
             <div className="product">
@@ -11,27 +43,32 @@ function Product() {
                     </div>
                     <div className="col-6 prod-details">
                         <div className="prod-name">
-                            <h2>Smart Watch</h2>
-                            <p className="shop-name">Variety Super Store</p>
+                            <h2>{product.name}</h2>
+                            <p className="shop-name">{shopName}</p>
                         </div>
                         <div className="prod-desc">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis doloribus ipsa sed suscipit perferendis tempora et assumenda, quas totam modi atque non voluptas dignissimos deleniti? Iure labore soluta velit illum!
+                            {product.desc}
                         </div>
                         <div className="prod-price">
-                            <p>Rs. 200</p>
+                            <p>Rs. {product.price}</p>
                         </div>
                         <div className="btn btn-warning addtocart">Add To Cart</div>
                     </div>
                 </div>
                 <hr />
                 <div className="similar-prods row">
-                    <div className="category-name"><h3>More from Electronics</h3></div>
+                    <div className="category-name"><h3>More from {product.category}</h3></div>
+                    {similarProducts && similarProducts.map((prod, index) => {
+                        console.log("pro " + prod);
+                        return (
+                            prod && <ProductCard key={index} prod={prod} sname={shopName} imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
+                        )
+                    })}
+                    {/* <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
                     <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
                     <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
                     <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
-                    <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
-                    <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
-                    <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
+                    <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" /> */}
                 </div>
             </div>
         </>

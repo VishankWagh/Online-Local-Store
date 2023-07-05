@@ -19,13 +19,15 @@ function App() {
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/Shop' element={<Shop />} />
-          <Route path='/Product' element={<Product />} />
-          <Route path='/Login' element={<Login />} />
-          <Route path='/Merchant' element={<Merchant />} />
-        </Routes>
+        <div className="main">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/Shop' element={<Shop />} />
+            <Route path='/Product' element={<Product />} />
+            <Route path='/Login' element={<Login />} />
+            <Route path='/Merchant' element={<Merchant />} />
+          </Routes>
+        </div>
         <Footer />
       </Router>
     </>

@@ -1,7 +1,28 @@
 .navbar .logo img {
-    height: 70px;
+    height: 55px;
+    padding: 10px 10px 0px;
     margin-left: 3rem;
     mix-blend-mode: multiply;
+}
+
+.navbar .logo {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.logo-name {
+    padding-top: 10px;
+}
+
+.nav-item .nav-link {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-link span {
+    font-size: 1rem;
 }
 
 .navbar {
@@ -12,6 +33,7 @@
     background-color: #2b2b2b;
     padding: 2rem 6rem;
     color: white;
+    z-index: -1;
 }
 
 a {
@@ -25,4 +47,14 @@ ul {
 
 ul {
     list-style-type: none;
+}
+
+/* main */
+
+.main {
+    min-height: 75vh;
+}
+
+.content {
+    padding: 1rem 7rem;
 }

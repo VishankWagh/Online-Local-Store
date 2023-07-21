@@ -41,7 +41,12 @@ const DRegister = () => {
 
     return <div className="register">
         <form onSubmit={handleSubmit}>
-            <h2 className="mb-4">Delivery Person Register</h2>
+            <h2 className="register-head">
+                <span className="mx-4 fs-1 material-symbols-outlined">
+                    local_shipping
+                </span>
+                Delivery Person Register
+            </h2>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">Name</label>
                 <input type="text" className="form-control" id="name" value={name} onChange={(e) => { setName(e.target.value) }} required></input>
@@ -74,7 +79,7 @@ const DRegister = () => {
                 <label htmlFor="exampleInputPassword1" className="form-label">Pincode</label>
                 <input type="number" className="form-control" id="exampleInputPassword1" value={} onChange={(e) =>{setName(e.target.value)}} required></input>
             </div> */}
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Register</button>
         </form>
     </div>
 

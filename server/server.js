@@ -8,7 +8,6 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js"
 import orderRoutes from "./routes/ordersRoute.js"
 import categoryRoutes from "./routes/categoryRoutes.js"
-import cors from "cors"
 // import qbDB from "./config/db.js"
 
 dotenv.config();

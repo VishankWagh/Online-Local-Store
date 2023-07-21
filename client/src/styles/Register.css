@@ -1,0 +1,35 @@
+.register {
+    padding: 10rem 25rem;
+    background-color: rgb(238, 255, 238);
+}
+
+.register .material-symbols-outlined {
+    color: rgb(67, 152, 67);
+}
+
+.register-head {
+    margin-bottom: 2rem;
+    padding-bottom: 15px;
+    width: 75%;
+    border-bottom: 5px solid #0a5616;
+}
+
+.register form {
+    padding: 3rem 2rem;
+    border: 2px solid rgb(0, 106, 255);
+    border-radius: 20px;
+    border: 3px solid #0a5616;
+}
+
+.register button {
+    margin-left: 36%;
+    margin-top: 2rem;
+    width: 25%;
+    font-size: large;
+    letter-spacing: 2px;
+    background-color: #0a5616;
+}
+
+.register select {
+    background-color: rgb(212, 255, 212);
+}

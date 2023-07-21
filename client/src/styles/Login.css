@@ -1,9 +1,33 @@
 .login {
     padding: 10rem 25rem;
+    background-color: rgb(238, 255, 238);
+}
+
+.login .material-symbols-outlined {
+    color: rgb(67, 152, 67);
+}
+
+.login-head {
+    /* margin-left: 4.7rem; */
+    margin-bottom: 2.5rem;
+    padding-bottom: 20px;
+    width: 75%;
+    font-size: 3rem;
+    /* text-align: center; */
+    border-bottom: 5px solid #0a5616;
 }
 
 .login form {
-    border: 2px solid rgb(0, 106, 255);
+    border: 3px solid #0a5616;
     border-radius: 20px;
     padding: 2rem;
+}
+
+.login button {
+    margin-left: 36%;
+    margin-top: 2rem;
+    width: 25%;
+    font-size: large;
+    letter-spacing: 2px;
+    background-color: #0a5616;
 }

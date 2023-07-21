@@ -1,0 +1,55 @@
+.merchant {
+    background-color: rgb(238, 255, 238);
+}
+
+.merchant button {
+    background-color: #0a5616;
+}
+
+.merchant-head {
+    border-color: #0a5616 !important;
+}
+
+.merchant-head .material-symbols-outlined {
+    color: rgb(67, 152, 67);
+}
+
+.merchant-menu {
+    z-index: -10;
+    background-color: rgb(170 236 170);
+}
+
+.merchant-menu .material-symbols-outlined {
+    color: rgb(67, 152, 67);
+}
+
+.merchant-menu p {
+    background-color: rgb(212, 255, 212);
+}
+
+.order,
+.del-prod-card {
+    background-color: rgb(212, 255, 212) !important;
+}
+
+.order-header {
+    background-color: #0a5616;
+    color: white;
+}
+
+.del-prod-card input {
+    /* background-color: rgb(212, 255, 212); */
+    background-color: rgb(238, 255, 238) !important;
+}
+
+.merchant table {
+    --bs-table-bg: transparent;
+}
+
+.order-status {
+    background-color: rgb(170 236 170);
+}
+
+.form-control {
+    background-color: rgb(212, 255, 212) !important;
+}

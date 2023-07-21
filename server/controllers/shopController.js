@@ -15,7 +15,7 @@ import qbDB from '../config/db.js';
 
 export const shoplistByPincodeController = async (req, res) => {
     const pincd = parseInt(req.params.pincode);
-    console.log(pincd);
+    // console.log(pincd);
     let shopList = await qbDB.collection("shops").find({ pincode: pincd }).toArray();
     let categories = await qbDB.collection("category").find().toArray();
     // let shopList = await qbDB.collection("category").find().toArray();
@@ -31,3 +31,26 @@ export const singleShopController = async (req, res) => {
 
 
 // export { shoplistByAreaController, shoplistByPincodeController };
+
+
+// get shop
+export const getShopController = async (req, res) => {
+
+    try {
+        const shopName = req.params.shopName;
+        const shop = await qbDB.collection("shops").findOne({ shopName });
+        res.status(200).send({
+            success: true,
+            message: "get shop success",
+            shop
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(404).send({
+            success: false,
+            message: "err in category controller",
+            error
+        })
+    }
+
+}

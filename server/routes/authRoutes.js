@@ -1,5 +1,5 @@
 import express from "express";
-import { cregisterController, dregisterController, sregisterController } from "../controller/authController.js";
+import { cregisterController, dregisterController, loginController, sregisterController } from "../controllers/authController.js";
 
 const router = express.Router();
 
@@ -13,6 +13,6 @@ router.post("/s-register", sregisterController);
 router.post("/d-register", dregisterController);
 
 // User Login
-// router.get("/login/:user", loginController);
+router.post("/login/:user", loginController);
 
 export default router

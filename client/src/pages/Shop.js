@@ -22,12 +22,12 @@ function Shop() {
             const queryParameters = new URLSearchParams(window.location.search)
             const sname = queryParameters.get("sname")
             const response = await axios.get(`http://localhost:5050/shops/singleshop/${sname}`);
-            // console.log(JSON.stringify(response));
+            // // console.log(JSON.stringify(response));
             const shp = await response.data;
             setShop(shp);
             setCategories(shp.categories);
             setNCategories(shp.categories);
-            // console.log("prods " + JSON.stringify(shp.prods));
+            // // console.log("prods " + JSON.stringify(shp.prods));
 
             const prodLst = shp.prods;
 
@@ -35,14 +35,14 @@ function Shop() {
             setProductList(data?.prodArr);
             setNProductList(data?.prodArr);
 
-            // console.log("prarr " + JSON.stringify(data.prodArr));
+            // // console.log("prarr " + JSON.stringify(data.prodArr));
             setShopProds(prodLst);
         }
         fetchShop();
     }, [setShop])
 
-    // console.log("shopp " + JSON.stringify(shop));
-    // console.log("prdl " + JSON.stringify(productList));
+    // // console.log("shopp " + JSON.stringify(shop));
+    // // console.log("prdl " + JSON.stringify(productList));
 
 
     let product = [
@@ -60,30 +60,30 @@ function Shop() {
     }
 
     function updateSearched(srch, name) {
-        if (name == "none") {
+        if (name === "none") {
             setNProductList(productList);
             setNCategories(categories);
             setShopProds(shop.prods);
         }
-        else if (srch == "product") {
+        else if (srch === "product") {
             const nprd = productList.filter((prd) => {
-                return prd.name == name;
+                return prd.name === name;
             })
-            console.log("nprd " + nprd);
+            // console.log("nprd " + nprd);
             setNProductList(nprd);
         }
-        else if (srch == "category") {
+        else if (srch === "category") {
             setCatSelected(name);
             const ncatg = categories.filter((cat) => {
-                return cat == name;
+                return cat === name;
             })
-            console.log("ncatg " + ncatg);
+            // console.log("ncatg " + ncatg);
             setNCategories(ncatg);
 
             const nprd = productList.filter((prd) => {
-                return prd.category == name;
+                return prd.category === name;
             })
-            console.log("nprd catg " + JSON.stringify(nprd));
+            // console.log("nprd catg " + JSON.stringify(nprd));
             setShopProds(nprd.map((p) => p.name));
         }
     }

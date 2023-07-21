@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import "../style/register.css"
+import "../styles/Register.css"
 
 const SRegister = () => {
 
@@ -46,10 +46,22 @@ const SRegister = () => {
 
     return <div className="register">
         <form onSubmit={handleSubmit}>
-            <h2 className="mb-4">Shop Register</h2>
+            {/* <div> */}
+
+            <h2 className="register-head align-items-center">
+                <span className="mx-4 fs-1 material-symbols-outlined">
+                    storefront
+                </span>
+                Shop Register
+            </h2>
+            {/* </div> */}
             <div className="mb-3">
                 <label htmlFor="shopName" className="form-label">Shop Name</label>
                 <input type="text" className="form-control" id="shopName" value={shopName} onChange={(e) => { setShopName(e.target.value) }} ></input>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="sdescription" className="form-label">Shop description</label>
+                <textarea className="form-control bg-body-secondary" id="sdescription"></textarea>
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="shopImage">Shop image</label>
@@ -87,7 +99,7 @@ const SRegister = () => {
                 <label htmlFor="cpassword" className="form-label">Confirm Password</label>
                 <input type="password" className="form-control" id="cpassword"></input>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Register</button>
         </form>
     </div>
 

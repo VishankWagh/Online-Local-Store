@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const UpdateProduct = () => {
-    return (
-        <form className="m-5 col">
+
+    const [searched, setSearched] = useState(true);
+
+    return (<div className="col m-5">
+        {/* {!searched ? */}
+
+        <div className="search-prod mb-3">
+            <label htmlFor="productName" className="form-label m-3 fs-5">Search Product by Name</label>
+            <div className="input-group m-0  manage-cat-inp">
+                <input type="text" list="products" className="form-control" id="productName" placeholder="Search Product Name" />
+                <datalist id="products">
+                    <option value="keyboard" />
+                    <option value="Mouse" />
+                    <option value="Laptop" />
+                    <option value="kurta" />
+                </datalist>
+                <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button">Select</button>
+            </div>
+        </div>
+
+        {/* : */}
+
+        <form className="">
             <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">Product Name</label>
                 <input type="text" className="form-control bg-body-secondary" id="exampleInputEmail1" ></input>
@@ -22,6 +43,9 @@ const UpdateProduct = () => {
             dropdown <br />
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
+
+        {/* } */}
+    </div>
     )
 }
 

@@ -17,14 +17,14 @@ function Home() {
 
     useEffect(() => {
 
-        console.log("use ");
+        // console.log("use ");
         async function fetchShopList() {
             const pincode = 432001;
             const response = await axios.get('http://localhost:5050/shops/shoplistbypincode/432001');
             // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
             const shopLs = await response.data.shopList;
             const catgs = await response.data.categories;
-            console.log(JSON.stringify(response));
+            // console.log(JSON.stringify(response));
             setShopList(shopLs);
             setNShopList(shopLs);
             setCategories(catgs);
@@ -61,10 +61,10 @@ function Home() {
     function updateSearched(srch, name) {
         const area = filter.area;
         const catg = filter.catg;
-        console.log("updsrchd " + srch);
-        console.log("shplstu " + JSON.stringify(shopList));
+        // // console.log("updsrchd " + srch);
+        // // console.log("shplstu " + JSON.stringify(shopList));
         if (name == "") {
-            console.log("nn");
+            // console.log("nn");
             setNShopList(shopList)
             if (srch == "area") {
                 setFilter(p => { return { ...p, area: name } })
@@ -87,28 +87,28 @@ function Home() {
                 }
             }
 
-            // console.log("nn");
+            // // console.log("nn");
             // if (area + catg === "") {
-            //     console.log("b nn");
+            //     // console.log("b nn");
             //     setNShopList(shopList)
             // }
             // else if (filter.area === "" && filter.catg !== "") {
-            //     console.log("a nn");
-            //     console.log("if catg " + filter.catg);
+            //     // console.log("a nn");
+            //     // console.log("if catg " + filter.catg);
             // setNShopList(shopList.filter((shp) => {
             //     return shp.categories.includes(catg);
             // }))
             // }
             // else if (filter.area !== "" && filter.catg === "") {
-            //     console.log("c nn");
-            //     console.log("if area " + filter.area);
+            //     // console.log("c nn");
+            //     // console.log("if area " + filter.area);
             //     setNShopList(shopList.filter((shp) => {
             //         return (shp.area == area);
             //     }))
             // }
         }
         else if (srch == "area") {
-            console.log("catg " + (filter.catg === ""));
+            // console.log("catg " + (filter.catg === ""));
             setFilter(p => { return { ...p, area: name } })
 
             let nshp = shopList.filter((shop) => {
@@ -119,11 +119,11 @@ function Home() {
                     return shp.categories.includes(filter.catg);
                 });
             }
-            console.log("nshp " + JSON.stringify(nshp));
+            // console.log("nshp " + JSON.stringify(nshp));
             setNShopList(nshp);
         }
         else if (srch == "category") {
-            console.log("area " + filter.area);
+            // console.log("area " + filter.area);
             setFilter(p => { return { ...p, catg: name } })
 
             let nshp = shopList.filter((shop) => {
@@ -134,7 +134,7 @@ function Home() {
                     return (shp.area == filter.area);
                 });
             }
-            console.log("nshpc " + JSON.stringify(nshp));
+            // console.log("nshpc " + JSON.stringify(nshp));
             setNShopList(nshp);
         }
     }

@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import qbDB from "../config/db.js"
+import JWT from 'jsonwebtoken';
 
 // const hashPassword = async (password) => {
 //     try {
@@ -208,18 +209,19 @@ export const loginController = async (req, res) => {
 
         if (req.params.user === "c") {
 
-            const customer = qbDB.collection("customer").findOne({ uname });
+            const customer = await qbDB.collection("customer").findOne({ uname });
             if (!customer) {
                 return res.status(404).send({
                     success: false,
                     message: "Customer is not Registered Please Register"
                 })
             }
+            // console.log("customer.password " + JSON.stringify(customer.password));
             let match;
             await bcrypt.compare(password, customer.password).then(function (result) {
                 match = result;
             });
-            if (match) {
+            if (!match) {
                 res.status(200).send({
                     success: false,
                     message: "Invalid Password",
@@ -227,19 +229,31 @@ export const loginController = async (req, res) => {
             }
 
             //token
-            const token = await jwt.sign({ data: 'foobar' }, 'secret', { expiresIn: 60 * 60 });
+            const token = JWT.sign({
+                exp: 60,
+                data: customer._id
+            }, 'thisisusw04jsonwebtoken');
+
+            res.status(200).send({
+                success: true,
+                message: "Login Successfull",
+                user: {
+                    user: "Customer",
+                    name: customer.name
+                }
+            })
 
         } else if (req.params.user === "s") {
 
-            const customer = qbDB.collection("shop").findOne({ uname });
-            if (!customer) {
+            const shopKeeper = await qbDB.collection("shop").findOne({ uname });
+            if (!shopKeeper) {
                 return res.status(404).send({
                     success: false,
-                    message: "Customer is not Registered Please Register"
+                    message: "Shop-Keeper is not Registered Please Register"
                 })
             }
             let match;
-            await bcrypt.compare(password, customer.password).then(function (result) {
+            await bcrypt.compare(password, shopKeeper.password).then(function (result) {
                 match = result;
             });
             if (match) {
@@ -250,10 +264,23 @@ export const loginController = async (req, res) => {
             }
 
             //token
+            const token = JWT.sign({
+                exp: 60,
+                data: customer._id
+            }, 'thisisusw04jsonwebtoken');
+
+            res.status(200).send({
+                success: true,
+                message: "Login Successfull",
+                user: {
+                    user: "ShopKeeper",
+                    name: shopKeeper.ownerName
+                }
+            })
 
         } else if (req.params.user === "d") {
 
-            const dperson = qbDB.collection("deliveryperson").findOne({ uname });
+            const dperson = await qbDB.collection("deliveryperson").findOne({ uname });
             if (!dperson) {
                 return res.status(404).send({
                     success: false,
@@ -272,6 +299,19 @@ export const loginController = async (req, res) => {
             }
 
             //token
+            const token = JWT.sign({
+                exp: 60,
+                data: customer._id
+            }, 'thisisusw04jsonwebtoken');
+
+            res.status(200).send({
+                success: true,
+                message: "Login Successfull",
+                user: {
+                    user: "Delivery person",
+                    name: dperson.ownerName
+                }
+            })
 
         }
 

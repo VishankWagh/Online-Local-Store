@@ -1,26 +1,39 @@
 .product {
-    padding: 7rem;
+    padding: 8rem 7rem 7rem;
+}
+
+.prod-row {
+    /* border: 1px solid #0a5616; */
 }
 
 .prod-img img {
     max-width: 100%;
+    width: 100%;
+}
+
+.prod-img {
+    padding: 0 !important;
 }
 
 .prod-details {
     padding-left: 3rem;
+    background-color: rgb(212, 255, 212);
 }
 
 .prod-name h2 {
+    padding-top: 3rem;
     font-size: 3rem;
     font-weight: bold;
 }
 
 .prod-name .shop-name {
     color: grey;
-    /* font-style: 1rem; */
+    font-size: 1.5rem;
 }
 
 .prod-desc {
+    font-size: 1.2rem;
+    font-weight: 500;
     padding-top: 2rem;
     padding-bottom: 1rem;
 }
@@ -37,4 +50,32 @@
 .category-name {
     /* padding-left: 2rem; */
     padding-bottom: 1rem;
+}
+
+.similar-prods .card-body a {
+    margin-bottom: 10px;
+    color: white;
+}
+
+.addcartbtn {
+    background-color: #ffca00 !important;
+    color: black !important;
+    border: 1px solid #ffca00 !important;
+    border-radius: 0;
+}
+
+.prod-details .addcartbtn {
+    margin-top: 1rem;
+}
+
+.ofr-price {
+    color: rgb(184 0 0);
+    font-weight: 300;
+    font-size: 2rem;
+}
+
+.org-price {
+    padding: 0 1rem;
+    font-weight: 500;
+    font-size: 2rem;
 }

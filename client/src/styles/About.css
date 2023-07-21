@@ -1,0 +1,103 @@
+.abt-head {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 2rem;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #5da759;
+    padding: 1rem 0;
+}
+
+.about section.container {
+    padding-top: 6.5rem;
+}
+
+.abt-content {
+    background-color: rgb(212, 255, 212);
+    padding: 2rem 0;
+}
+
+.abt-hmbtn {
+    border-radius: 0;
+    background-color: #0a5616;
+    color: white;
+    border: 1px solid #0a5616;
+}
+
+.abt-hmbtn:hover {
+    border: 1px solid #0a5616;
+    background-color: rgb(238, 255, 238);
+}
+
+.abt-cntbtn {
+    border-radius: 0;
+    color: #0a5616;
+    background-color: rgb(238, 255, 238);
+    border: 1px solid #0a5616;
+}
+
+.abt-cntbtn:hover {
+    border: 1px solid #0a5616;
+}
+
+p {
+    margin: 0;
+}
+
+.head-p {
+    position: relative;
+}
+
+.quote {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    position: absolute;
+    font-size: 7rem;
+    font-weight: 700;
+    color: #0a5616;
+}
+
+.open-q {
+    top: -14%;
+    left: -15%;
+}
+
+.close-q {
+    top: -10%;
+    right: -15%;
+}
+
+
+/* meet our team */
+
+.abt-team {
+    margin-top: 1.5rem;
+    padding: 3.5rem 0;
+}
+
+.team-head {
+    font-size: 2rem;
+    font-weight: 600;
+    padding-bottom: 2.5rem;
+}
+
+.dev-img {
+    width: auto;
+}
+
+.abt-team .col {
+    padding: 1rem;
+}
+
+.soc-link {
+    border-color: #0a5616;
+    color: #0a5616;
+}
+
+.soc-link:hover {
+    color: rgb(212, 255, 212);
+    background-color: #0a5616;
+    border-color: #0a5616;
+}

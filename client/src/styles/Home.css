@@ -1,3 +1,8 @@
+/* :root {
+    --bg: rgb(238, 255, 238);
+    --clr: rgb(241, 255, 241);
+} */
+
 .home {
     min-height: 100vh;
     /* padding: 5rem 7rem; */
@@ -6,13 +11,22 @@
 }
 
 .carousel-item {
-    height: 55vh;
+    height: 70vh;
     /* background-color: blue; */
     background-image: url('../images/bgi2.png');
-    background-position: contain;
+    /* background-position: ; */
+    background-size: 1519px 551px;
+    background-repeat: no-repeat;
+    /* filter: brightness(50%); */
+    background-position: left;
     color: white;
-    padding: 8rem 9rem;
 }
+
+.bg {
+    backdrop-filter: brightness(70%);
+    padding: 10rem 9rem;
+}
+
 
 .carousel-control-next,
 .carousel-control-prev {
@@ -21,28 +35,119 @@
 
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
-    background-color: #00000075;
+    background-color: #1f4f00d9;
     border-radius: 5px;
+    height: 3rem;
+    width: 2.5rem;
 }
 
 .carousel-bx {
     padding-top: 10px;
 }
 
+.dbl-quote {
+    position: relative;
+    top: 5%;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
 .home-txt {
-    font-size: 2rem;
+    padding: 0 3rem;
+    font-size: 3.5rem;
+    font-weight: 700;
+    width: 60vw;
+}
+
+.home-desc {
+    padding: 0 3rem;
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
 .drop-downs {
+    border-top: 2px solid #0a5616;
     margin-top: 2rem;
+    background-color: rgb(212, 255, 212);
 }
 
 .css-b62m3t-container {
     margin: 1rem 1rem 2rem;
+    border: 1px solid #0a5616;
     /* margin-left: auto; */
 }
 
 .load-more {
     width: 20%;
     height: fit-content;
+}
+
+
+/* shop */
+
+.shops {
+    margin: 0;
+    padding: 0;
+}
+
+.shop-comp {
+    padding-left: 0;
+}
+
+.shop-comp .details {
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+
+}
+
+.home-shpimg {
+    height: 10rem;
+
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 4rem 0rem 3rem;
+    /* border-bottom: 2px solid #0a5616; */
+    width: fit-content;
+}
+
+.card {
+    margin: 0;
+    padding: 1rem;
+    background-color: rgb(212, 255, 212);
+    border: none;
+}
+
+.list-group-item {
+    background-color: rgb(212, 255, 212);
+}
+
+.line {
+    padding: 0 1rem;
+}
+
+.ratings span {
+    color: rgb(243, 186, 0);
+    font-size: 20px;
+}
+
+.card-body a {
+    width: 100%;
+    border-radius: 0;
+    background-color: #0a5616;
+    border: 1px solid #0a5616;
+}
+
+.card-body a:hover {
+    background-color: rgb(212, 255, 212) !important;
+    border: 1px solid #0a5616 !important;
+    color: #0a5616 !important;
+}
+
+.load-more {
+    border-radius: 0;
+    background-color: #15a72b;
+    color: white;
 }

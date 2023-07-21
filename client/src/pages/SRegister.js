@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import "../style/register.css"
+import "../styles/Register.css"
 
 const SRegister = () => {
 

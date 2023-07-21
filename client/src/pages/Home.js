@@ -4,6 +4,7 @@ import DropDown from '../components/DropDown';
 import ShopCard from '../components/ShopCard';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Cart from '../components/Cart';
 
 function Home() {
 
@@ -20,7 +21,7 @@ function Home() {
         console.log("use ");
         async function fetchShopList() {
             const pincode = 432001;
-            const response = await axios.get('http://localhost:5050/shops/shoplistbypincode/432001');
+            const response = await axios.get('http://localhost:5050/shops/shoplistbypincode/396001');
             // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
             const shopLs = await response.data.shopList;
             const catgs = await response.data.categories;
@@ -139,9 +140,19 @@ function Home() {
         }
     }
 
+    const shopImgArr =
+        [
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCatveyiU5Ji4sQjTCydq-Cs0H-49jsK0EbQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXsjiZGfBkq3fdal8BYjQRkLwNVKx3hCnEA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRa-uc1ljm3iuPu5fq4zOK_KTXT9jxOQJitrAEPvxsQ0ybxB0972ZaxfenGQpGJ564Ygg&usqp=CAU',
+            'https://5.imimg.com/data5/HR/BA/WN/SELLER-13309345/shop-name-board.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFGydmvCaRm32-wk_A8MzX6J1tVRtLc20CS1bRupC0Cu3_Br_2KZg3UIxRx7WT7ycWTGc&usqp=CAU'
+        ]
+
     return (
         <>
             <div className="home">
+
                 <div id="carouselExampleIndicators" className="carousel slide carousel-bx">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -149,30 +160,48 @@ function Home() {
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div className="carousel-inner">
-                        <div className="carousel-item active">
-                            <div className="home-txt">
-                                Welcome to Quik-Buy
-                            </div>
-                            <div className="home-desc">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur totam maxime a voluptates, ea neque expedita alias placeat suscipit optio.
-                            </div>
-                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
-                        </div>
-                        <div className="carousel-item">
-                            <div className="home-txt">
-                                Find your known and trusted local shops with ease
-                            </div>
-                            <div className="home-desc">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur totam maxime a voluptates, ea neque expedita alias placeat suscipit optio.
+                        <div className="carousel-item active" style={{ backgroundImage: "url('https://img.freepik.com/premium-photo/top-view-black-friday-decoration-concept-with-gift-box-shopping-cart-shopping-bag-dark-background-shopping-concept-boxing-day-black-friday-composition_53476-6274.jpg')" }}>
+                            <div className="bg">
+                                <div className="home-txt">
+                                    Welcome to Quik-Buy
+                                </div>
+                                <div className="home-desc">
+                                    <span className="dbl-quote">"</span>
+                                    Discover the joy of finding exactly what you're looking for.
+                                    <span className="dbl-quote">"</span>
+                                </div>
                             </div>
                             {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
                         </div>
-                        <div className="carousel-item">
-                            <div className="home-txt">
-                                Order products from desired shop in your area
+                        <div className="carousel-item" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/front-view-cyber-monday-shopping-cart-with-bags-copy-space_23-2148657638.jpg?w=1380&t=st=1689565890~exp=1689566490~hmac=850f8ef733898efd555a555b28232d9f893f4887ee458e81de908a5e33a9734a')" }}>
+                            <div className="bg">
+
+                                <div className="home-txt">
+                                    Find your known and trusted local shops with ease
+                                </div>
+                                <div className="home-desc">
+                                    <span className="dbl-quote">"</span>
+
+                                    Elevate your shopping experience and redefine your style.
+                                    <span className="dbl-quote">"</span>
+
+                                </div>
                             </div>
-                            <div className="home-desc">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur totam maxime a voluptates, ea neque expedita alias placeat suscipit optio.
+                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
+                        </div>4
+                        <div className="carousel-item" style={{ backgroundImage: "url('https://png.pngtree.com/thumb_back/fw800/background/20230624/pngtree-online-e-commerce-store-in-sleek-3d-black-design-image_3661423.png ')" }}>
+                            <div className="bg">
+
+                                <div className="home-txt">
+                                    Order products from desired shop in your area
+                                </div>
+                                <div className="home-desc">
+                                    <span className="dbl-quote">"</span>
+
+                                    Shop with us and indulge in the luxury of choice and convenience
+                                    <span className="dbl-quote">"</span>
+
+                                </div>
                             </div>
                             {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
                         </div>
@@ -188,26 +217,34 @@ function Home() {
                 </div>
 
                 <div className="content">
+
+                    <Cart />
                     <div className="drop-downs d-flex">
                         <DropDown data={areaLs} updSrchd={updateSearched} name={"area"} />
                         <DropDown data={category} updSrchd={updateSearched} name={"category"} />
                         {/* <DropDown data={area} /> */}
                     </div>
+                    <h3 className="title">Find Your Desired Shops...</h3>
                     <div className="shops d-flex container row">
-                        {nshopList.map((shop) => {
+                        {nshopList.map((shop, index) => {
                             return (
                                 <div className="shop-comp mr-1 mb-5 col-3">
                                     <div className="card" style={{ width: "18rem" }}>
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3n1hDUr-6ZnNqdbLgmy8-2YELpShpwq-iyA&usqp=CAU" className="card-img-top" alt="..." />
+                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
                                         <div className="card-body">
-                                            <h5 className="card-title">{shop.shopName}</h5>
-                                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
+                                            <span className="details">{shop.area} - {shop.pincode}</span>
                                         </div>
                                         <ul className="list-group list-group-flush">
-                                            <li className="list-group-item">Owner: {shop.ownerName}</li>
-                                            <li className="list-group-item">Area: {shop.area}</li>
-                                            <li className="list-group-item">Pincode: {shop.pincode}</li>
+                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
+                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
+                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
                                         </ul>
+                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
+                                        <p className="own line">
+                                            <span className="ownedby">Owned By - </span>
+                                            <span className="ownername">{shop.ownerName}</span>
+                                        </p>
                                         <div className="card-body">
                                             <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
                                             {/* <a href="/" className="card-link">Another link</a> */}
@@ -216,13 +253,62 @@ function Home() {
                                 </div>
                             )
                         })}
-                        {/* <ShopCard />
-                    <ShopCard />
-                    <ShopCard />
-                    <ShopCard />
-                    <ShopCard /> */}
+                        {nshopList.map((shop, index) => {
+                            return (
+                                <div className="shop-comp mr-1 mb-5 col-3">
+                                    <div className="card" style={{ width: "18rem" }}>
+                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
+                                            <span className="details">{shop.area} - {shop.pincode}</span>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
+                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
+                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
+                                        </ul>
+                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
+                                        <p className="own line">
+                                            <span className="ownedby">Owned By - </span>
+                                            <span className="ownername">{shop.ownerName}</span>
+                                        </p>
+                                        <div className="card-body">
+                                            <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
+                                            {/* <a href="/" className="card-link">Another link</a> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        {nshopList.map((shop, index) => {
+                            return (
+                                <div className="shop-comp mr-1 mb-5 col-3">
+                                    <div className="card" style={{ width: "18rem" }}>
+                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
+                                            <span className="details">{shop.area} - {shop.pincode}</span>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
+                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
+                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
+                                        </ul>
+                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
+                                        <p className="own line">
+                                            <span className="ownedby">Owned By - </span>
+                                            <span className="ownername">{shop.ownerName}</span>
+                                        </p>
+                                        <div className="card-body">
+                                            <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
+                                            {/* <a href="/" className="card-link">Another link</a> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
-                    {nshopList.length ? <button type="button" className="btn btn-primary load-more">Load More...</button> : "No Products Here"}
+                    {nshopList.length ? <button type="button" className="btn load-more">Load More...</button> : "No Products Here"}
                 </div>
             </div>
         </>

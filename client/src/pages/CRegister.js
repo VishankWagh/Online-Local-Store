@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "../style/register.css"
+import "../styles/Register.css"
 import axios from "axios";
 
 /*

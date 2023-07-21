@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 // import qbdb from "./config/db.js";
-import cors from 'cors';
 // import productRoutes from "./routes/productRoute.js";
 import shopRoutes from "./routes/shopRoute.js";
 import productRoutes from "./routes/productRoute.js";

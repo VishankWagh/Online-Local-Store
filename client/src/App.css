@@ -1,8 +1,31 @@
+:root {
+    /* --bg: rgb(225 255 225); */
+    --bg: rgb(238, 255, 238);
+    --clr: rgb(241, 255, 241);
+}
+
+/* remve brdr rad */
+.card,
+.card img {
+    border-radius: 0;
+}
+
+
+.main {
+    background-color: var(--bg);
+}
+
+.navbar {
+    background-color: #0a5616;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.900);
+}
+
 .navbar .logo img {
-    height: 55px;
-    padding: 10px 10px 0px;
+    height: 75px;
+    padding: 0 10px;
     margin-left: 3rem;
     mix-blend-mode: multiply;
+    border-radius: 10px;
 }
 
 .navbar .logo {
@@ -14,19 +37,41 @@
 
 .logo-name {
     padding-top: 10px;
+    color: var(--clr);
 }
 
 .nav-item .nav-link {
     display: flex;
+    color: var(--clr);
     flex-direction: column;
 }
 
-.nav-link span {
+.reglog-link {
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link .txt {
     font-size: 1rem;
 }
 
+.sec-logo {
+    font-size: 2rem;
+}
+
+a.page-link {
+    font-weight: 400;
+    font-size: 20px;
+    padding-top: 17px;
+}
+
 .navbar {
+    /* background-color: #071952; */
+    color: var(--clr);
     padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer {
@@ -57,4 +102,63 @@ ul {
 
 .content {
     padding: 1rem 7rem;
+}
+
+.cart-icon {
+    cursor: pointer;
+    position: fixed;
+    top: 15%;
+    right: 10%;
+    border-radius: 10px;
+    color: black;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.500);
+    background-color: rgb(238, 255, 238);
+    /* border: 1px solid #0a5616; */
+    z-index: 10;
+    padding: 5px;
+}
+
+.btn {
+    border-radius: 0;
+    border: 1px solid #0a5616;
+    background-color: #0a5616;
+}
+
+.btn:hover {
+    background-color: transparent;
+}
+
+.reg-select {
+    background-color: rgb(212, 255, 212);
+    outline: none;
+}
+
+.reg-select option {
+    border-radius: 0;
+}
+
+
+/* footer */
+
+footer {
+    margin-top: 2rem;
+    padding: 2rem 5rem;
+    background-color: #002e07;
+    color: white;
+}
+
+ul li {
+    list-style: none;
+    font-size: 17px;
+}
+
+.mail-btn,
+.form-control {
+    border-top-right-radius: 0%;
+    border-bottom-left-radius: 0;
+    background-color: rgb(212, 255, 212);
+}
+
+.mail-btn:hover {
+    border: 1px solid rgb(212, 255, 212);
 }

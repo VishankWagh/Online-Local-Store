@@ -1,6 +1,11 @@
 import '../styles/About.css'
+import tmv from '../images/tm_vishank.jpg';
+import tmu from '../images/tm_ushank.jpg';
 
 function About() {
+
+    document.title = "About System and Team";
+
     return (
         <div className='about'>
             <section className="text-center container">
@@ -26,7 +31,7 @@ function About() {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div className="col">
                             <div className="card shadow-sm">
-                                <img className="bd-placeholder-img dev-img card-img-top" src="https://daniel-stefan.dev/static/b0b02cfbc8fbe8d19c51d413cc1ff598/70b5d/avatar.png" />
+                                <img className="bd-placeholder-img dev-img card-img-top" src={tmv} />
                                 <div className="card-body">
                                     <h4>
                                         Vishank Wagh
@@ -46,7 +51,7 @@ function About() {
                         </div>
                         <div className="col">
                             <div className="card shadow-sm">
-                                <img className="bd-placeholder-img dev-img card-img-top" src="https://daniel-stefan.dev/static/b0b02cfbc8fbe8d19c51d413cc1ff598/70b5d/avatar.png" />
+                                <img className="bd-placeholder-img dev-img card-img-top" src={tmu} />
                                 <div className="card-body">
                                     <h4>
                                         Ushank Wagh

@@ -31,11 +31,12 @@ function Cart() {
                     document.getElementById("cart").style.right = isCartOpen ? "-24%" : "0";
                     setIsCartOpen(!isCartOpen);
                 }}>
-                    <span>{!isCartOpen && "<"}</span>
+                    <span><b>{!isCartOpen && "<"}</b></span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                     </svg>
-                    <span>{isCartOpen && ">"}</span>
+                    <span className="crt-qty">{cart?.length}</span>
+                    <span><b>{isCartOpen && ">"}</b></span>
                 </div>
                 <div className="cart-items">
                     <table class="table cart-tbl">
@@ -52,9 +53,9 @@ function Cart() {
                                 totprice += citem.price;
                                 return (
                                     <tr>
-                                        <th scope="row">{ind}</th>
+                                        <th scope="row">{ind + 1}</th>
                                         <td>{citem.name}</td>
-                                        <td>{citem.qty}</td>
+                                        <td><a href="" className="btn addqty-btn">+</a> {citem.qty} <a href="" className="btn delqty-btn">-</a></td>
                                         <td>&#8377; {citem.price}</td>
                                     </tr>
                                 )
@@ -68,6 +69,7 @@ function Cart() {
                         </tbody>
                     </table>
                 </div>
+                <a className="plc-ord btn" href="">Place Order</a>
             </div>
         </>
     )

@@ -41,6 +41,8 @@ function Shop() {
         fetchShop();
     }, [setShop])
 
+    document.title = "Shop - " + shop.shopName;
+
     // // console.log("shopp " + JSON.stringify(shop));
     // // console.log("prdl " + JSON.stringify(productList));
 
@@ -98,7 +100,17 @@ function Shop() {
             "https://media.istockphoto.com/id/182688952/photo/full-frame-blue-denim-jeans.jpg?s=612x612&w=0&k=20&c=iYNXVbOUICN-vA8qx-B1xfJB8FrTfSfDlk5UCNWGgI8=",
             "https://m.media-amazon.com/images/I/61jcqGkoiQS._AC_UY300_.jpg"
         ]
+    ]
 
+    const vrty = [
+        [
+            "https://m.media-amazon.com/images/I/618+Q58fQsL._AC_UF1000,1000_QL80_.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtaKlBbokDZmmWby5Wxr-rLqxBSDJqM4c9VA&usqp=CAU"
+        ],
+        [
+            "https://brownliving.in/cdn/shop/products/recycled-notebooks-pack-of-6-70-gsm-paper-216-08584-rsk80ur-notebooks-notepads-brown-living-705176_800x.jpg?v=1682966800",
+            "https://m.media-amazon.com/images/I/513Ew3f7ESL._AC_UF1000,1000_QL80_.jpg"
+        ]
     ]
 
     const hmhr = [
@@ -171,6 +183,9 @@ function Shop() {
                     </div>
                     <div className="all-products">
                         {ncategories.map((catg, ind) => {
+                            if (shop.shopName == "Variety") {
+                                imgUrls = vrty;
+                            }
                             if (shop.shopName == "Home-Harmony") {
                                 imgUrls = hmhr;
                             }

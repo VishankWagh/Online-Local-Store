@@ -1,9 +1,17 @@
 .merchant {
+    width: 100%;
     background-color: rgb(238, 255, 238);
+    padding-top: 8rem;
 }
 
 .merchant button {
     background-color: #0a5616;
+    border-color: #0a5616;
+}
+
+.merchant button:hover {
+    border-color: #0a5616;
+    color: #0a5616;
 }
 
 .merchant-head {
@@ -30,6 +38,12 @@
 .order,
 .del-prod-card {
     background-color: rgb(212, 255, 212) !important;
+}
+
+.order table tr td,
+.order table tr th {
+    padding: 4px;
+    font-size: 19px !important;
 }
 
 .order-header {

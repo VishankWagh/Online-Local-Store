@@ -4,6 +4,7 @@ import '../styles/Login.css'
 
 function Login() {
 
+    document.title = "Quik-Buy | Login";
 
     function reg_redirect() {
         // navigate("/customer-register")
@@ -52,7 +53,7 @@ function Login() {
                         <label htmlFor="pswd" className="form-label">Password</label>
                         <input type="password" className="form-control" id="pswd" placeholder='Enter Password' />
                     </div>
-                    <button type="submit" className="btn btn-primary">LOGIN</button>
+                    <button type="submit" className="btn btn-primary"><a href="/">LOGIN</a></button>
                     <p>Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary text-decoration-underline">Register</span></p>
                     {/* () => {
                     //         switch (document.getElementById("user").value) {

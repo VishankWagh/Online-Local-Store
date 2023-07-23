@@ -4,6 +4,19 @@ import DropDown from './DropDown';
 
 const Header = () => {
 
+    function regSelect(sel) {
+        console.log("reg " + sel);
+        if (sel === "Customer") {
+            window.location.href = "/customer-register";
+        }
+        else if (sel === "Shop") {
+            window.location.href = "/shop-register";
+        }
+        else if (sel === "Delivery-Person") {
+            window.location.href = "/deliveryperson-register";
+        }
+    }
+
     return <nav className="navbar navbar-expand-lg p-2 position-fixed w-100 z-10" style={{ zIndex: "10" }}>
         <div className="container-fluid">
             <a className="navbar-brand ms-5 fs-2 fw-bold logo" href="/"><img src={logo} alt="" /><span className="logo-name"> Quik-Buy</span></a>
@@ -34,9 +47,10 @@ const Header = () => {
                             <span class="material-symbols-outlined sec-logo">
                                 app_registration
                             </span>
-                            <select className='reg-select' name="" id="">
-                                <option value="Register as">Register as</option>
+                            <select className='reg-select' name="" id="" onChange={(e) => regSelect(e.target.value)}>
+                                <option value="Register as">Sign Up as</option>
                                 <option value="Customer" onClick={() => {
+                                    console.log("cust")
                                     window.location.href = "/customer-register"
                                 }}>Customer</option>
                                 <option value="Shop" onClick={() => {

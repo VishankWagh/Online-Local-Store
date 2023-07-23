@@ -4,6 +4,10 @@
     --clr: rgb(241, 255, 241);
 }
 
+body {
+    background-color: var(--bg);
+}
+
 /* remve brdr rad */
 .card,
 .card img {
@@ -121,11 +125,20 @@ ul {
 }
 
 .btn:hover {
+    border: 1px solid #0a5616;
+    background-color: rgb(212, 255, 212);
+    color: #0a5616;
+}
+
+.btn:hover {
     background-color: transparent;
 }
 
 .reg-select {
-    background-color: rgb(212, 255, 212);
+    /* background-color: rgb(212, 255, 212); */
+    background-color: #0a5616;
+    color: rgb(212, 255, 212);
+    border: none;
     outline: none;
 }
 

@@ -4,6 +4,8 @@ import "../styles/Register.css"
 
 const SRegister = () => {
 
+    document.title = "Quik-Buy | Shop Register";
+
     const [shopName, setShopName] = useState("");
     const [shopImg, setShopImg] = useState("shop image");
     const [area, setArea] = useState("");

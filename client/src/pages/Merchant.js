@@ -24,6 +24,7 @@ const Merchant = () => {
         // eslint - disable - next - line
     }, [shopName]);
 
+    document.title = "Quik-Buy | Merchant";
 
     async function displayOrders() {
         try {
@@ -61,7 +62,7 @@ const Merchant = () => {
 
     // console.log("orders " + JSON.stringify(orders));
 
-    return <div className="merchant row position-sticky" style={{ paddingTop: "5rem" }}>
+    return <div className="merchant row position-sticky" >
         <div className="merchant-menu list-group mx-5 mt-4 col-3 position-fixed bottom-20 text-start" style={{ marginTop: "10rem" }}>
             <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" aria-current="true" onClick={(e) => { displayOrders(); setSelectedMenuOpt("Orders"); }}>
                 <span className="material-symbols-outlined mx-3 fs-2">checklist_rtl</span>
@@ -101,7 +102,7 @@ const Merchant = () => {
                 {selectedMenuOpt}
             </h2>
             {selectedMenuOpt === "Orders" &&
-                <div className="d-flex">
+                <div className="m-5">
                     {orders.map((order, index) => {
                         return <Order key={index} id={index} _id={order._id} uname={order.uname} address={order.address} products={order.products} totBill={order.totBill} updateStatus={updateStatus} />
                     })}

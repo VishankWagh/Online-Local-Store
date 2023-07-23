@@ -4,6 +4,8 @@ import "../styles/Register.css"
 
 const DRegister = () => {
 
+    document.title = "Quik-Buy | Delivery-Person Register";
+
     const [name, setName] = useState("");
     const [shopName, setShopName] = useState("");
     const [email, setEmail] = useState("");

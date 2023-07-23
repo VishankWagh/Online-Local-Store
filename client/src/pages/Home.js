@@ -7,6 +7,7 @@ import axios from 'axios';
 import Cart from '../components/Cart';
 
 function Home() {
+    document.title = "Quik-Buy | Home";
 
     const [shopList, setShopList] = useState([]);
     const [nshopList, setNShopList] = useState([]);

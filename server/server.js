@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import shopRoutes from "./routes/shopRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import bodyParser from "body-parser";
+import cors from "cors";
 import authRoutes from "./routes/authRoutes.js"
 import orderRoutes from "./routes/ordersRoute.js"
 import categoryRoutes from "./routes/categoryRoutes.js"

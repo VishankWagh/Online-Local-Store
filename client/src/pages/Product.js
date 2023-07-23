@@ -34,17 +34,101 @@ function Product() {
     }, [shopName])
     console.log("sim " + JSON.stringify(similarProducts));
 
+    document.title = "Product - " + product.name;
+
     const imgUrls = [
         "https://m.media-amazon.com/images/I/618+Q58fQsL._AC_UF1000,1000_QL80_.jpg",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtaKlBbokDZmmWby5Wxr-rLqxBSDJqM4c9VA&usqp=CAU",
         "https://brownliving.in/cdn/shop/products/recycled-notebooks-pack-of-6-70-gsm-paper-216-08584-rsk80ur-notebooks-notepads-brown-living-705176_800x.jpg?v=1682966800",
-        "https://m.media-amazon.com/images/I/513Ew3f7ESL._AC_UF1000,1000_QL80_.jpg"
+        "https://m.media-amazon.com/images/I/513Ew3f7ESL._AC_UF1000,1000_QL80_.jpg",
+        // variety shop end
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCAUeStWXTjkOr5M0Xbr801Fm20hrA_NP1JdpZ_Wwic7p9Lp45M4qLClGWi-ZhsL4iYU&usqp=CAU",
+        "https://images.meesho.com/images/products/280527119/zorh6_512.webp",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlwB2aLXoNWylKEwZuKKRsheeCXq3as43LFA&usqp=CAU",
+        "https://img.freepik.com/free-photo/man-wearing-hoodie-with-hoodie-it_188544-40017.jpg",
+        "https://static.vecteezy.com/system/resources/thumbnails/022/827/941/small/3d-realistic-black-t-shirt-template-free-vector.jpg",
+        "https://media.istockphoto.com/id/182688952/photo/full-frame-blue-denim-jeans.jpg?s=612x612&w=0&k=20&c=iYNXVbOUICN-vA8qx-B1xfJB8FrTfSfDlk5UCNWGgI8=",
+        "https://m.media-amazon.com/images/I/61jcqGkoiQS._AC_UY300_.jpg",
+        // jayambe shop end
+        "https://www.scfurnitureltd.co.uk/wp-content/uploads/2017/11/BOSTON-FITCH-BROWN-RH-FACING-USB.jpg",
+        "https://www.ulcdn.net/images/products/121923/slide/666x363/Danton_Folding_Dining_Table_Set_Capra_Chairs_Mahogany_Finish_01_IMG_0052-M.jpg?1477555973",
+        "https://media.4rgos.it/i/Argos/8470618_R_Z001A?w=750&h=440&qlt=70",
+        "https://m.media-amazon.com/images/S/aplus-media-library-service-media/b9f335c7-e535-4df9-bb78-5f0732782a58.__CR0,0,970,600_PT0_SX970_V1___.jpg",
+        "https://media.restorationhardware.com/is/image/rhis/cat24490005-fw?wid=1000",
+        "https://images.bestofbharat.com/2022/08/il_1500xN.3074781435_qutg.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtWu9Mb-bhYJUhcNuaBjZrMZwmg_Xm7VCihA&usqp=CAU",
+        "https://www.ncypgarden.com/cdn/shop/products/il_fullxfull.3837944066_mxo1_1050x700.jpg?v=1651053584"
+        // homeharmony shop end
+
+
     ]
     let imgurl;
     if (product.name == "Keyboard") imgurl = imgUrls[0]
     else if (product.name == "Mouse") imgurl = imgUrls[1]
     else if (product.name == "Notebook") imgurl = imgUrls[2]
     else if (product.name == "Writing-Pad") imgurl = imgUrls[3]
+
+    switch (product.name) {
+        case "Keyboard":
+            imgurl = imgUrls[0]
+            break;
+        case "Mouse":
+            imgurl = imgUrls[1]
+            break;
+        case "Notebook":
+            imgurl = imgUrls[2]
+            break;
+        case "Writing-Pad":
+            imgurl = imgUrls[3]
+            break;
+        case "Elegant-Embroidered-Sari":
+            imgurl = imgUrls[4]
+            break;
+        case "Traditional-Kurta":
+            imgurl = imgUrls[5]
+            break;
+        case "Ethnic-Embellished-Sandals":
+            imgurl = imgUrls[6]
+            break;
+        case "Hooded-Sweatshirt":
+            imgurl = imgUrls[7]
+            break;
+        case "Cotton-T-Shirt":
+            imgurl = imgUrls[8]
+            break;
+        case "Classic-Denim-Jeans":
+            imgurl = imgUrls[9]
+            break;
+        case "Casual-Canvas-Sneakers":
+            imgurl = imgUrls[10]
+            break;
+        case "Mid-Century-Modern-Sofa":
+            imgurl = imgUrls[11]
+            break;
+        case "Wooden-Dining-Table":
+            imgurl = imgUrls[12]
+            break;
+        case "Leather-Recliner-Chair":
+            imgurl = imgUrls[13]
+            break;
+        case "Industrial-Bookshelf":
+            imgurl = imgUrls[14]
+            break;
+        case "Throw-Pillow":
+            imgurl = imgUrls[15]
+            break;
+        case "Wooden-Wall-Art":
+            imgurl = imgUrls[16]
+            break;
+        case "Modern-Geometric-Rug":
+            imgurl = imgUrls[17]
+            break;
+        case "Glass-Terrarium-Planter":
+            imgurl = imgUrls[18]
+            break;
+        default:
+            break;
+    }
 
     return (
         <>
@@ -60,17 +144,23 @@ function Product() {
                             <p className="shop-name">{shopName}</p>
                             <div className="ratings">Ratings: <span>&#9733; &#9733; &#9733; &#9733; &#9734; </span></div>
                         </div>
-                        <div className="prod-desc">
+                        {/* <div className="prod-desc">
                             {product.desc}
-                        </div>
+                        </div> */}
                         <div className="prod-price">
                             <span className="ofr-price"><strike>&#8377; {product.price * 2}</strike></span>
                             <span className="org-price">&#8377; {product.price}</span>
                         </div>
                         <a className="btn addcartbtn">Add To Cart</a>
+                        <a className="btn plc-ord">Place Order</a>
+                    </div>
+                    <div className="col-12 prod-desc">
+                        <p className="fs-4 fw-bold mb-3">Product Details</p>
+                        {product.desc}
+                        {product.desc}
+                        {product.desc}
                     </div>
                 </div>
-                <hr />
                 <div className="similar-prods row">
                     <div className="category-name"><h3>More from {product.category}</h3></div>
                     {similarProducts && similarProducts.map((prod, index) => {

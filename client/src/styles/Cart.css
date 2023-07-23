@@ -12,8 +12,8 @@
     font-size: 15px;
 }
 
-tr:nth-child(2n),
-thead tr {
+.cart tr:nth-child(2n),
+.cart thead tr {
     background-color: rgb(237, 255, 237);
 }
 
@@ -30,7 +30,17 @@ th {
 .cart-head {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin: 2rem 0 1rem;
+}
+
+.plc-ord {
+    color: rgb(212, 255, 212);
+}
+
+.addqty-btn,
+.delqty-btn {
+    padding: 5px;
+    color: rgb(212, 255, 212);
 }
 
 .cart .p-name,
@@ -41,4 +51,20 @@ th {
 
 .cart-tbl {
     background-color: transparent;
+}
+
+
+/* c icon */
+
+.crt-qty {
+    position: absolute;
+    top: -20%;
+    right: -15%;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #0a5616;
+    color: rgb(212, 255, 212);
+    padding: 0px 7px;
+    text-align: center;
+    border-radius: 50px;
 }

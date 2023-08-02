@@ -189,19 +189,19 @@ function Shop() {
                             if (shop.shopName == "Home-Harmony") {
                                 imgUrls = hmhr;
                             }
-                            console.log("c " + catg)
+                            {/* console.log("c " + catg) */ }
                             {/* imgUrls = shop.shopName == "Jay-Ambe" ? catg == "Traditionals" ? jayambetrad : jayambecasu : null
                             imgUrls = shop.shopName == "Home-Harmony" ? catg == "Furniture" ? homeharmonyfur : homeharmonydec : null */}
                             return (
-                                <div className="category">
+                                <div className="category" key={ind}>
                                     <div className="category-name"><h3>{catg}</h3></div>
                                     <div className="products row">
                                         {nproductList?.filter((prf) => {
                                             return prf.category == catg;
                                         })
                                             .map((prod, index) => {
-                                                console.log(prod.name + " prd " + index)
-                                                return (<ProductCard sname={shop.shopName} prod={prod} imgUrl={imgUrls[ind][index]} />);
+                                                {/* console.log(prod.name + " prd " + index) */ }
+                                                return (<ProductCard key={index} sname={shop.shopName} prod={prod} imgUrl={imgUrls[ind][index]} />);
                                             })}
                                     </div>
                                 </div>

@@ -16,56 +16,41 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import { AuthProvider } from './context/auth';
+import PrivateRoute from './components/Routes/Private';
+import DelPerson from './pages/DelPerson';
 
 
 function App() {
 
-  function addToCart(citem) {
-    let cart = [JSON.parse(localStorage.getItem("cart")), ...citem];
-    // [
-    //         {
-    //             shopNmae: "Variety",
-    //             name: "Potato",
-    //             price: 70,
-    //             qty: 3
-    //         },
-    //         {
-    //             shopNmae: "Jay-Ambe",
-    //             name: "Keyboard",
-    //             price: 900,
-    //             qty: 2
-    //         },
-    //         {
-    //             shopNmae: "Variety",
-    //             name: "Hing",
-    //             price: 55,
-    //             qty: 1
-    //         }
-    // ];
-    console.log("app cart " + cart);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
   return (
-    <>
+    <AuthProvider>
       <Router>
         <Header />
         <div className="main">
           <Routes>
+            <Route path='/customer/' element={<PrivateRoute role="customer" />} >
+              <Route path='Shop' element={<Shop />} />
+              <Route path='Product' element={<Product />} />
+            </Route>
             <Route path='/customer-register' element={<CRegister />} />
             <Route path='/shop-register' element={<SRegister />} />
             <Route path='/deliveryperson-register' element={<DRegister />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/' element={<Home />} />
-            <Route path='/Shop' element={<Shop />} />
-            <Route path='/Product' element={<Product />} />
-            <Route path='/Merchant' element={<Merchant />} />
+            {/* <Route path='/Merchant' element={<Merchant />} /> */}
+            <Route path='/Merchant' element={<PrivateRoute role="merchant" />} >
+              <Route path='' element={<Merchant />} />
+            </Route>
+            <Route path='/Deliveryperson' element={<PrivateRoute role="dperson" />} >
+              <Route path='' element={<DelPerson />} />
+            </Route>
             <Route path='/About' element={<About />} />
           </Routes>
         </div>
         <Footer />
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 

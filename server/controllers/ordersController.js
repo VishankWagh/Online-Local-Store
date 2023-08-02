@@ -28,11 +28,14 @@ export const updataStatusController = async (req, res) => {
     try {
         // const status = req.params.status;
         // const _id = ObjectId(req.params.oid);
-        const status = "delivered";
-        const _id = ObjectId('64892e97384f7a5496dee3f0');
+        // const status = "delivered";
+        // const _id = ObjectId('64892e97384f7a5496dee3f0');
 
-        console.log("status " + status + " id " + _id);
-        // await qbDB.collection("orders").update({ _id }, { $set: { status } });
+        const status = req.body.status;
+        const id = req.params.id;
+        console.log("status " + req.body.status);
+        console.log("id " + id);
+        await qbDB.collection("orders").update({ orderId: id }, { $set: { status: status } });
         res.status(200).send({
             success: true,
             message: "Order status Updated"

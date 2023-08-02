@@ -229,7 +229,34 @@ function Home() {
                     <div className="shops d-flex container row">
                         {nshopList.map((shop, index) => {
                             return (
-                                <div className="shop-comp mr-1 mb-5 col-3">
+                                <div className="shop-comp mr-1 mb-5 col-3" key={index}>
+                                    <div className="card" style={{ width: "18rem" }}>
+                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
+                                            <span className="details">{shop.area} - {shop.pincode}</span>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
+                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
+                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
+                                        </ul>
+                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
+                                        <p className="own line">
+                                            <span className="ownedby">Owned By - </span>
+                                            <span className="ownername">{shop.ownerName}</span>
+                                        </p>
+                                        <div className="card-body">
+                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
+                                            {/* <a href="/" className="card-link">Another link</a> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        {nshopList.map((shop, index) => {
+                            return (
+                                <div className="shop-comp mr-1 mb-5 col-3" key={index}>
                                     <div className="card" style={{ width: "18rem" }}>
                                         <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
                                         <div className="card-body">
@@ -256,34 +283,7 @@ function Home() {
                         })}
                         {nshopList.map((shop, index) => {
                             return (
-                                <div className="shop-comp mr-1 mb-5 col-3">
-                                    <div className="card" style={{ width: "18rem" }}>
-                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
-                                            <span className="details">{shop.area} - {shop.pincode}</span>
-                                        </div>
-                                        <ul className="list-group list-group-flush">
-                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
-                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
-                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
-                                        </ul>
-                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
-                                        <p className="own line">
-                                            <span className="ownedby">Owned By - </span>
-                                            <span className="ownername">{shop.ownerName}</span>
-                                        </p>
-                                        <div className="card-body">
-                                            <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
-                                            {/* <a href="/" className="card-link">Another link</a> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                        {nshopList.map((shop, index) => {
-                            return (
-                                <div className="shop-comp mr-1 mb-5 col-3">
+                                <div className="shop-comp mr-1 mb-5 col-3" key={index}>
                                     <div className="card" style={{ width: "18rem" }}>
                                         <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
                                         <div className="card-body">

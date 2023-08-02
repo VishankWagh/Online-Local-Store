@@ -7,7 +7,7 @@ const DRegister = () => {
     document.title = "Quik-Buy | Delivery-Person Register";
 
     const [name, setName] = useState("");
-    const [shopName, setShopName] = useState("");
+    const [shopName, setShopName] = useState("Variety");
     const [email, setEmail] = useState("");
     const [uname, setUname] = useState("");
     const [password, setPassword] = useState("");
@@ -56,9 +56,9 @@ const DRegister = () => {
             <div className="mb-3">
                 <label htmlFor="shopName" className="form-label">Select Shop</label>
                 <select className="form-select w-25 mb-3" name="shopName" value={shopName} onChange={(e) => { setShopName(e.target.value) }}>
-                    <option value="pending">Pending</option>
-                    <option value="on the way">On The Way</option>
-                    <option value="delivered">Delivered</option>
+                    <option value="Home-Harmony">Home-Harmony</option>
+                    <option value="Variety">Variety</option>
+                    <option value="Jay-Ambe">Jay-Ambe</option>
                 </select>
             </div>
             <div className="mb-3">

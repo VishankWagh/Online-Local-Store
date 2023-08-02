@@ -1,10 +1,21 @@
-// import { useState } from 'react';
-// import navigate from "react";
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import '../styles/Login.css'
+import { useAuth } from '../context/auth';
 
 function Login() {
 
     document.title = "Quik-Buy | Login";
+
+    const [uname, setUname] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState("c");
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const [auth, setAuth] = useAuth();
 
     function reg_redirect() {
         // navigate("/customer-register")
@@ -23,23 +34,44 @@ function Login() {
             default:
                 // window.location.href = "/customer-register";
                 break;
+        }
+    }
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const response = await axios.post(`http://localhost:5050/auth/login/${role}`, {
+            uname,
+            password
+        });
+
+        if (response.data.success) {
+            setAuth({
+                ...auth,
+                user: response.data.user,
+                token: response.data.token
+            });
+            localStorage.setItem("auth", JSON.stringify(response.data));
+            navigate(location.state || "/");
         }
     }
 
     return (
         <>
             <div className="login">
-                <form>
+                <form onSubmit={handleSubmit} >
                     <h2 className="login-head" >
                         <span className="mx-4 fs-1 material-symbols-outlined">
                             login
                         </span>
                         Login
                     </h2>
+                    <div className="mb-3 text-center text-danger d-none">UserName or Password is Invalid !!</div>
+                    {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
                     <div className="mb-3">
                         <label htmlFor="user" className="form-label">Select User</label>
-                        <select name="user" className="form-control" id="user" >
+                        <select name="user" className="form-control" id="user" value={role} onChange={e => setRole(e.target.value)} required>
                             <option value="c">Customer</option>
                             <option value="s">Shop Keeper</option>
                             <option value="d">Delivery - person</option>
@@ -47,31 +79,14 @@ function Login() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="uname" className="form-label">User Name</label>
-                        <input type="text" className="form-control" id="uname" aria-describedby="emailHelp" placeholder='Enter Username' />
+                        <input type="text" className="form-control" id="uname" value={uname} onChange={e => setUname(e.target.value)} aria-describedby="emailHelp" placeholder='Enter Username' required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="pswd" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="pswd" placeholder='Enter Password' />
+                        <input type="password" className="form-control" id="pswd" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Password' required />
                     </div>
-                    <button type="submit" className="btn btn-primary"><a href="/">LOGIN</a></button>
-                    <p>Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary text-decoration-underline">Register</span></p>
-                    {/* () => {
-                    //         switch (document.getElementById("user").value) {
-                    //             case "Customer":
-                    //                 return "/customer-register";
-                    //             case "Shop Keeper":
-                    //                 return "/shop-register"
-                    //             case "Delivery - person":
-                    //                 return "/deliveryperson-register"
-                    //         }
-                    //         // (document.getElementById("user").value) === "Customer" &&
-                    //         // "/customer-register"
-                    //         //     (document.getElementById("user").value) === "Shop Keeper" &&
-                    //         // "/shop-register"
-                    //         //     (document.getElementById("user").value) === "Delivery - person" &&
-                    //         // "/deliveryperson-register"
-                    //     }
-                    // }>Register</a> */}
+                    <button type="submit" className="mb-3 btn btn-primary" >LOGIN</button>
+                    <p className="text-center" >Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary text-decoration-underline">Register</span></p>
                 </form>
             </div>
         </>

@@ -19,20 +19,20 @@ function Product() {
             setShopName(sname);
 
             const response = await axios.get(`http://localhost:5050/products/singleproduct/${pname}`);
-            console.log("repn " + JSON.stringify(response));
+            // console.log("repn " + JSON.stringify(response));
             setProduct(response.data.product);
-            console.log("shpName " + shopName);
+            // console.log("shpName " + shopName);
 
             // fetch similar products
             const cname = response.data.product.category;
-            console.log("sn cn " + JSON.stringify(response.data), cname);
+            // console.log("sn cn " + JSON.stringify(response.data), cname);
             const res = await axios.get(`http://localhost:5050/products/similarproducts/${sname}/${cname}/${pname}`);
             setSimilarProducts(res.data.prodList);
         }
 
         fetchProdDetails();
     }, [shopName])
-    console.log("sim " + JSON.stringify(similarProducts));
+    // console.log("sim " + JSON.stringify(similarProducts));
 
     document.title = "Product - " + product.name;
 
@@ -164,7 +164,7 @@ function Product() {
                 <div className="similar-prods row">
                     <div className="category-name"><h3>More from {product.category}</h3></div>
                     {similarProducts && similarProducts.map((prod, index) => {
-                        console.log("pro " + prod);
+                        {/* console.log("pro " + prod); */ }
                         return (
                             prod && <ProductCard key={index} prod={prod} sname={shopName} imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
                         )

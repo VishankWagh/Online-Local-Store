@@ -10,6 +10,7 @@ function Product() {
     const [product, setProduct] = useState([]);
     const [similarProducts, setSimilarProducts] = useState();
     const [shopName, setShopName] = useState();
+    const [shop_Cart, setShop_Cart] = useState(JSON.parse(localStorage.getItem("shopCart")));
 
     useEffect(() => {
         async function fetchProdDetails() {
@@ -34,7 +35,7 @@ function Product() {
     }, [shopName])
     console.log("sim " + JSON.stringify(similarProducts));
 
-    document.title = "Product - " + product.name;
+    document.title = "Quik-Buy | Product - " + product.name;
 
     const imgUrls = [
         "https://m.media-amazon.com/images/I/618+Q58fQsL._AC_UF1000,1000_QL80_.jpg",
@@ -130,10 +131,72 @@ function Product() {
             break;
     }
 
+
+    // add to cart
+    function addToCart(shopName, cartItem) {
+        // Check if the shopName exists in the shopCart
+        // let shopCart = JSON.parse(localStorage.getItem("shopCart"));
+        let shopCart = shop_Cart;
+        if (shopCart.filter((shp) => { return shp.shopName === shopName }).length) {
+            // Check if the cartItem exists in the shopCart
+            for (let item of shopCart) {
+                if (item["shopName"] === shopName) {
+                    // If the cartItem exists, increment the qty property
+                    let citmFndAt = -1;
+                    item.cartItems.map((citm, ind) => { if (citm.prodName === cartItem.prodName) citmFndAt = ind })
+                    if (citmFndAt >= 0) {
+                        item.cartItems[citmFndAt].qty += 1;
+                    } else {
+                        // If the cartItem does not exist, push it to the array of cartItems
+                        item["cartItems"].push(cartItem);
+                    }
+                }
+            }
+        } else {
+            // If the shopName does not exist, push the shopName and cartItem to the shopCart array
+            shopCart.push({ "shopName": shopName, "cartItems": [cartItem] })
+        }
+        localStorage.setItem("shopCart", JSON.stringify(shopCart));
+        setShop_Cart(JSON.parse(localStorage.getItem("shopCart")))
+        document.getElementById("cart").style.right = "0%";
+    }
+
+    // delete cart item
+    function deleteCartItem(shopInd, cartInd) {
+        let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
+        const cartItems = shop_Cart[shopInd].cartItems;
+        if (cartItems.length === 1) {
+            newShopCart.splice(shopInd, 1);
+        } else {
+            cartItems.splice(cartInd, 1);
+            newShopCart[shopInd].cartItems = cartItems;
+        }
+        localStorage.setItem("shopCart", JSON.stringify(newShopCart));
+        setShop_Cart(newShopCart);
+    }
+
+
+    // inc qty
+    function incdecQty(shpind, crtind, inc) {
+        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || shop_Cart[shpind].cartItems[crtind].qty == 0 && inc) {
+            let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
+            inc ? newShopCart[shpind].cartItems[crtind].qty += 1 : newShopCart[shpind].cartItems[crtind].qty -= 1;
+            setShop_Cart(newShopCart);
+            localStorage.setItem("shopCart", JSON.stringify(newShopCart));
+        }
+    }
+
+    let imgUrl = [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCAUeStWXTjkOr5M0Xbr801Fm20hrA_NP1JdpZ_Wwic7p9Lp45M4qLClGWi-ZhsL4iYU&usqp=CAU",
+        "https://images.meesho.com/images/products/280527119/zorh6_512.webp",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlwB2aLXoNWylKEwZuKKRsheeCXq3as43LFA&usqp=CAU",
+        "https://img.freepik.com/free-photo/man-wearing-hoodie-with-hoodie-it_188544-40017.jpg"
+    ];
+
     return (
         <>
             <div className="product">
-                <Cart />
+                <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
                 <div className="row prod-row">
                     <div className="prod-img col-6">
                         <img src={imgurl || "https://images.bestofbharat.com/2022/08/il_1500xN.3074781435_qutg.jpg"} alt="" />
@@ -151,8 +214,15 @@ function Product() {
                             <span className="ofr-price"><strike>&#8377; {product.price * 2}</strike></span>
                             <span className="org-price">&#8377; {product.price}</span>
                         </div>
-                        <a className="btn addcartbtn">Add To Cart</a>
-                        <a className="btn plc-ord">Place Order</a>
+                        <a className="btn addcartbtn" onClick={() => {
+                            let citm = {
+                                "prodName": product.name,
+                                "qty": 1,
+                                "price": product.price
+                            }
+                            addToCart(shopName, citm);
+                        }}>Add To Cart</a>
+                        <a className="btn plc-ord" href={`/checkout?sind=${shopName}`}>Place Order</a>
                     </div>
                     <div className="col-12 prod-desc">
                         <p className="fs-4 fw-bold mb-3">Product Details</p>
@@ -166,7 +236,7 @@ function Product() {
                     {similarProducts && similarProducts.map((prod, index) => {
                         console.log("pro " + prod);
                         return (
-                            prod && <ProductCard key={index} prod={prod} sname={shopName} imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />
+                            prod && <ProductCard key={index} prod={prod} sname={shopName} addToCart={addToCart} imgUrl={imgUrl[index]} />
                         )
                     })}
                     {/* <ProductCard imgUrl="https://img.rawpixel.com/private/static/images/website/2022-11/rm362-01a-mockup.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=387ad550e11628f504cd68389dc84108" />

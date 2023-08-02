@@ -16,6 +16,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import Checkout from './pages/Checkout';
+import OrderHist from './pages/OrderHist';
 
 
 function App() {
@@ -59,7 +61,9 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/Shop' element={<Shop />} />
             <Route path='/Product' element={<Product />} />
+            <Route path='/Orders' element={<OrderHist />} />
             <Route path='/Merchant' element={<Merchant />} />
+            <Route path='/Checkout' element={<Checkout />} />
             <Route path='/About' element={<About />} />
           </Routes>
         </div>

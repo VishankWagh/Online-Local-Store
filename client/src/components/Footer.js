@@ -1,7 +1,12 @@
+import { useState } from "react";
+
 function Footer() {
+
+    const [mailBody, setMailBody] = useState("");
+
     return (
         <>
-            <footer>
+            <footer id="footer">
                 <div className="row">
                     <div className="col-6">
                         <div className="row">
@@ -36,10 +41,13 @@ function Footer() {
                             <h4 className="mail">Contact Us</h4>
                             <form action="">
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label">E-mail Us</label>
-                                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label htmlFor="exampleFormControlTextarea1" className="form-label">E-mail Us</label>
+                                    <textarea className="form-control" value={mailBody} placeholder="Enter your query here..." id="exampleFormControlTextarea1" rows="3" onChange={(e) => {
+                                        setMailBody(e.target.value);
+                                    }}></textarea>
                                 </div>
-                                <input type="button" value="Send E-mail" className="btn mail-btn" />
+                                {/* <input type="button" value="Send E-mail" className="btn mail-btn" /> */}
+                                <a className="btn mail-btn" href={`mailto:?subject=To contact you for Subject&body=${mailBody}`}>E-Mail-Us</a>
                             </form>
                         </div>
                     </div>

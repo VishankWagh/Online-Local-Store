@@ -162,12 +162,13 @@ ul li {
 }
 
 .mail-btn,
-.form-control {
+footer .form-control {
     border-top-right-radius: 0%;
     border-bottom-left-radius: 0;
     background-color: rgb(212, 255, 212);
 }
 
 .mail-btn:hover {
+    color: rgb(212, 255, 212);
     border: 1px solid rgb(212, 255, 212);
 }

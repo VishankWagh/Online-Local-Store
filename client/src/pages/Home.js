@@ -16,6 +16,7 @@ function Home() {
         area: "",
         catg: ""
     });
+    const [shop_Cart, setShop_Cart] = useState(JSON.parse(localStorage.getItem("shopCart")));
 
     useEffect(() => {
 
@@ -26,7 +27,7 @@ function Home() {
             // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
             const shopLs = await response.data.shopList;
             const catgs = await response.data.categories;
-            // console.log(JSON.stringify(response));
+            console.log(JSON.stringify(catgs));
             setShopList(shopLs);
             setNShopList(shopLs);
             setCategories(catgs);
@@ -52,8 +53,11 @@ function Home() {
         { value: "", label: 'Select Area', isFixed: true },
         { value: 'halar', label: 'Halar' },
         { value: 'tithal', label: 'tithal' },
-        { value: 'nanakvada', label: 'Nanakvada' }
+        { value: 'nanakvada', label: 'Nanakvada' },
+        { value: 'Kamla-Nagar', label: 'Kamla-Nagar' },
+        { value: 'Chandni-Chowk', label: 'Chandni-Chowk' }
     ];
+    // https://cloud.mongodb.com/v2/6436e4ddfc447b15f06aeafa#/clusters
 
     let category = [
         { value: '', label: 'Select Category', isFixed: true },
@@ -141,13 +145,39 @@ function Home() {
         }
     }
 
+    // delete cart item
+    function deleteCartItem(shopInd, cartInd) {
+        let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
+        const cartItems = shop_Cart[shopInd].cartItems;
+        if (cartItems.length === 1) {
+            newShopCart.splice(shopInd, 1);
+        } else {
+            cartItems.splice(cartInd, 1);
+            newShopCart[shopInd].cartItems = cartItems;
+        }
+        localStorage.setItem("shopCart", JSON.stringify(newShopCart));
+        setShop_Cart(newShopCart);
+    }
+
+
+    // inc qty
+    function incdecQty(shpind, crtind, inc) {
+        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || shop_Cart[shpind].cartItems[crtind].qty == 0 && inc) {
+            let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
+            inc ? newShopCart[shpind].cartItems[crtind].qty += 1 : newShopCart[shpind].cartItems[crtind].qty -= 1;
+            setShop_Cart(newShopCart);
+            localStorage.setItem("shopCart", JSON.stringify(newShopCart));
+        }
+    }
+
     const shopImgArr =
         [
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCatveyiU5Ji4sQjTCydq-Cs0H-49jsK0EbQ&usqp=CAU',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXsjiZGfBkq3fdal8BYjQRkLwNVKx3hCnEA&usqp=CAU',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRa-uc1ljm3iuPu5fq4zOK_KTXT9jxOQJitrAEPvxsQ0ybxB0972ZaxfenGQpGJ564Ygg&usqp=CAU',
             'https://5.imimg.com/data5/HR/BA/WN/SELLER-13309345/shop-name-board.jpg',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFGydmvCaRm32-wk_A8MzX6J1tVRtLc20CS1bRupC0Cu3_Br_2KZg3UIxRx7WT7ycWTGc&usqp=CAU'
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFGydmvCaRm32-wk_A8MzX6J1tVRtLc20CS1bRupC0Cu3_Br_2KZg3UIxRx7WT7ycWTGc&usqp=CAU',
+            'https://c4.wallpaperflare.com/wallpaper/805/668/874/lofi-neon-coffee-house-shop-neon-glow-hd-wallpaper-preview.jpg'
         ]
 
     return (
@@ -219,17 +249,17 @@ function Home() {
 
                 <div className="content">
 
-                    <Cart />
+                    <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
                     <div className="drop-downs d-flex">
                         <DropDown data={areaLs} updSrchd={updateSearched} name={"area"} />
                         <DropDown data={category} updSrchd={updateSearched} name={"category"} />
                         {/* <DropDown data={area} /> */}
                     </div>
-                    <h3 className="title">Find Your Desired Shops...</h3>
+                    <h3 className="title">Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
                         {nshopList.map((shop, index) => {
                             return (
-                                <div className="shop-comp mr-1 mb-5 col-3">
+                                <div className="shop-comp mr-1 mb-5 col-3" key={index}>
                                     <div className="card" style={{ width: "18rem" }}>
                                         <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
                                         <div className="card-body">
@@ -256,34 +286,7 @@ function Home() {
                         })}
                         {nshopList.map((shop, index) => {
                             return (
-                                <div className="shop-comp mr-1 mb-5 col-3">
-                                    <div className="card" style={{ width: "18rem" }}>
-                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
-                                            <span className="details">{shop.area} - {shop.pincode}</span>
-                                        </div>
-                                        <ul className="list-group list-group-flush">
-                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
-                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
-                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
-                                        </ul>
-                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
-                                        <p className="own line">
-                                            <span className="ownedby">Owned By - </span>
-                                            <span className="ownername">{shop.ownerName}</span>
-                                        </p>
-                                        <div className="card-body">
-                                            <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
-                                            {/* <a href="/" className="card-link">Another link</a> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                        {nshopList.map((shop, index) => {
-                            return (
-                                <div className="shop-comp mr-1 mb-5 col-3">
+                                <div className="shop-comp mr-1 mb-5 col-3" key={index}>
                                     <div className="card" style={{ width: "18rem" }}>
                                         <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
                                         <div className="card-body">

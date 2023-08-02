@@ -15,7 +15,10 @@ function Shop() {
     const [nproductList, setNProductList] = useState([]);
     const [shopProds, setShopProds] = useState([]);
     const [catSelected, setCatSelected] = useState(null);
+    const [shop_Cart, setShop_Cart] = useState();
+    // const [isCartOpen, setIsCartOpen] = useState(false);
 
+    let dummydata = { "_id": { "$oid": "64c2a2742f3006ed8f135171" }, "shopName": "gopal-dairy", "shopImg": "shop image", "area": "azad chowk", "pincode": { "$numberInt": "391760" }, "ownerName": "Raj thakkar", "email": "raj@gmail.com", "uname": "raj", "password": "$2b$fmsodifd10$4VHpjRdS/S3zqi0D6eJ9Du7dpGu88KwlD6vy3ukypORWmMxGbD7Ai", "categories": [], "prods": [], "id": { "$numberInt": "6" } }
 
     useEffect(() => {
         async function fetchShop() {
@@ -37,11 +40,12 @@ function Shop() {
 
             // // console.log("prarr " + JSON.stringify(data.prodArr));
             setShopProds(prodLst);
+            setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
         }
-        fetchShop();
-    }, [setShop])
+        fetchShop(shop_Cart);
+    }, [])
 
-    document.title = "Shop - " + shop.shopName;
+    document.title = "Quik-Buy | Shop - " + shop.shopName;
 
     // // console.log("shopp " + JSON.stringify(shop));
     // // console.log("prdl " + JSON.stringify(productList));
@@ -56,6 +60,7 @@ function Shop() {
         { value: 'none', label: 'Search by Category' },
         ...shop.categories.map(cat => { return { value: cat, label: cat } })
     ];
+
 
     function updateSearched(srch, name) {
         if (name === "none") {
@@ -86,9 +91,68 @@ function Shop() {
         }
     }
 
+    // set is cart open
+    // function changeIsCartOpen(curr) {
+    //     setIsCartOpen(!curr);
+    // }
 
-    // default data if for jayambe shop
+    // add to cart
+    function addToCart(shopName, cartItem) {
+        // Check if the shopName exists in the shopCart
+        // let shopCart = JSON.parse(localStorage.getItem("shopCart"));
+        let shopCart = shop_Cart;
+        if (shopCart.filter((shp) => { return shp.shopName === shopName }).length) {
+            // Check if the cartItem exists in the shopCart
+            for (let item of shopCart) {
+                if (item["shopName"] === shopName) {
+                    // If the cartItem exists, increment the qty property
+                    let citmFndAt = -1;
+                    item.cartItems.map((citm, ind) => { if (citm.prodName === cartItem.prodName) citmFndAt = ind })
+                    if (citmFndAt >= 0) {
+                        item.cartItems[citmFndAt].qty += 1;
+                    } else {
+                        // If the cartItem does not exist, push it to the array of cartItems
+                        item["cartItems"].push(cartItem);
+                    }
+                }
+            }
+        } else {
+            // If the shopName does not exist, push the shopName and cartItem to the shopCart array
+            shopCart.push({ "shopName": shopName, "cartItems": [cartItem] })
+        }
+        localStorage.setItem("shopCart", JSON.stringify(shopCart));
+        setShop_Cart(JSON.parse(localStorage.getItem("shopCart")))
+        document.getElementById("cart").style.right = "0%";
+    }
+
+    // delete cart item
+    function deleteCartItem(shopInd, cartInd) {
+        let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
+        const cartItems = shop_Cart[shopInd].cartItems;
+        if (cartItems.length === 1) {
+            newShopCart.splice(shopInd, 1);
+        } else {
+            cartItems.splice(cartInd, 1);
+            newShopCart[shopInd].cartItems = cartItems;
+        }
+        localStorage.setItem("shopCart", JSON.stringify(newShopCart));
+        setShop_Cart(newShopCart);
+    }
+
+
+    // inc qty
+    function incdecQty(shpind, crtind, inc) {
+        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || shop_Cart[shpind].cartItems[crtind].qty == 0 && inc) {
+            let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
+            inc ? newShopCart[shpind].cartItems[crtind].qty += 1 : newShopCart[shpind].cartItems[crtind].qty -= 1;
+            setShop_Cart(newShopCart);
+            localStorage.setItem("shopCart", JSON.stringify(newShopCart));
+        }
+    }
+
+    // default data is for jayambe shop
     let imgUrls = [
+        // jay ambe
         [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCAUeStWXTjkOr5M0Xbr801Fm20hrA_NP1JdpZ_Wwic7p9Lp45M4qLClGWi-ZhsL4iYU&usqp=CAU",
             "https://images.meesho.com/images/products/280527119/zorh6_512.webp",
@@ -128,39 +192,11 @@ function Shop() {
         ]
     ]
 
-    const jayambetrad = [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCAUeStWXTjkOr5M0Xbr801Fm20hrA_NP1JdpZ_Wwic7p9Lp45M4qLClGWi-ZhsL4iYU&usqp=CAU",
-        "https://images.meesho.com/images/products/280527119/zorh6_512.webp",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlwB2aLXoNWylKEwZuKKRsheeCXq3as43LFA&usqp=CAU",
-        "https://img.freepik.com/free-photo/man-wearing-hoodie-with-hoodie-it_188544-40017.jpg"
-    ]
-
-    const jayambecasu = [
-        "https://static.vecteezy.com/system/resources/thumbnails/022/827/941/small/3d-realistic-black-t-shirt-template-free-vector.jpg",
-        "https://media.istockphoto.com/id/182688952/photo/full-frame-blue-denim-jeans.jpg?s=612x612&w=0&k=20&c=iYNXVbOUICN-vA8qx-B1xfJB8FrTfSfDlk5UCNWGgI8=",
-        "https://m.media-amazon.com/images/I/61jcqGkoiQS._AC_UY300_.jpg"
-    ]
-
-    const homeharmonyfur = [
-        "https://www.scfurnitureltd.co.uk/wp-content/uploads/2017/11/BOSTON-FITCH-BROWN-RH-FACING-USB.jpg",
-        "https://www.ulcdn.net/images/products/121923/slide/666x363/Danton_Folding_Dining_Table_Set_Capra_Chairs_Mahogany_Finish_01_IMG_0052-M.jpg?1477555973",
-        "https://media.4rgos.it/i/Argos/8470618_R_Z001A?w=750&h=440&qlt=70",
-        "https://m.media-amazon.com/images/S/aplus-media-library-service-media/b9f335c7-e535-4df9-bb78-5f0732782a58.__CR0,0,970,600_PT0_SX970_V1___.jpg"
-    ]
-
-    const homeharmonydec = [
-        "https://media.restorationhardware.com/is/image/rhis/cat24490005-fw?wid=1000",
-        "https://images.bestofbharat.com/2022/08/il_1500xN.3074781435_qutg.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtWu9Mb-bhYJUhcNuaBjZrMZwmg_Xm7VCihA&usqp=CAU",
-        "https://www.ncypgarden.com/cdn/shop/products/il_fullxfull.3837944066_mxo1_1050x700.jpg?v=1651053584"
-    ]
-
     return (
         <>
             <div className="shop">
 
-                <Cart />
-
+                <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
                 <div className="shop-img">
                     {/* <img src={car} alt="" /> */}
                     <div className="shop-head">
@@ -183,25 +219,23 @@ function Shop() {
                     </div>
                     <div className="all-products">
                         {ncategories.map((catg, ind) => {
-                            if (shop.shopName == "Variety") {
+                            if (shop.shopName === "Variety") {
                                 imgUrls = vrty;
                             }
-                            if (shop.shopName == "Home-Harmony") {
+                            if (shop.shopName === "Home-Harmony") {
                                 imgUrls = hmhr;
                             }
-                            console.log("c " + catg)
                             {/* imgUrls = shop.shopName == "Jay-Ambe" ? catg == "Traditionals" ? jayambetrad : jayambecasu : null
                             imgUrls = shop.shopName == "Home-Harmony" ? catg == "Furniture" ? homeharmonyfur : homeharmonydec : null */}
                             return (
-                                <div className="category">
+                                <div className="category" key={ind}>
                                     <div className="category-name"><h3>{catg}</h3></div>
                                     <div className="products row">
                                         {nproductList?.filter((prf) => {
-                                            return prf.category == catg;
+                                            return prf.category === catg;
                                         })
                                             .map((prod, index) => {
-                                                console.log(prod.name + " prd " + index)
-                                                return (<ProductCard sname={shop.shopName} prod={prod} imgUrl={imgUrls[ind][index]} />);
+                                                return (<ProductCard sname={shop.shopName} prod={prod} imgUrl={imgUrls[ind][index]} addToCart={addToCart} key={index} />);
                                             })}
                                     </div>
                                 </div>

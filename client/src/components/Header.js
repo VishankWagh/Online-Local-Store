@@ -34,9 +34,12 @@ const Header = () => {
                     <li className="nav-item me-5 fs-5">
                         <a className="nav-link page-link" href="/about">About Us</a>
                     </li>
+                    <li className="nav-item me-5 fs-5">
+                        <a className="nav-link page-link" href="/orders">Orders</a>
+                    </li>
                     <li className="nav-item me-5 fs-5 signin-btn">
                         <a className="nav-link reglog-link" href="/login">
-                            <span class="material-symbols-outlined sec-logo">
+                            <span className="material-symbols-outlined sec-logo">
                                 login
                             </span>
                             <span className="txt signin-txt">Sign In</span>
@@ -44,7 +47,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item me-5 fs-5 signup-btn">
                         <span className="nav-link reglog-link" href="/customer-register">
-                            <span class="material-symbols-outlined sec-logo">
+                            <span className="material-symbols-outlined sec-logo">
                                 app_registration
                             </span>
                             <select className='reg-select' name="" id="" onChange={(e) => regSelect(e.target.value)}>

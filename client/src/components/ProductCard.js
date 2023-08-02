@@ -1,5 +1,5 @@
 function ProductCard(props) {
-    const { name, desc, price } = props.prod;
+    const { name, desc, price, qty } = props.prod;
     return (
         <>
             <div className="card col-3 m-3" style={{ width: "18rem" }}>
@@ -14,7 +14,14 @@ function ProductCard(props) {
                     {/* <div className="shop-name" style={{ color: "grey", fontSize: "15px", paddingBottom: ".5rem" }}>{props.sname}</div> */}
                     <p className="card-text">{desc.slice(0, 25) + "..."}</p>
                     <a href={`/product?sname=${props.sname}&pname=${name}`} className="btn">More Details</a>
-                    <a href="/" className="btn addcartbtn">Add To Cart</a>
+                    <a className="btn addcartbtn" onClick={() => {
+                        let citm = {
+                            "prodName": name,
+                            "qty": 1,
+                            "price": price
+                        }
+                        props.addToCart(props.sname, citm);
+                    }}>Add To Cart</a>
                 </div>
             </div>
         </>

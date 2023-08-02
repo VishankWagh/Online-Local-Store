@@ -7,7 +7,8 @@
 .lead {
     font-size: 1.25rem;
     font-weight: 500;
-    color: #5da759;
+    /* color: #5da759; */
+    color: white;
     padding: 1rem 0;
 }
 
@@ -16,8 +17,13 @@
 }
 
 .abt-content {
-    background-color: rgb(212, 255, 212);
+    /* background: rgb(212, 255, 212); */
+    color: white;
     padding: 2rem 0;
+    background-image: url("https://img.freepik.com/premium-photo/top-view-black-friday-decoration-concept-with-gift-box-shopping-cart-shopping-bag-dark-background-shopping-concept-boxing-day-black-friday-composition_53476-6274.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
 }
 
 .abt-hmbtn {
@@ -25,6 +31,10 @@
     background-color: #0a5616;
     color: white;
     border: 1px solid #0a5616;
+}
+
+.btn-grp {
+    margin: 2rem 0 1.5rem;
 }
 
 .abt-hmbtn:hover {
@@ -35,12 +45,14 @@
 .abt-cntbtn {
     border-radius: 0;
     color: #0a5616;
+    /* color: white; */
     background-color: rgb(238, 255, 238);
     border: 1px solid #0a5616;
 }
 
 .abt-cntbtn:hover {
-    border: 1px solid #0a5616;
+    color: white;
+    border: 1px solid rgb(212, 255, 212);
 }
 
 p {
@@ -56,7 +68,8 @@ p {
     position: absolute;
     font-size: 7rem;
     font-weight: 700;
-    color: #0a5616;
+    /* color: #0a5616; */
+    color: white;
 }
 
 .open-q {

@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/getorders/:shopName", getOrdersController);
 
 // update order status
-// router.get("/setstatus", updataStatusController);
+router.post("/setstatus/:id", updataStatusController);
 
 router.post("/placeorder", placeOrderController);
 

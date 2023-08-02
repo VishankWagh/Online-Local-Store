@@ -4,12 +4,16 @@ import Order from '../components/Order'
 import CreateProduct from '../components/CreateProduct'
 import axios from "axios";
 import "../styles/Merchant.css"
+import DeleteProduct from '../components/DeleteProduct';
 
 const Merchant = () => {
 
     const [orders, setOrders] = useState([]);
     // const [shop, setShop] = useState();
     const [selectedMenuOpt, setSelectedMenuOpt] = useState("Orders");
+    const [category, setCategory] = useState("");
+    const [catList, setCatList] = useState([]);
+
     let shopName = "Variety";
 
     useEffect(() => {
@@ -18,6 +22,13 @@ const Merchant = () => {
         //     const response = await axios.get(`http://localhost:5050/shops/getshop/${shopName}`);
         //     console.log(response.data.shop);
         //     setShop(response.data.shop);
+        async function getcatlist() {
+            const response = await axios.get(`http://localhost:5050/categories/getcategorylist/${shopName}`);
+            if (response.status === 200) {
+                setCatList(response.data.categories);
+            }
+        }
+        getcatlist();
         displayOrders();
         // }
         // fetchShop();
@@ -30,35 +41,63 @@ const Merchant = () => {
         try {
             const response = await axios.get(`http://localhost:5050/orders/getorders/${shopName}`);
             const neworders = response.data.orders
-            console.log("orders " + JSON.stringify(neworders));
+            // console.log("orders " + JSON.stringify(neworders));
             // setSelectedMenuOpt("Orders")
             setOrders(neworders);
         } catch (error) {
             console.log(error);
         }
     }
-    console.log("orders " + JSON.stringify(orders));
+    // console.log("orders " + JSON.stringify(orders));
 
     async function updateStatus(id, status) {
         try {
             // const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, { status });
             // const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}/${status}`, { status });
-            const response = await axios({
-                method: 'POST',
-                url: `http://localhost:5050/orders/setstatus/${id}`,
-                body: { status }
-            })
+
+            // const response = await axios({
+            //     method: 'POST',
+            //     url: `http://localhost:5050/orders/setstatus/${id}`,
+            //     body: { status }
+            // })
+            console.log("update status called " + status);
+            const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, {
+                status
+            });
+            if (response.status === 200) {
+                alert(response.data.message);
+            }
+            else {
+                alert("Update Status Unsuccessful !!")
+            }
+
             console.log("update " + JSON.stringify(response.data.message));
         } catch (error) {
             console.log(error);
         }
     }
 
-    // async function createCategory() {
-    //     const response = await axios.post(`http://localhost:5050/categories/addcategory/${categoryName}/${shopName}`);
-    // }
+    const addCategory = async () => {
+        const response = await axios.post("http://localhost:5050/categories/addcategory", { categoryName: category, shopName });
 
+        if (response.status === 200) {
+            alert(response.data.message);
+        }
+        else {
+            alert("Add category Unsuccessful !!")
+        }
+    }
 
+    const deleteCategory = async () => {
+        const response = await axios.post("http://localhost:5050/categories/deletecategory", { categoryName: category, shopName });
+
+        if (response.status === 200) {
+            alert(response.data.message);
+        }
+        else {
+            alert("Add category Unsuccessful !!")
+        }
+    }
 
     // console.log("orders " + JSON.stringify(orders));
 
@@ -104,74 +143,29 @@ const Merchant = () => {
             {selectedMenuOpt === "Orders" &&
                 <div className="m-5">
                     {orders.map((order, index) => {
-                        return <Order key={index} id={index} _id={order._id} uname={order.uname} address={order.address} products={order.products} totBill={order.totBill} updateStatus={updateStatus} />
+                        console.log(JSON.stringify(order));
+                        return <Order key={index} ind={index} id={order.orderId} name={order.name} address={order.address} products={order.products} status={order.status} subTotal={order.subTotal} dcharge={order.deliveryCharge} isDperson={false} updateStatus={updateStatus} />
                     })}
                 </div>}
-            {selectedMenuOpt === "Create Product" && <CreateProduct />}
+            {selectedMenuOpt === "Create Product" && <CreateProduct shopName={shopName} />}
             {selectedMenuOpt === "Update Product" && <UpdateProduct />}
-            {selectedMenuOpt === "Delete Product" &&
-                <div className="card del-prod-card m-5 w-75">
-                    <div className="card-header fs-4">
-                        <div className="search-prod mb-3">
-                            <label htmlFor="productName" className="form-label m-3 fs-5">Search Product</label>
-                            <div className="input-group m-0 delete-prod-inp w-50">
-                                <input type="text" list="products" className="form-control" id="productName" placeholder="Search & Select Product" />
-                                <datalist id="products">
-                                    <option value="keyboard" />
-                                    <option value="Mouse" />
-                                    <option value="Laptop" />
-                                    <option value="kurta" />
-                                </datalist>
-                                <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button">Select</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card-body">
-                        <div className="prod-img h-50 w-50 mx-4 mb-4">
-                            <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-math-90946.jpg&fm=jpg" className="object-fit-contain" alt="" />
-                        </div>
-                        {/* <p className="m-2 p-0" ><b className="fs-5">Product Name : </b><span className="fs-5 ms-3">Smart Watch</span></p>
-                        <p className="m-2 p-0" ><b className="fs-5">Description : </b><span className="fs-5 ms-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, qui eum veritatis saepe facilis sit quis nulla iste laudantium laborum.</span><br /></p>
-                        <p className="m-2 p-0" ><b className="fs-5">Price: </b><span className="fs-5 ms-3">$ 1499.00</span></p> */}
-
-                        <table className="table mb-4">
-                            <tbody>
-                                <tr>
-                                    <th scope="row" className="fs-5 w-15" style={{ width: "24%" }} colSpan={2}>Product Name : </th>
-                                    <td className="fw" style={{ fontSize: "17px" }} >Smart Watch</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="fs-5" colSpan={2}>Description : </th>
-                                    <td className="fw" style={{ fontSize: "17px" }} >Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, qui eum veritatis saepe facilis sit quis nulla iste laudantium laborum</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="fs-5" colSpan={2}>Price: </th>
-                                    <td className="fw" style={{ fontSize: "17px" }} >$ 1499.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <button href="#" className="btn btn-danger px-5">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-
-            }
+            {selectedMenuOpt === "Delete Product" && <DeleteProduct />}
             {selectedMenuOpt === "Add Category" &&
                 <div className="search-prod m-5 mb-3">
                     <label htmlFor="productName" className="form-label m-3 fs-5">Select Category</label>
                     <div className="input-group m-0  manage-cat-inp">
-                        <input type="text" list="categories" className="form-control" id="categoryName" placeholder="Search & Select Category" />
+                        <input type="text" list="categories" className="form-control" id="categoryName" value={category} onChange={(e) => { setCategory(e.target.value) }} placeholder="Search & Select Category" />
                         <datalist id="categories">
-                            <option value="Traditionals" />
+                            {catList.map((cat, ind) => {
+                                return <option value={cat} />
+                            })}
+                            {/* <option value="Traditionals" />
                             <option value="Casuals" />
                             <option value="Electronics" />
                             <option value="Stationary" />
-                            <option value="Home-decor" />
+                            <option value="Home-decor" /> */}
                         </datalist>
-                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button">Add</button>
+                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => { addCategory() }} >Add</button>
                     </div>
                 </div>}
 
@@ -179,15 +173,18 @@ const Merchant = () => {
                 <div className="search-prod m-5 mb-3">
                     <label htmlFor="categoryName" className="form-label m-3 fs-5">Search Category</label>
                     <div className="input-group m-0  manage-cat-inp">
-                        <input type="text" list="categories" className="form-control" id="categoryName" placeholder="Search & Select Category" />
+                        <input type="text" list="categories" className="form-control" id="categoryName" value={category} onChange={(e) => { setCategory(e.target.value) }} placeholder="Search & Select Category" />
                         <datalist id="categories">
-                            <option value="Traditionals" />
+                            {catList.map((cat, ind) => {
+                                return <option value={cat} />
+                            })}
+                            {/* <option value="Traditionals" />
                             <option value="Casuals" />
                             <option value="Electronics" />
                             <option value="Stationary" />
-                            <option value="Home-decor" />
+                            <option value="Home-decor" /> */}
                         </datalist>
-                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button">Delete</button>
+                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => { deleteCategory() }}>Delete</button>
                     </div>
                 </div>
             }

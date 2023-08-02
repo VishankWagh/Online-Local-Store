@@ -61,10 +61,21 @@ export const cregisterController = async (req, res) => {
 
         await qbDB.collection("customer").insertOne({ name, email, uname, password: hashedPassword, address, pincode });
 
+        //token
+        const token = JWT.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            role: "Customer"
+        }, 'thisisusw04jsonwebtoken');
+
         res.status(200).send({
             success: true,
             message: "Customer Registered Successfully",
-        })
+            user: {
+                role: "Customer",
+                uname: existingUser.uname
+            },
+            token: token
+        });
 
     } catch (error) {
         console.log(error);
@@ -80,32 +91,8 @@ export const cregisterController = async (req, res) => {
 //shop register controller
 export const sregisterController = async (req, res) => {
     try {
-        const { shopName, shopImg, area, pincode, ownerName, email, uname, password } = req.body;
-
-        if (!shopName) {
-            return res.send({ error: "Shop Name is Required" });
-        }
-        if (!shopImg) {
-            return res.send({ error: "Shop Image is Required" });
-        }
-        if (!area) {
-            return res.send({ error: "Shop area is Required" });
-        }
-        if (!pincode) {
-            return res.send({ error: "Pincode is Required" });
-        }
-        if (!ownerName) {
-            return res.send({ error: "Owner Name is Required" });
-        }
-        if (!email) {
-            return res.send({ error: "Email is Required" });
-        }
-        if (!uname) {
-            return res.send({ error: "Username is Required" });
-        }
-        if (!password) {
-            return res.send({ error: "Password is Required" });
-        }
+        const { shopName, shopDesc, shopImg, area, pincode, ownerName, email, uname, password } = req.body;
+        const Npincode = parseInt(pincode);
 
         const existingShop = await qbDB.collection("shops").findOne({ shopName: shopName });
 
@@ -121,11 +108,25 @@ export const sregisterController = async (req, res) => {
             hashedPassword = hash;
         });
 
-        await qbDB.collection("shops").insertOne({ shopName, shopImg, area, pincode, ownerName, email, uname, password: hashedPassword, categories: [], prods: [] });
+        await qbDB.collection("shops").updateOne({ name: "shopId" }, { $inc: { currId: 1 } })
+        const shopId = await qbDB.collection("shops").findOne({ name: "shopId" });
+        const currId = shopId.currId;
+        await qbDB.collection("shops").insertOne({ id: currId, shopName, desc: shopDesc, shopImg, area, pincode: Npincode, ownerName, email, uname, password: hashedPassword, categories: [], prods: [] });
+
+        //token
+        const token = JWT.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            role: "Merchant"
+        }, 'thisisusw04jsonwebtoken');
 
         res.status(200).send({
             success: true,
             message: "Shop Registered Successfully",
+            user: {
+                role: "Merchant",
+                uname: existingShop.uname
+            },
+            token: token
         })
 
     }
@@ -211,9 +212,9 @@ export const loginController = async (req, res) => {
 
             const customer = await qbDB.collection("customer").findOne({ uname });
             if (!customer) {
-                return res.status(404).send({
+                return res.status(200).send({
                     success: false,
-                    message: "Customer is not Registered Please Register"
+                    message: "Customer is does not Exist Please Register"
                 })
             }
             // console.log("customer.password " + JSON.stringify(customer.password));
@@ -230,24 +231,25 @@ export const loginController = async (req, res) => {
 
             //token
             const token = JWT.sign({
-                exp: 60,
-                data: customer._id
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                role: "Customer"
             }, 'thisisusw04jsonwebtoken');
 
             res.status(200).send({
                 success: true,
                 message: "Login Successfull",
                 user: {
-                    user: "Customer",
-                    name: customer.name
-                }
-            })
+                    role: "Customer",
+                    uname: customer.uname
+                },
+                token: token
+            });
 
         } else if (req.params.user === "s") {
 
-            const shopKeeper = await qbDB.collection("shop").findOne({ uname });
+            const shopKeeper = await qbDB.collection("shops").findOne({ uname });
             if (!shopKeeper) {
-                return res.status(404).send({
+                return res.status(200).send({
                     success: false,
                     message: "Shop-Keeper is not Registered Please Register"
                 })
@@ -256,7 +258,7 @@ export const loginController = async (req, res) => {
             await bcrypt.compare(password, shopKeeper.password).then(function (result) {
                 match = result;
             });
-            if (match) {
+            if (!match) {
                 res.status(200).send({
                     success: false,
                     message: "Invalid Password",
@@ -265,24 +267,26 @@ export const loginController = async (req, res) => {
 
             //token
             const token = JWT.sign({
-                exp: 60,
-                data: customer._id
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                role: "Merchant"
             }, 'thisisusw04jsonwebtoken');
 
             res.status(200).send({
                 success: true,
                 message: "Login Successfull",
                 user: {
-                    user: "ShopKeeper",
-                    name: shopKeeper.ownerName
-                }
+                    role: "Merchant",
+                    uname: shopKeeper.uname
+                },
+                token: token
             })
+
 
         } else if (req.params.user === "d") {
 
             const dperson = await qbDB.collection("deliveryperson").findOne({ uname });
             if (!dperson) {
-                return res.status(404).send({
+                return res.status(200).send({
                     success: false,
                     message: "Delivery person is not Registered Please Register"
                 })
@@ -291,7 +295,7 @@ export const loginController = async (req, res) => {
             await bcrypt.compare(password, dperson.password).then(function (result) {
                 match = result;
             });
-            if (match) {
+            if (!match) {
                 res.status(200).send({
                     success: false,
                     message: "Invalid Password",
@@ -300,17 +304,18 @@ export const loginController = async (req, res) => {
 
             //token
             const token = JWT.sign({
-                exp: 60,
-                data: customer._id
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                role: "DeliveryPerson"
             }, 'thisisusw04jsonwebtoken');
 
             res.status(200).send({
                 success: true,
                 message: "Login Successfull",
                 user: {
-                    user: "Delivery person",
-                    name: dperson.ownerName
-                }
+                    role: "DeliveryPerson",
+                    uname: dperson.uname
+                },
+                token: token
             })
 
         }

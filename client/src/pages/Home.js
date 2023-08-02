@@ -277,7 +277,7 @@ function Home() {
                                             <span className="ownername">{shop.ownerName}</span>
                                         </p>
                                         <div className="card-body">
-                                            <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
+                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
                                             {/* <a href="/" className="card-link">Another link</a> */}
                                         </div>
                                     </div>

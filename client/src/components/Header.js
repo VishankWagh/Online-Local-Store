@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from '../images/QBuy-logo.jpg';
-import DropDown from './DropDown';
+import { useAuth } from '../context/auth';
 
 const Header = () => {
+
+    const [auth, setAuth] = useAuth();
+
+    useEffect(() => { }, [auth]);
 
     function regSelect(sel) {
         console.log("reg " + sel);
@@ -15,6 +19,15 @@ const Header = () => {
         else if (sel === "Delivery-Person") {
             window.location.href = "/deliveryperson-register";
         }
+    }
+
+    function handleLogout() {
+        setAuth({
+            ...auth,
+            user: null,
+            token: ""
+        });
+        localStorage.removeItem("auth");
     }
 
     return <nav className="navbar navbar-expand-lg p-2 position-fixed w-100 z-10" style={{ zIndex: "10" }}>
@@ -37,35 +50,54 @@ const Header = () => {
                     <li className="nav-item me-5 fs-5">
                         <a className="nav-link page-link" href="/orders">Orders</a>
                     </li>
-                    <li className="nav-item me-5 fs-5 signin-btn">
-                        <a className="nav-link reglog-link" href="/login">
-                            <span className="material-symbols-outlined sec-logo">
-                                login
+                    {!auth.user ? (<>
+                        <li className="nav-item me-5 fs-5 signin-btn">
+                            <a className="nav-link reglog-link" href="/login">
+                                <span class="material-symbols-outlined sec-logo">
+                                    login
+                                </span>
+                                <span className="txt signin-txt">Sign In</span>
+                            </a>
+                        </li>
+                        <li className="nav-item me-5 fs-5 signup-btn">
+                            <span className="nav-link reglog-link" href="/customer-register">
+                                <span class="material-symbols-outlined sec-logo">
+                                    app_registration
+                                </span>
+                                <select className='reg-select' name="" id="" onChange={(e) => regSelect(e.target.value)}>
+                                    <option value="Register as">Sign Up as</option>
+                                    <option value="Customer" onClick={() => {
+                                        console.log("cust")
+                                        window.location.href = "/customer-register"
+                                    }}>Customer</option>
+                                    <option value="Shop" onClick={() => {
+                                        window.location.href = "/shop-register"
+                                    }}>Shop</option>
+                                    <option value="Delivery-Person" onClick={() => {
+                                        window.location.href = "/deliveryperson-register"
+                                    }}>Delivery-Person</option>
+                                </select>
+                                {/* <span className="txt signup-txt">Sign Up</span> */}
                             </span>
-                            <span className="txt signin-txt">Sign In</span>
-                        </a>
-                    </li>
-                    <li className="nav-item me-5 fs-5 signup-btn">
-                        <span className="nav-link reglog-link" href="/customer-register">
-                            <span className="material-symbols-outlined sec-logo">
-                                app_registration
+                        </li>
+                    </>) : (<>
+                        <li className="nav-item me-5 fs-5 signin-btn">
+                            <a className="nav-link reglog-link" href="/login" onClick={() => { handleLogout() }} >
+                                <span class="material-symbols-outlined sec-logo">
+                                    power_settings_new
+                                </span>
+                                <span className="txt signin-txt">Sign Out</span>
+                            </a>
+                        </li>
+                        <li className="nav-item me-3 ms-5 fs-5">
+                            <span className="nav-link u-profile" href="/customer-register">
+                                <div className="u text-uppercase">
+                                    u
+                                </div>
+                                <div className="uname">Ushank</div>
                             </span>
-                            <select className='reg-select' name="" id="" onChange={(e) => regSelect(e.target.value)}>
-                                <option value="Register as">Sign Up as</option>
-                                <option value="Customer" onClick={() => {
-                                    console.log("cust")
-                                    window.location.href = "/customer-register"
-                                }}>Customer</option>
-                                <option value="Shop" onClick={() => {
-                                    window.location.href = "/shop-register"
-                                }}>Shop</option>
-                                <option value="Delivery-Person" onClick={() => {
-                                    window.location.href = "/deliveryperson-register"
-                                }}>Delivery-Person</option>
-                            </select>
-                            {/* <span className="txt signup-txt">Sign Up</span> */}
-                        </span>
-                    </li>
+                        </li>
+                    </>)}
                 </ul>
             </div>
         </div>

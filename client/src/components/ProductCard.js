@@ -13,7 +13,7 @@ function ProductCard(props) {
                     </h5>
                     {/* <div className="shop-name" style={{ color: "grey", fontSize: "15px", paddingBottom: ".5rem" }}>{props.sname}</div> */}
                     <p className="card-text">{desc.slice(0, 25) + "..."}</p>
-                    <a href={`/product?sname=${props.sname}&pname=${name}`} className="btn">More Details</a>
+                    <a href={`/customer/product?sname=${props.sname}&pname=${name}`} className="btn">More Details</a>
                     <a className="btn addcartbtn" onClick={() => {
                         let citm = {
                             "prodName": name,

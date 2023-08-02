@@ -20,20 +20,20 @@ function Product() {
             setShopName(sname);
 
             const response = await axios.get(`http://localhost:5050/products/singleproduct/${pname}`);
-            console.log("repn " + JSON.stringify(response));
+            // console.log("repn " + JSON.stringify(response));
             setProduct(response.data.product);
-            console.log("shpName " + shopName);
+            // console.log("shpName " + shopName);
 
             // fetch similar products
             const cname = response.data.product.category;
-            console.log("sn cn " + JSON.stringify(response.data), cname);
+            // console.log("sn cn " + JSON.stringify(response.data), cname);
             const res = await axios.get(`http://localhost:5050/products/similarproducts/${sname}/${cname}/${pname}`);
             setSimilarProducts(res.data.prodList);
         }
 
         fetchProdDetails();
     }, [shopName])
-    console.log("sim " + JSON.stringify(similarProducts));
+    // console.log("sim " + JSON.stringify(similarProducts));
 
     document.title = "Quik-Buy | Product - " + product.name;
 
@@ -234,7 +234,7 @@ function Product() {
                 <div className="similar-prods row">
                     <div className="category-name"><h3>More from {product.category}</h3></div>
                     {similarProducts && similarProducts.map((prod, index) => {
-                        console.log("pro " + prod);
+                        {/* console.log("pro " + prod); */ }
                         return (
                             prod && <ProductCard key={index} prod={prod} sname={shopName} addToCart={addToCart} imgUrl={imgUrl[index]} />
                         )

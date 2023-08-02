@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import "../styles/Register.css"
 import axios from "axios";
 import "../styles/Register.css"
@@ -23,6 +24,7 @@ const CRegister = () => {
     const [address, setAddress] = useState("");
     const [pincode, setPincode] = useState("");
 
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,8 +43,9 @@ const CRegister = () => {
                 address,
                 pincode
             });
-            if (response.status === 200) {
+            if (response.data.success) {
                 alert(response.data.message);
+                navigate("/login");
             }
             else {
                 alert("Unsuccessful Registration")

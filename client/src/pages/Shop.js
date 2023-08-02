@@ -208,12 +208,12 @@ function Shop() {
                 </div>
 
                 <div className="content">
-                    <div className="drop-downs d-flex">
-                        {/* <div className="input-group mb-3 pin-code-inp">
+                    {/* <div className="input-group mb-3 pin-code-inp">
                         <input type="text" className="form-control" placeholder="Change Pincode?" />
                         <button className="btn btn-outline-secondary btn-primary text-light" type="button">Change</button>
                     </div> */}
 
+                    <div className="drop-downs d-flex">
                         <DropDown data={product} name={"product"} updSrchd={updateSearched} />
                         <DropDown data={category} name={"category"} updSrchd={updateSearched} />
                     </div>
@@ -229,14 +229,16 @@ function Shop() {
                             imgUrls = shop.shopName == "Home-Harmony" ? catg == "Furniture" ? homeharmonyfur : homeharmonydec : null */}
                             return (
                                 <div className="category" key={ind}>
-                                    <div className="category-name"><h3>{catg}</h3></div>
-                                    <div className="products row">
-                                        {nproductList?.filter((prf) => {
-                                            return prf.category === catg;
-                                        })
-                                            .map((prod, index) => {
-                                                return (<ProductCard sname={shop.shopName} prod={prod} imgUrl={imgUrls[ind][index]} addToCart={addToCart} key={index} />);
-                                            })}
+                                    <div className="category" key={ind}>
+                                        <div className="category-name"><h3>{catg}</h3></div>
+                                        <div className="products row">
+                                            {nproductList?.filter((prf) => {
+                                                return prf.category === catg;
+                                            })
+                                                .map((prod, index) => {
+                                                    return (<ProductCard sname={shop.shopName} prod={prod} imgUrl={imgUrls[ind][index]} addToCart={addToCart} key={index} />);
+                                                })}
+                                        </div>
                                     </div>
                                 </div>
                             )

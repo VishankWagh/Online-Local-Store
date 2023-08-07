@@ -55,6 +55,10 @@ body {
     flex-direction: column;
 }
 
+.nav2 {
+    padding-right: 7rem;
+}
+
 .reglog-link {
     align-items: center;
     justify-content: center;
@@ -71,7 +75,7 @@ body {
 a.page-link {
     font-weight: 400;
     font-size: 20px;
-    padding-top: 17px;
+    text-transform: uppercase;
 }
 
 .footer {
@@ -146,13 +150,14 @@ ul {
     border-radius: 0;
 }
 
-.u-profile {
+.user-profile {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 4rem;
 }
 
-.u-profile .u {
+.user-profile .user-logo {
     text-align: center;
     background-color: rgb(134 216 134);
     color: #0a5616;

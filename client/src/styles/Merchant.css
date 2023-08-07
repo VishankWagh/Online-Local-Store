@@ -1,5 +1,6 @@
 .merchant {
     width: 100%;
+    min-height: 90vh;
     background-color: rgb(238, 255, 238);
     padding-top: 8rem;
 }
@@ -25,6 +26,13 @@
 .merchant-menu {
     z-index: -10;
     background-color: rgb(170 236 170);
+    padding: 0;
+    border: 1px solid black;
+}
+
+.merchant-menu .list-group-item {
+    border: none;
+    border-top: 1px solid black;
 }
 
 .merchant-menu .material-symbols-outlined {
@@ -33,6 +41,16 @@
 
 .merchant-menu p {
     background-color: rgb(212, 255, 212);
+}
+
+.merchant .card-body {
+    padding: 2rem 3rem 1rem;
+    /* padding-left: 3rem; */
+}
+
+.mer-shpnm {
+    margin: 1rem;
+    margin-left: 2.5rem;
 }
 
 .order,
@@ -47,8 +65,14 @@
 }
 
 .order-header {
+    padding-left: 3rem;
     background-color: #0a5616;
     color: white;
+}
+
+.del-prod-card {
+    /* margin: auto; */
+    width: 70%;
 }
 
 .del-prod-card input {
@@ -66,4 +90,8 @@
 
 .merchant .form-control {
     background-color: rgb(212, 255, 212) !important;
+}
+
+#cp-qty {
+    width: 5rem;
 }

@@ -5,7 +5,7 @@ const Order = (props) => {
     return (
         <div className="p-0 border-0 rounded-0 mb-5 card order">
             <h5 className="card-header order-header fs-3 fw-bold">Order : {props.ind + 1}</h5>
-            <div className="card-body my-3">
+            <div className="card-body">
                 {/* <p className="card-text mb-1"><b>UserName of Customer : </b> &nbsp; {props.uname} </p>
                 <p className="card-text m-0"><b>Address : </b> {props.address} </p>
                 <p className="mt-3"><b>Payment Method:</b> COD</p> */}
@@ -29,7 +29,7 @@ const Order = (props) => {
                         </tr>}
                     </tbody>
                 </table>
-                <table className="table del-prod-card mb-3 text-center">
+                <table className="table del-prod-card mb-3">
                     <tbody>
                         <tr>
                             <th scope="row" className="fs-5" >Name</th>
@@ -40,7 +40,7 @@ const Order = (props) => {
                         </tr>
                         {props.products.map((product, index) => {
                             return <tr key={index}>
-                                <td className="" style={{ fontSize: "17px" }} >{product.productName}</td>
+                                <td className="" style={{ fontSize: "17px" }} >{product.prodName}</td>
                                 {/* <td className="" style={{ fontSize: "17px" }} >{product.price}</td> */}
                                 <td className="" style={{ fontSize: "17px" }} >{product.qty}</td>
                                 <td className="fw-light" >X</td>

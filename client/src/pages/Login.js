@@ -11,6 +11,7 @@ function Login() {
     const [uname, setUname] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("c");
+    const [errMsg, setErrMsg] = useState("");
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -53,7 +54,15 @@ function Login() {
                 token: response.data.token
             });
             localStorage.setItem("auth", JSON.stringify(response.data));
-            navigate(location.state || "/");
+            if (role === "c") {
+                navigate(location.state || "/");
+            } else if (role === "s") {
+                navigate("/merchant");
+            } else if (role === "d") {
+                navigate("/deliveryperson");
+            }
+        } else {
+            setErrMsg(response.data.message);
         }
     }
 
@@ -67,7 +76,7 @@ function Login() {
                         </span>
                         Login
                     </h2>
-                    <div className="mb-3 text-center text-danger d-none">UserName or Password is Invalid !!</div>
+                    <div className="mb-3 text-center text-danger">{errMsg}</div>
                     {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
                     <div className="mb-3">
                         <label htmlFor="user" className="form-label">Select User</label>

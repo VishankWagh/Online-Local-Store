@@ -5,37 +5,43 @@ import CreateProduct from '../components/CreateProduct'
 import axios from "axios";
 import "../styles/Merchant.css"
 import DeleteProduct from '../components/DeleteProduct';
+import { useAuth } from '../context/auth';
 
 const Merchant = () => {
 
     const [orders, setOrders] = useState([]);
-    // const [shop, setShop] = useState();
+    const [shopName, setShopName] = useState();
     const [selectedMenuOpt, setSelectedMenuOpt] = useState("Orders");
     const [category, setCategory] = useState("");
     const [catList, setCatList] = useState([]);
 
-    let shopName = "Variety";
+    const [auth, setAuth] = useAuth();
+
+
+    // let shopName = "Variety";
 
     useEffect(() => {
 
-        // async function fetchShop() {
-        //     const response = await axios.get(`http://localhost:5050/shops/getshop/${shopName}`);
-        //     console.log(response.data.shop);
-        //     setShop(response.data.shop);
-        async function getcatlist() {
-            const response = await axios.get(`http://localhost:5050/categories/getcategorylist/${shopName}`);
+        async function fetchData() {
+            //get shopname
+            const response = await axios.post("http://localhost:5050/shops/getshopName", { uname: auth.user.uname });
+            if (response.data.success) {
+                setShopName(response.data.shopName);
+            }
+
+            //get catlist
+            const res = await axios.get(`http://localhost:5050/categories/getcategorylist/${response.data.shopName}`);
             if (response.status === 200) {
-                setCatList(response.data.categories);
+                setCatList(res.data.categories);
             }
         }
-        getcatlist();
+
+        fetchData();
         displayOrders();
-        // }
-        // fetchShop();
         // eslint - disable - next - line
     }, [shopName]);
 
-    document.title = "Quik-Buy | Merchant";
+    document.title = "Quik-Buy | " + shopName;
 
     async function displayOrders() {
         try {
@@ -48,6 +54,7 @@ const Merchant = () => {
             console.log(error);
         }
     }
+    console.log("sn " + shopName);
     // console.log("orders " + JSON.stringify(orders));
 
     async function updateStatus(id, status) {
@@ -103,6 +110,7 @@ const Merchant = () => {
 
     return <div className="merchant row position-sticky" >
         <div className="merchant-menu list-group mx-5 mt-4 col-3 position-fixed bottom-20 text-start" style={{ marginTop: "10rem" }}>
+            <h1 className='mer-shpnm'>{shopName}</h1>
             <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" aria-current="true" onClick={(e) => { displayOrders(); setSelectedMenuOpt("Orders"); }}>
                 <span className="material-symbols-outlined mx-3 fs-2">checklist_rtl</span>
                 Orders

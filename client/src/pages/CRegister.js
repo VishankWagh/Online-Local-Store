@@ -92,6 +92,7 @@ const CRegister = () => {
                 <input type="number" className="form-control" name="pincode" id="pincode" onChange={(e) => { setPincode(e.target.value) }} value={pincode} required></input>
             </div>
             <button type="submit" className="btn btn-primary">Register</button>
+            <p className="reglgn-txt">Already have an Account? <a href='/login' className="btn btn-primary reg-lgnbtn">Login</a></p>
         </form>
     </div>
 

@@ -36,7 +36,7 @@ const Header = () => {
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse pe-5" id="navbarSupportedContent">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                     {/* <li className="nav-item me-5 fs-5">
                         <a className="nav-link active" aria-current="page" href="#">Orders</a>
@@ -47,11 +47,26 @@ const Header = () => {
                     <li className="nav-item me-5 fs-5">
                         <a className="nav-link page-link" href="/about">About Us</a>
                     </li>
-                    <li className="nav-item me-5 fs-5">
-                        <a className="nav-link page-link" href="/orders">Orders</a>
-                    </li>
+                    {console.log("autn " + JSON.stringify(auth))}
+                    {auth.user?.role === "Customer" &&
+                        <li className="nav-item me-5 fs-5">
+                            <a className="nav-link page-link" href="/customer/orders">Orders</a>
+                        </li>
+                    }
+                    {auth.user?.role === "Merchant" &&
+                        <li className="nav-item me-5 fs-5">
+                            <a className="nav-link page-link" href="/merchant">DashBoard</a>
+                        </li>
+                    }
+                    {auth.user?.role === "DeliveryPerson" &&
+                        <li className="nav-item me-5 fs-5">
+                            <a className="nav-link page-link" href="/deliveryperson">DashBoard</a>
+                        </li>
+                    }
+                </ul>
+                <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav2">
                     {!auth.user ? (<>
-                        <li className="nav-item me-5 fs-5 signin-btn">
+                        <li className="nav-item fs-5 signin-btn">
                             <a className="nav-link reglog-link" href="/login">
                                 <span class="material-symbols-outlined sec-logo">
                                     login
@@ -59,7 +74,7 @@ const Header = () => {
                                 <span className="txt signin-txt">Sign In</span>
                             </a>
                         </li>
-                        <li className="nav-item me-5 fs-5 signup-btn">
+                        <li className="nav-item fs-5 signup-btn">
                             <span className="nav-link reglog-link" href="/customer-register">
                                 <span class="material-symbols-outlined sec-logo">
                                     app_registration
@@ -89,12 +104,12 @@ const Header = () => {
                                 <span className="txt signin-txt">Sign Out</span>
                             </a>
                         </li>
-                        <li className="nav-item me-3 ms-5 fs-5">
-                            <span className="nav-link u-profile" href="/customer-register">
-                                <div className="u text-uppercase">
+                        <li className="nav-item me-4 fs-5">
+                            <span className="nav-link user-profile" href="/customer-register">
+                                <div className="user-logo text-uppercase">
                                     u
                                 </div>
-                                <div className="uname">Ushank</div>
+                                <div className="uname">{auth.user.uname}</div>
                             </span>
                         </li>
                     </>)}

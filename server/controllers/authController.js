@@ -202,7 +202,7 @@ export const loginController = async (req, res) => {
         const { uname, password } = req.body;
 
         if (!uname || !password) {
-            return res.status(404).send({
+            return res.status(200).send({
                 success: false,
                 message: "Invalid email or password"
             })
@@ -223,7 +223,7 @@ export const loginController = async (req, res) => {
                 match = result;
             });
             if (!match) {
-                res.status(200).send({
+                return res.status(200).send({
                     success: false,
                     message: "Invalid Password",
                 })
@@ -259,7 +259,7 @@ export const loginController = async (req, res) => {
                 match = result;
             });
             if (!match) {
-                res.status(200).send({
+                return res.status(200).send({
                     success: false,
                     message: "Invalid Password",
                 })
@@ -285,6 +285,7 @@ export const loginController = async (req, res) => {
         } else if (req.params.user === "d") {
 
             const dperson = await qbDB.collection("deliveryperson").findOne({ uname });
+            console.log("dp " + JSON.stringify(dperson));
             if (!dperson) {
                 return res.status(200).send({
                     success: false,
@@ -296,7 +297,7 @@ export const loginController = async (req, res) => {
                 match = result;
             });
             if (!match) {
-                res.status(200).send({
+                return res.status(200).send({
                     success: false,
                     message: "Invalid Password",
                 })

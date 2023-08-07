@@ -33,3 +33,19 @@
 .register select {
     background-color: rgb(212, 255, 212);
 }
+
+.reglgn-txt {
+    /* margin-left: 36%; */
+    margin-top: 2rem;
+    font-size: large;
+    font-weight: 400;
+}
+
+.reg-lgnbtn {
+    /* margin-left: 36%; */
+    /* margin-top: 2rem; */
+    letter-spacing: 2px;
+    border-radius: 50px;
+    background-color: rgb(212, 255, 212);
+    color: #0a5616;
+}

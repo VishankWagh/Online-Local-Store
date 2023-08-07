@@ -86,7 +86,7 @@ function Cart({ shopCart, deleteCartItem, incdecQty }) {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a className="plc-ord btn" href={`/checkout?sind=${shopInd}`}>Place Order</a>
+                                <a className="plc-ord btn" href={`/customer/checkout?sind=${shopInd}`}>Place Order</a>
                             </div>
 
                         )

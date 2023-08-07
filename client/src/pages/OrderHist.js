@@ -16,7 +16,9 @@ function OrderHist() {
             setOrderList(ord);
         }
         fetchOrders();
-    }, [])
+    }, []);
+
+    document.title = "Quik-Buy | Order History";
 
     //cancel order
     async function cancelOrder(ordId) {
@@ -67,7 +69,7 @@ function OrderHist() {
                                             <tr>
                                                 <th>Delivery Charge</th>
                                                 <td></td>
-                                                <td>&#8377; 3</td>
+                                                <td>&#8377; {ordr.deliveryCharge}</td>
                                             </tr>
                                             <tr className="total-tr">
                                                 <th>Total</th>
@@ -120,7 +122,7 @@ function OrderHist() {
                                             <tr>
                                                 <th>Delivery Charge</th>
                                                 <td></td>
-                                                <td>&#8377; 3</td>
+                                                <td>&#8377; {ord.deliveryCharge}</td>
                                             </tr>
                                             <tr className="total-tr">
                                                 <th>Total</th>

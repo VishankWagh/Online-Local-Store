@@ -177,7 +177,8 @@ function Home() {
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRa-uc1ljm3iuPu5fq4zOK_KTXT9jxOQJitrAEPvxsQ0ybxB0972ZaxfenGQpGJ564Ygg&usqp=CAU',
             'https://5.imimg.com/data5/HR/BA/WN/SELLER-13309345/shop-name-board.jpg',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFGydmvCaRm32-wk_A8MzX6J1tVRtLc20CS1bRupC0Cu3_Br_2KZg3UIxRx7WT7ycWTGc&usqp=CAU',
-            'https://c4.wallpaperflare.com/wallpaper/805/668/874/lofi-neon-coffee-house-shop-neon-glow-hd-wallpaper-preview.jpg'
+            'https://c4.wallpaperflare.com/wallpaper/805/668/874/lofi-neon-coffee-house-shop-neon-glow-hd-wallpaper-preview.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9t9eVPaKzySOMDSPGwp-D0vzYkRtFmTOXUaZtIz0LQ&s'
         ]
 
     return (
@@ -304,7 +305,7 @@ function Home() {
                                             <span className="ownername">{shop.ownerName}</span>
                                         </p>
                                         <div className="card-body">
-                                            <a href={`/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
+                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
                                             {/* <a href="/" className="card-link">Another link</a> */}
                                         </div>
                                     </div>

@@ -34,22 +34,23 @@ function App() {
             <Route path='/customer/' element={<PrivateRoute role="customer" />} >
               <Route path='Shop' element={<Shop />} />
               <Route path='Product' element={<Product />} />
-              <Route path='/Orders' element={<OrderHist />} />
-              <Route path='/Checkout' element={<Checkout />} />
+              <Route path='Orders' element={<OrderHist />} />
+              <Route path='Checkout' element={<Checkout />} />
             </Route>
             <Route path='/customer-register' element={<CRegister />} />
             <Route path='/shop-register' element={<SRegister />} />
             <Route path='/deliveryperson-register' element={<DRegister />} />
-            <Route path='/Login' element={<Login />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/' element={<Home />} />
             {/* <Route path='/Merchant' element={<Merchant />} /> */}
-            <Route path='/Merchant' element={<PrivateRoute role="merchant" />} >
+            <Route path='/merchant' element={<PrivateRoute role="merchant" />} >
               <Route path='' element={<Merchant />} />
             </Route>
-            <Route path='/Deliveryperson' element={<PrivateRoute role="dperson" />} >
+            <Route path='/deliveryperson' element={<PrivateRoute role="dperson" />} >
               <Route path='' element={<DelPerson />} />
             </Route>
-            <Route path='/About' element={<About />} />
+            {/* <Route path='deliveryperson' element={<DelPerson />} /> */}
+            <Route path='/about' element={<About />} />
           </Routes>
         </div>
         <Footer />

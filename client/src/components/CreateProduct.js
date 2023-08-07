@@ -76,9 +76,9 @@ const CreateProduct = (props) => {
                 <label htmlFor="price" className="form-label b">Price</label>
                 <input type="number" className="form-control bg-body-secondary" id="price" value={price} onChange={(e) => setPrice(e.target.value)} ></input>
             </div>
-            <div className="mb-3 w-25">
-                <label htmlFor="qty" className="form-label b">Quantity</label>
-                <input type="number" className="form-control bg-body-secondary" id="qty" value={qty} onChange={(e) => setQty(e.target.value)} ></input>
+            <div className="mb-3">
+                <label htmlFor="cp-qty" className="form-label b">Quantity</label>
+                <input type="number" className="form-control bg-body-secondary" id="cp-qty" value={qty} onChange={(e) => setQty(e.target.value)} ></input>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>

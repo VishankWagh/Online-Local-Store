@@ -222,7 +222,7 @@ function Product() {
                             }
                             addToCart(shopName, citm);
                         }}>Add To Cart</a>
-                        <a className="btn plc-ord" href={`/checkout?sind=${shopName}`}>Place Order</a>
+                        <a className="btn plc-ord" href={`/customer/checkout?sind=${shopName}`}>Place Order</a>
                     </div>
                     <div className="col-12 prod-desc">
                         <p className="fs-4 fw-bold mb-3">Product Details</p>

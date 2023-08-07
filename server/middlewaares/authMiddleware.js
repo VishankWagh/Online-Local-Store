@@ -109,11 +109,12 @@ export const isDPerson = async (req, res, next) => {
 
         const role = decode.role;
 
-        if (role !== "Dperson") {
-            res.status(200).send({
+        if (role !== "DeliveryPerson") {
+            console.log("if del" + role + "f");
+            return res.status(200).send({
                 success: false,
                 message: "UnAuthorized Access"
-            })
+            });
         }
         else {
             next();
@@ -121,8 +122,8 @@ export const isDPerson = async (req, res, next) => {
     } catch (error) {
         console.log(error);
         res.status(400).send({
-            success: false,
             error,
+            success: false,
             message: "Error in authMiddleware isDPerson"
         })
     }

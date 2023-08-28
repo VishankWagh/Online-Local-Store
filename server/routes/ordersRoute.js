@@ -1,5 +1,5 @@
 import express from "express";
-import { cancelOrderController, getOrdersByNameController, getOrdersController, placeOrderController, updataStatusController } from "../controllers/ordersController.js";
+import { cancelOrderController, getDeliveredOrdersController, getOrdersByNameController, getOrdersController, placeOrderController, updataStatusController } from "../controllers/ordersController.js";
 
 const router = express.Router();
 
@@ -14,5 +14,8 @@ router.post("/placeorder", placeOrderController);
 router.get("/cancelorder/:oid", cancelOrderController);
 
 router.get("/getordersbyname/:name", getOrdersByNameController);
+
+// get delivered orders count
+router.get("/deliveredorderscount/:shopName", getDeliveredOrdersController);
 
 export default router;

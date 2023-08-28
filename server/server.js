@@ -11,7 +11,7 @@ import orderRoutes from "./routes/ordersRoute.js"
 import categoryRoutes from "./routes/categoryRoutes.js"
 // import qbDB from "./config/db.js"
 
-dotenv.config();
+dotenv.config("../.env");
 
 const app = express();
 app.use(cors());

@@ -27,7 +27,7 @@ function Home() {
             // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
             const shopLs = await response.data.shopList;
             const catgs = await response.data.categories;
-            console.log(JSON.stringify(catgs));
+            // console.log(JSON.stringify(catgs));
             setShopList(shopLs);
             setNShopList(shopLs);
             setCategories(catgs);
@@ -256,7 +256,7 @@ function Home() {
                         <DropDown data={category} updSrchd={updateSearched} name={"category"} />
                         {/* <DropDown data={area} /> */}
                     </div>
-                    <h3 className="title">Find Your Desired Shop...</h3>
+                    <h3 className="title" >Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
                         {nshopList.map((shop, index) => {
                             return (

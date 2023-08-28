@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import Select from 'react-select';
 
 const CreateProduct = (props) => {
 
     const [pName, setPName] = useState("");
-    const [category, setCategory] = useState("");
-    const [catList, setCatList] = useState([]);
+    const [category, setCategory] = useState({});
+    // const [catList, setCatList] = useState([]);
     const [desc, setDesc] = useState("");
     const [price, setPrice] = useState(0);
     const [qty, setQty] = useState(0);
@@ -13,13 +14,13 @@ const CreateProduct = (props) => {
     const shopName = props.shopName;
 
     useEffect(() => {
-        async function getcatlist() {
-            const response = await axios.get(`http://localhost:5050/categories/getcategorylist/${shopName}`);
-            if (response.status === 200) {
-                setCatList(response.data.categories);
-            }
-        }
-        getcatlist();
+        // async function getcatlist() {
+        //     const response = await axios.get(`http://localhost:5050/categories/getcategorylist/${shopName}`);
+        //     if (response.status === 200) {
+        // setCatList(props.catlist);
+        //     }
+        // }
+        // getcatlist();
     }, []);
 
     const handleSubmit = async (e) => {
@@ -29,12 +30,16 @@ const CreateProduct = (props) => {
         try {
             const response = await axios.post(`http://localhost:5050/products/${shopName}/create`, {
                 pName,
-                category,
+                category: category.value,
                 desc,
                 price,
                 qty
             });
             if (response.status === 200) {
+                setPName("");
+                setDesc("");
+                setPrice("");
+                setQty("");
                 alert(response.data.message);
             }
             else {
@@ -53,16 +58,17 @@ const CreateProduct = (props) => {
             </div>
             <div className="mb-3">
                 <label htmlFor="category" className="form-label b">Select Category</label>
-                <input list="brow" className="px-3 form-control bg-body-secondary" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                <Select options={props.sCatList} name="prods" className="form-control merchant-sel-inp" onChange={setCategory} placeholder="Select Category" />
+                {/* <input list="brow" className="px-3 form-control bg-body-secondary" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
                 <datalist id="brow">
-                    {catList.map((cat, ind) => {
-                        return <option value={cat} />
-                    })}
-                    {/* <option value="Casuals" />
+                    {props.sCatList.map((cat, ind) => {
+                        return <option value={cat} /> */}
+                {/* })} */}
+                {/* <option value="Casuals" />
                     <option value="Electronics" />
                     <option value="Stationary" />
                     <option value="Home-decor" /> */}
-                </datalist>
+                {/* </datalist> */}
             </div>
             <div className="mb-3">
                 <label className="form-label b" htmlFor="productImg">Product image</label>
@@ -72,7 +78,7 @@ const CreateProduct = (props) => {
                 <label htmlFor="description" className="form-label b">description</label>
                 <textarea className="form-control bg-body-secondary" id="description" value={desc} onChange={(e) => setDesc(e.target.value)}></textarea>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 w-25">
                 <label htmlFor="price" className="form-label b">Price</label>
                 <input type="number" className="form-control bg-body-secondary" id="price" value={price} onChange={(e) => setPrice(e.target.value)} ></input>
             </div>

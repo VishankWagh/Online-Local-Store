@@ -30,11 +30,6 @@ export default function PrivateRoute({ role }) {
                     },
                 });
             }
-            // const res = await axios.get("http://localhost:5050/auth/user-auth/customer", {
-            //     headers: {
-            //         Authorization: auth?.token
-            //     },
-            // });
             if (res.data.ok) {
                 setOk(true);
             }

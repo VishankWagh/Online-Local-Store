@@ -65,7 +65,7 @@ export const cregisterController = async (req, res) => {
         const token = JWT.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60),
             role: "Customer"
-        }, 'thisisusw04jsonwebtoken');
+        }, process.env.JWT_SECRET);
 
         res.status(200).send({
             success: true,
@@ -117,7 +117,7 @@ export const sregisterController = async (req, res) => {
         const token = JWT.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60),
             role: "Merchant"
-        }, 'thisisusw04jsonwebtoken');
+        }, process.env.JWT_SECRET);
 
         res.status(200).send({
             success: true,
@@ -233,7 +233,7 @@ export const loginController = async (req, res) => {
             const token = JWT.sign({
                 exp: Math.floor(Date.now() / 1000) + (60 * 60),
                 role: "Customer"
-            }, 'thisisusw04jsonwebtoken');
+            }, process.env.JWT_SECRET);
 
             res.status(200).send({
                 success: true,
@@ -269,7 +269,7 @@ export const loginController = async (req, res) => {
             const token = JWT.sign({
                 exp: Math.floor(Date.now() / 1000) + (60 * 60),
                 role: "Merchant"
-            }, 'thisisusw04jsonwebtoken');
+            }, process.env.JWT_SECRET);
 
             res.status(200).send({
                 success: true,
@@ -307,7 +307,7 @@ export const loginController = async (req, res) => {
             const token = JWT.sign({
                 exp: Math.floor(Date.now() / 1000) + (60 * 60),
                 role: "DeliveryPerson"
-            }, 'thisisusw04jsonwebtoken');
+            }, process.env.JWT_SECRET);
 
             res.status(200).send({
                 success: true,

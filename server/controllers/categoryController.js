@@ -95,3 +95,26 @@ export const getCategorylistController = async (req, res) => {
         })
     }
 }
+
+// get all categories
+
+export const getAllCategoriesController = async (req, res) => {
+    try {
+        let categories = await qbDB.collection('category').find({}).toArray();
+        categories = categories.map((cat) => {
+            return cat.name
+        });
+        // console.log("allcat " + categories);
+        res.status(200).send({
+            categories,
+            success: true,
+            message: "success in getting categorylist"
+        })
+    }
+    catch {
+        res.status(400).send({
+            success: false,
+            message: "error in getting category list"
+        })
+    }
+}

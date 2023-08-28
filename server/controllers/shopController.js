@@ -58,10 +58,10 @@ export const getShopController = async (req, res) => {
 // get shopname 
 export const getShopNameController = async (req, res) => {
     const uname = req.body.uname;
-    console.log("u " + uname);
+    // console.log("u " + uname);
     try {
         const shop = await qbDB.collection("shops").findOne({ uname });
-        console.log("sc " + JSON.stringify(shop));
+        // console.log("sc " + JSON.stringify(shop));
 
         res.status(200).send({
             shopName: shop.shopName,
@@ -82,10 +82,10 @@ export const getShopNameController = async (req, res) => {
 // get shopname 
 export const getDpShopNameController = async (req, res) => {
     const uname = req.body.uname;
-    console.log("u " + uname);
+    // console.log("u " + uname);
     try {
         const dp = await qbDB.collection("deliveryperson").findOne({ uname });
-        console.log("sc " + JSON.stringify(dp.shopName));
+        // console.log("sc " + JSON.stringify(dp.shopName));
 
         res.status(200).send({
             shopName: dp.shopName,

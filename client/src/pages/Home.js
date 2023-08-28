@@ -5,6 +5,7 @@ import ShopCard from '../components/ShopCard';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cart from '../components/Cart';
+import { Link } from 'react-router-dom';
 
 function Home() {
     document.title = "Quik-Buy | Home";
@@ -17,24 +18,29 @@ function Home() {
         catg: ""
     });
     const [shop_Cart, setShop_Cart] = useState(JSON.parse(localStorage.getItem("shopCart")));
+    const [page, setPage] = useState(0);
+    const [loadMore, setLoadMore] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
 
         // console.log("use ");
-        async function fetchShopList() {
-            const pincode = 432001;
-            const response = await axios.get('http://localhost:5050/shops/shoplistbypincode/396001');
-            // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
-            const shopLs = await response.data.shopList;
-            const catgs = await response.data.categories;
-            console.log(JSON.stringify(catgs));
-            setShopList(shopLs);
-            setNShopList(shopLs);
-            setCategories(catgs);
-        }
-        fetchShopList();
+        fetchShopList(page);
         // return;
     }, []);
+
+    async function fetchShopList(page) {
+        const pincode = 432001;
+        const response = await axios.get(`http://localhost:5050/shops/shoplistbypincode/396001/${page}`);
+        // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
+        const shopLs = await response.data.shopList;
+        setLoadMore(shopLs.length < 4 ? false : true);
+        const catgs = await response.data.categories;
+        console.log(JSON.stringify(catgs));
+        setShopList([...shopList, ...shopLs]);
+        setNShopList([...nshopList, ...shopLs]);
+        setCategories([...categories, ...catgs]);
+    }
 
     // let area = [
     //     { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
@@ -58,10 +64,10 @@ function Home() {
         { value: 'Chandni-Chowk', label: 'Chandni-Chowk' }
     ];
     // https://cloud.mongodb.com/v2/6436e4ddfc447b15f06aeafa#/clusters
-
+    console.log("ct " + JSON.stringify(categories));
     let category = [
         { value: '', label: 'Select Category', isFixed: true },
-        ...categories.map(cat => { return { value: cat.name, label: cat.name } })
+        ...categories?.map(cat => { return { value: cat.name, label: cat.name } })
     ];
 
     function updateSearched(srch, name) {
@@ -170,6 +176,13 @@ function Home() {
         }
     }
 
+
+    //Loadmore
+    function loadMoreShop() {
+        setPage(page + 1);
+        fetchShopList(page + 1);
+    }
+
     const shopImgArr =
         [
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCatveyiU5Ji4sQjTCydq-Cs0H-49jsK0EbQ&usqp=CAU',
@@ -258,6 +271,7 @@ function Home() {
                     </div>
                     <h3 className="title">Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
+                        {nshopList.length <= 0 && <div className="altr-txt">No Shop in selected preferences</div>}
                         {nshopList.map((shop, index) => {
                             return (
                                 <div className="shop-comp mr-1 mb-5 col-3" key={index}>
@@ -278,14 +292,14 @@ function Home() {
                                             <span className="ownername">{shop.ownerName}</span>
                                         </p>
                                         <div className="card-body">
-                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
+                                            <Link to={`/customer/shop?sname=${shop.shopName}&sind=${index}`} className="btn btn-primary">More Details</Link>
                                             {/* <a href="/" className="card-link">Another link</a> */}
                                         </div>
                                     </div>
                                 </div>
                             )
                         })}
-                        {nshopList.map((shop, index) => {
+                        {/* {nshopList.map((shop, index) => {
                             return (
                                 <div className="shop-comp mr-1 mb-5 col-3" key={index}>
                                     <div className="card" style={{ width: "18rem" }}>
@@ -294,26 +308,21 @@ function Home() {
                                             <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
                                             <span className="details">{shop.area} - {shop.pincode}</span>
                                         </div>
-                                        <ul className="list-group list-group-flush">
-                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
-                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
-                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
-                                        </ul>
-                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
+                                        <div className="ratings line">Ratings: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
                                         <p className="own line">
                                             <span className="ownedby">Owned By - </span>
                                             <span className="ownername">{shop.ownerName}</span>
                                         </p>
                                         <div className="card-body">
-                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
-                                            {/* <a href="/" className="card-link">Another link</a> */}
+                                            <Link to={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</Link>
                                         </div>
                                     </div>
                                 </div>
                             )
-                        })}
+                        })} */}
                     </div>
-                    {nshopList.length ? <button type="button" className="btn load-more">Load More...</button> : "No Products Here"}
+                    {/* No Shop in selected preferences */}
+                    {(loadMore && nshopList.length > 0) && <button type="button" onClick={loadMoreShop} className="btn load-more">Load More &darr;</button>}
                 </div>
             </div>
         </>

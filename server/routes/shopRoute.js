@@ -5,7 +5,7 @@ import { getDpShopNameController, getShopController, getShopNameController, shop
 const router = express.Router();
 
 // router.get("/shoplistbyarea/:area", shoplistByAreaController);
-router.get("/shoplistbypincode/:pincode", shoplistByPincodeController);
+router.get("/shoplistbypincode/:pincode/:page", shoplistByPincodeController);
 router.get("/singleshop/:shopName", singleShopController);
 
 // get shop

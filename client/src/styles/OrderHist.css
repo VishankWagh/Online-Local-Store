@@ -20,6 +20,10 @@
     padding-left: 2rem;
 }
 
+.ord-hist .card-body {
+    display: flex;
+}
+
 .ord-hist .cnclord-btn {
     margin: 1rem 2rem;
 }
@@ -29,4 +33,10 @@
     font-weight: 800;
     border: 1px solid black;
     background-color: rgb(212, 255, 212);
+}
+
+.altr-txt {
+    color: #9b9b9b;
+    font-size: 17px;
+    font-weight: 500;
 }

@@ -15,9 +15,9 @@ export const singleProductController = async (req, res) => {
 
 export const shopProductsController = async (req, res) => {
     const { prodLst } = await req.body;
-    console.log("prdls " + JSON.stringify(req.body));
+    // console.log("prdls " + JSON.stringify(req.body));
     const prodArr = await qbDB.collection('products').find({ name: { $in: prodLst } }).toArray();
-    console.log("prar " + JSON.stringify(prodArr));
+    // console.log("prar " + JSON.stringify(prodArr));
     // res.send(prodArr).status(200);
     res.status(200).send({
         prodArr
@@ -29,7 +29,7 @@ export const similarProductsController = async (req, res) => {
     const sname = req.params.sname;
     const pname = req.params.pname;
     const { prods } = await qbDB.collection('shops').findOne({ shopName: sname });
-    console.log("prodsdb " + JSON.stringify(prods));
+    // console.log("prodsdb " + JSON.stringify(prods));
     // res.status(200).send({ prods });
 
     const products = await qbDB.collection('products').find({ name: { $in: prods } }).toArray();
@@ -37,7 +37,7 @@ export const similarProductsController = async (req, res) => {
         return prd.category == cname && prd.name != pname;
     })
 
-    console.log("np " + JSON.stringify(nprdLst));
+    // console.log("np " + JSON.stringify(nprdLst));
 
     res.status(200).send({ prodList: nprdLst });
 }

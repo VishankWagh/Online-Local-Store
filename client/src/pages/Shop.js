@@ -16,14 +16,21 @@ function Shop() {
     const [shopProds, setShopProds] = useState([]);
     const [catSelected, setCatSelected] = useState(null);
     const [shop_Cart, setShop_Cart] = useState();
+
+    // just for loading temporary static images. remove when upload images in db
+    const [sind, setSind] = useState();
+    // remove it afterwards
+
     // const [isCartOpen, setIsCartOpen] = useState(false);
 
     let dummydata = { "_id": { "$oid": "64c2a2742f3006ed8f135171" }, "shopName": "gopal-dairy", "shopImg": "shop image", "area": "azad chowk", "pincode": { "$numberInt": "391760" }, "ownerName": "Raj thakkar", "email": "raj@gmail.com", "uname": "raj", "password": "$2b$fmsodifd10$4VHpjRdS/S3zqi0D6eJ9Du7dpGu88KwlD6vy3ukypORWmMxGbD7Ai", "categories": [], "prods": [], "id": { "$numberInt": "6" } }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         async function fetchShop() {
             const queryParameters = new URLSearchParams(window.location.search)
             const sname = queryParameters.get("sname")
+            setSind(queryParameters.get('sind'));
             const response = await axios.get(`http://localhost:5050/shops/singleshop/${sname}`);
             // // console.log(JSON.stringify(response));
             const shp = await response.data;
@@ -49,6 +56,17 @@ function Shop() {
 
     // // console.log("shopp " + JSON.stringify(shop));
     // // console.log("prdl " + JSON.stringify(productList));
+
+    const shopImgArr =
+        [
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCatveyiU5Ji4sQjTCydq-Cs0H-49jsK0EbQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXsjiZGfBkq3fdal8BYjQRkLwNVKx3hCnEA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRa-uc1ljm3iuPu5fq4zOK_KTXT9jxOQJitrAEPvxsQ0ybxB0972ZaxfenGQpGJ564Ygg&usqp=CAU',
+            'https://5.imimg.com/data5/HR/BA/WN/SELLER-13309345/shop-name-board.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFGydmvCaRm32-wk_A8MzX6J1tVRtLc20CS1bRupC0Cu3_Br_2KZg3UIxRx7WT7ycWTGc&usqp=CAU',
+            'https://c4.wallpaperflare.com/wallpaper/805/668/874/lofi-neon-coffee-house-shop-neon-glow-hd-wallpaper-preview.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9t9eVPaKzySOMDSPGwp-D0vzYkRtFmTOXUaZtIz0LQ&s'
+        ]
 
 
     let product = [
@@ -197,7 +215,7 @@ function Shop() {
             <div className="shop">
 
                 <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
-                <div className="shop-img">
+                <div className="shop-img" style={{ backgroundImage: `url("${shopImgArr[sind]}")` }}>
                     {/* <img src={car} alt="" /> */}
                     <div className="shop-head">
                         <div className="shop-name"><h2>{shop.shopName}</h2></div>

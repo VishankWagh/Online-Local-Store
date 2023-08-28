@@ -15,12 +15,13 @@ import qbDB from '../config/db.js';
 
 export const shoplistByPincodeController = async (req, res) => {
     const pincd = parseInt(req.params.pincode);
+    const page = req.params.page || 0;
+    const perPage = 4;
     // console.log(pincd);
-    let shopList = await qbDB.collection("shops").find({ pincode: pincd }).toArray();
+    let shopList = await qbDB.collection("shops").find({ pincode: pincd }).skip(page * perPage).limit(perPage).toArray();
     let categories = await qbDB.collection("category").find().toArray();
     // let shopList = await qbDB.collection("category").find().toArray();
-    // console.log("controller" + JSON.stringify(shopList));
-    res.send({ shopList: shopList, categories: categories }).status(200);
+    res.send({ shopList, categories }).status(200);
 };
 
 export const singleShopController = async (req, res) => {

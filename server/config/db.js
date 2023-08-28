@@ -1,14 +1,15 @@
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
-dotenv.config({ path: '../../.env' });
+dotenv.config({ path: '../.env' });
 
 let qbDB;
 
 // async function main() {
 const uri = process.env.MongoUrl;
 
-const client = new MongoClient("mongodb+srv://admin-vsw:vswadmin@cluster0.99d6gcn.mongodb.net/?retryWrites=true&w=majority");
+// const client = new MongoClient("mongodb+srv://admin-vsw:vswadmin@cluster0.99d6gcn.mongodb.net/?retryWrites=true&w=majority");
+const client = new MongoClient(process.env.MONGO_URI);
 
 try {
     const conn = await client.connect();

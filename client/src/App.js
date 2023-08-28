@@ -21,6 +21,7 @@ import PrivateRoute from './components/Routes/Private';
 import DelPerson from './pages/DelPerson';
 import Checkout from './pages/Checkout';
 import OrderHist from './pages/OrderHist';
+import Profile from './pages/Profile.js';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path='Product' element={<Product />} />
               <Route path='Orders' element={<OrderHist />} />
               <Route path='Checkout' element={<Checkout />} />
+              <Route path='Profile' element={<Profile />} />
             </Route>
             <Route path='/customer-register' element={<CRegister />} />
             <Route path='/shop-register' element={<SRegister />} />

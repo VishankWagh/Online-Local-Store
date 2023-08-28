@@ -33,17 +33,6 @@
     font-size: 1.5rem;
 }
 
-.prod-desc {
-    background-color: rgb(212, 255, 212);
-    margin-top: 4rem;
-    border-top: 1px solid #0a5616;
-    font-size: 1.2rem;
-    font-weight: 500;
-    /* padding-top: 2rem; */
-    padding: 2rem 4rem;
-    /* padding-bottom: 1rem; */
-}
-
 .prod-price p {
     font-size: 1.5rem;
     font-weight: 700;
@@ -94,4 +83,90 @@
     padding: 0 1rem;
     font-weight: 500;
     font-size: 2rem;
+}
+
+
+
+.prod-secs {
+    background-color: rgb(212, 255, 212);
+    margin-top: 4rem;
+    border-top: 1px solid #0a5616;
+    font-size: 1.2rem;
+    font-weight: 500;
+    /* padding-top: 2rem; */
+    padding: 2rem 4rem;
+    /* padding-bottom: 1rem; */
+}
+
+.psec {
+    margin-bottom: 2rem;
+}
+
+.psec-head {
+    font-size: 1.5rem;
+    font-weight: 700;
+    /* margin-bottom: 1rem; */
+}
+
+.psec-cntnt {
+    padding: 1rem 0;
+}
+
+
+
+/* product review */
+
+.review {
+    background-color: rgb(238, 255, 238);
+    padding: 1rem;
+    padding-bottom: 1.3rem;
+    margin-bottom: 1rem;
+    position: relative;
+    border-left: 5px solid #0a5616;
+    /* border-bottom: 1px solid rgb(224, 224, 224); */
+}
+
+.mr-rvw-btn {
+    padding: 0px 5px;
+    font-size: 1rem;
+    background-color: #0a5616;
+    color: #fff;
+}
+
+.psec hr {
+    text-align: center;
+    margin: 0;
+}
+
+.r-clogo {
+    text-transform: uppercase;
+    margin-right: .5rem;
+    background-color: #0a5616;
+    color: white;
+    border-radius: 50%;
+    padding: 1px 8px 2px;
+    font-weight: 400;
+}
+
+.r-cname {
+    /* font-size: 1rem; */
+    font-weight: 400;
+    margin-right: 2rem;
+
+}
+
+.r-head {
+    font-weight: 500;
+    margin: 15px 0 5px;
+}
+
+.r-txt {
+    font-weight: 400;
+}
+
+.r-date {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+    color: gray;
 }

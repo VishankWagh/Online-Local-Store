@@ -17,10 +17,13 @@ function Checkout() {
         function getChkCart() {
             const queryParameters = new URLSearchParams(window.location.search)
             let sind = queryParameters.get("sind");
-            if (isNaN(sind)) {
-                sind = 0;
-            }
             let chkitms = JSON.parse(localStorage.getItem("shopCart"));
+            if (isNaN(sind)) {
+                sind = chkitms.findIndex(chitms => {
+                    return chitms.shopName === sind;
+                });
+                // console.log("sind " + sind);
+            }
             // console.log("chkitms " + JSON.stringify(chkitms) + " " + sind);
             chkitms = chkitms[sind];
             setSind(sind);
@@ -104,9 +107,13 @@ function Checkout() {
                                             <th className="ordtbl-th">Delivery Charges</th>
                                             <th className="ordtbl-val">&#8377; 2</th>
                                         </tr>
+                                        <tr>
+                                            <th className="ordtbl-th">Discount</th>
+                                            <th className="ordtbl-val">&#8377; 0</th>
+                                        </tr>
                                         <tr className="tot">
                                             <th className="ordtbl-th">Total</th>
-                                            <th className="ordtbl-val">&#8377; {subTotal + 2}</th>
+                                            <th className="ordtbl-val">&#8377; {subTotal + 2 - 0}</th>
                                         </tr>
                                     </table>
                                 </div>

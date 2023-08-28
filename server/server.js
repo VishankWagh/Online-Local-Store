@@ -9,6 +9,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js"
 import orderRoutes from "./routes/ordersRoute.js"
 import categoryRoutes from "./routes/categoryRoutes.js"
+import userRoutes from "./routes/userRoute.js"
 // import qbDB from "./config/db.js"
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.use("/orders", orderRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
 app.use("/shops", shopRoutes);
+app.use("/user", userRoutes);
 
 app.listen(5050, () => {
     console.log(`Server running on Port 5050`);

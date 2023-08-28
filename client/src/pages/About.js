@@ -2,8 +2,14 @@ import '../styles/About.css'
 import tmv from '../images/tm_vishank.jpg';
 import tmu from '../images/tm_ushank.jpg';
 import tma from '../images/tm_ankit.png';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function About() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     document.title = "Quik-Buy | About System and Team";
 
@@ -19,7 +25,7 @@ function About() {
                             <span className="quote close-q">"</span>
                         </p>
                         <p className='btn-grp'>
-                            <a href="/" className="btn abt-hmbtn mx-2">Home Page</a>
+                            <Link to="/" className="btn abt-hmbtn mx-2">Home Page</Link>
                             <a href="#footer" className="btn abt-cntbtn mx-2">Contact Us</a>
                         </p>
                     </div>

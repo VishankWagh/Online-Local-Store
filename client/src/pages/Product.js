@@ -3,16 +3,21 @@ import ProductCard from "../components/ProductCard";
 import "../styles/Product.css";
 import { useEffect, useState } from 'react';
 import Cart from "../components/Cart";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Product() {
+
+    const navigate = useNavigate();
 
     const [product, setProduct] = useState([]);
     const [similarProducts, setSimilarProducts] = useState();
     const [shopName, setShopName] = useState();
     const [shop_Cart, setShop_Cart] = useState(JSON.parse(localStorage.getItem("shopCart")));
+    const [showReviews, setShowReviews] = useState(2);
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         async function fetchProdDetails() {
             const queryParameters = new URLSearchParams(window.location.search)
             const pname = queryParameters.get("pname");
@@ -186,12 +191,60 @@ function Product() {
         }
     }
 
+    // ordFromProduct
+    // function ordFromProduct(){
+    //     let citm = {
+    //         "prodName": product.name,
+    //         "qty": 1,
+    //         "price": product.price
+    //     }
+    //     addToCart(shopName, citm);
+    // }
+
     let imgUrl = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCAUeStWXTjkOr5M0Xbr801Fm20hrA_NP1JdpZ_Wwic7p9Lp45M4qLClGWi-ZhsL4iYU&usqp=CAU",
         "https://images.meesho.com/images/products/280527119/zorh6_512.webp",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlwB2aLXoNWylKEwZuKKRsheeCXq3as43LFA&usqp=CAU",
         "https://img.freepik.com/free-photo/man-wearing-hoodie-with-hoodie-it_188544-40017.jpg"
     ];
+
+    let reviews = [
+        {
+            name: "Vishank Wagh",
+            uname: "vis",
+            rating: 3,
+            heading: "Good",
+            review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam cum aliquam praesentium magnam quidem ",
+            date: "11-08-2023"
+        },
+        {
+            name: "Ushank Wagh",
+            uname: "usw",
+            rating: 5,
+            heading: "Excellent",
+            review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam cum aliquam praesentium magnam quidem ",
+            date: "13-08-2023"
+        }
+    ];
+
+    function createStars(stars) {
+        console.log("str " + stars);
+        return Array.from({ length: 5 }, (_, index) => {
+            stars--;
+            return stars >= 0 ? <span key={index}>&#9733;</span> : <span key={index}>&#9734;</span>;
+        });
+    }
+
+    function getAvgRatings() {
+        let avg = 0;
+        let n = 0;
+        product?.reviews?.map((rv) => {
+            avg += rv.rating;
+            n++;
+        })
+        console.log("rat " + n);
+        return avg / n;
+    }
 
     return (
         <>
@@ -205,7 +258,7 @@ function Product() {
                         <div className="prod-name">
                             <h2>{product.name}</h2>
                             <p className="shop-name">{shopName}</p>
-                            <div className="ratings">Ratings: <span>&#9733; &#9733; &#9733; &#9733; &#9734; </span></div>
+                            <div className="ratings">Ratings: {createStars(getAvgRatings())}</div>
                         </div>
                         {/* <div className="prod-desc">
                             {product.desc}
@@ -222,13 +275,49 @@ function Product() {
                             }
                             addToCart(shopName, citm);
                         }}>Add To Cart</a>
-                        <a className="btn plc-ord" href={`/customer/checkout?sind=${shopName}`}>Place Order</a>
+                        <button className="btn plc-ord" onClick={() => {
+                            let citm = {
+                                "prodName": product.name,
+                                "qty": 1,
+                                "price": product.price
+                            }
+                            addToCart(shopName, citm);
+                            navigate(`/customer/checkout?sind=${shopName}`);
+                        }}>Place Order</button>
                     </div>
-                    <div className="col-12 prod-desc">
-                        <p className="fs-4 fw-bold mb-3">Product Details</p>
-                        {product.desc}
-                        {product.desc}
-                        {product.desc}
+                    <div className="col-12 prod-desc prod-secs">
+                        <div className="psec">
+                            <div className="psec-head">Product Details</div>
+                            <div className="psec-cntnt">{product.desc}.</div>
+                        </div>
+                        <hr />
+                        <div className="psec">
+                            <div className="psec-head">Customer Reviews</div>
+                            <div className="psec-cntnt">
+                                {product?.reviews ? product?.reviews.slice(0, showReviews)?.map((review) => {
+                                    return (
+                                        <div className="review">
+                                            <div className="r-prof">
+                                                <span className="r-clogo">{review.uname.slice(0, 1)}</span>
+                                                <span className="r-cname">{review.name}</span>
+                                                <span className="ratings r-rate">
+                                                    {createStars(review.rating)}
+                                                </span>
+                                            </div>
+                                            <div className="r-cntnt">
+                                                <div className="r-head">{review.heading}</div>
+                                                <div className="r-txt">
+                                                    {review.review.slice(0, 150)}...
+                                                </div>
+                                                <div className="r-date">{review.date} | 2 months ago</div>
+                                            </div>
+                                        </div>
+                                    )
+                                }) : "Be the first to review this product..."}
+                                {product?.reviews?.length > showReviews && <button onClick={() => { setShowReviews(showReviews + 2) }} className="mr-rvw-btn">Show More</button>}
+                                {showReviews > 2 && <button onClick={() => { setShowReviews(2) }} className="mr-rvw-btn">Show Less</button>}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="similar-prods row">

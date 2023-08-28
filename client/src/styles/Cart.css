@@ -6,11 +6,12 @@
     height: 100vh;
     width: 25vw;
     padding: 5rem 2rem 3rem;
-    border-left: 2px solid #454545;
+    /* border-left: 2px solid #454545; */
     z-index: 5;
     transition: right .5s;
     font-size: 15px;
     overflow: hidden auto;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.500);
 }
 
 .cart tr:nth-child(2n),
@@ -121,6 +122,21 @@ th {
 
 
 /* c icon */
+
+.cart-icon {
+    cursor: pointer;
+    position: fixed;
+    top: 15%;
+    right: 10%;
+    border-radius: 10px;
+    color: black;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.500);
+    background-color: rgb(238, 255, 238);
+    /* border: 1px solid #0a5616; */
+    z-index: 10;
+    padding: 5px;
+}
+
 
 .crt-qty {
     position: absolute;

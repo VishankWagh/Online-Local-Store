@@ -4,7 +4,7 @@ export const singleProductController = async (req, res) => {
     const shpName = await req.body.shopName;
     const prodName = await req.params.pname;
     const product = await qbDB.collection('products').findOne({ name: prodName });
-
+    // console.log("p ", JSON.stringify(product), JSON.stringify(prodName));
     if (product) {
         return res.status(200).send({ success: true, message: "success", product, shpName });
     }
@@ -20,6 +20,7 @@ export const shopProductsController = async (req, res) => {
     // console.log("prar " + JSON.stringify(prodArr));
     // res.send(prodArr).status(200);
     res.status(200).send({
+        success: true,
         prodArr
     })
 };
@@ -62,12 +63,13 @@ export const createProductController = async (req, res) => {
     }
 
     try {
-        const nProduct = { name: pName, category, desc, image: "...", price, qty };
         const product = await qbDB.collection('products').findOne({ name: pName });
         const shop = await qbDB.collection('shops').findOne({ shopName });
-        if (!(pName in shop.prods)) {
+        // console.log("cond " + pName in shop.prods, pName, shop.prods);
+        if (!(shop.prods.includes(pName))) {
             await qbDB.collection("shops").updateOne({ shopName }, { $push: { prods: pName } })
-            if (nProduct !== product) {
+            if (!product) {
+                const nProduct = { name: pName, category, desc, image: "...", price, qty };
                 await qbDB.collection('products').insertOne(nProduct);
                 // const Nqty = product.qty + qty;
                 // await qbDB.collection('products').update({ name: pName }, { $set: { qty: Nqty } })
@@ -111,7 +113,6 @@ export const updateProductController = async (req, res) => {
         return res.send({ message: "Product Quantity is Required" });
     }
 
-
     try {
 
         const nProduct = { name: pName, category, desc, image: "...", price, qty };
@@ -123,6 +124,7 @@ export const updateProductController = async (req, res) => {
             return prod !== prevName;
         });
         nProds.push(pName);
+        // console.log("np ", nProds, pName, req.body.prevName);
         const shopUpdate = await qbDB.collection('shops').updateOne({ shopName }, { $set: { prods: nProds } });
 
         if (productUpdate || shopUpdate) {
@@ -174,6 +176,7 @@ export const deleteProductController = async (req, res) => {
             return prod !== pName;
         });
         const shopUpdate = await qbDB.collection('shops').updateOne({ shopName }, { $set: { prods: nProds } });
+        // console.log("np ", pName, nProds, shopName, shopUpdate);
         if (shopUpdate) {
             return res.status(200).send({
                 success: true,
@@ -204,11 +207,18 @@ export const getProductlistController = async (req, res) => {
         const { sname } = req.params;
         const { prods } = await qbDB.collection('shops').findOne({ shopName: sname });
 
+        if (!prods) {
+            res.status(201).send({
+                prods,
+                success: false,
+                message: "no Products"
+            });
+        }
         res.status(200).send({
             prods,
             success: true,
             message: "success in getting prodlist"
-        })
+        });
     }
     catch (error) {
         res.status(400).send({

@@ -269,7 +269,7 @@ function Home() {
                         <DropDown data={category} updSrchd={updateSearched} name={"category"} />
                         {/* <DropDown data={area} /> */}
                     </div>
-                    <h3 className="title">Find Your Desired Shop...</h3>
+                    <h3 className="title" >Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
                         {nshopList.length <= 0 && <div className="altr-txt">No Shop in selected preferences</div>}
                         {nshopList.map((shop, index) => {

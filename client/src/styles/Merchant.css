@@ -41,6 +41,8 @@
 
 .merchant-menu p {
     background-color: rgb(212, 255, 212);
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.666);
 }
 
 .merchant .card-body {
@@ -56,6 +58,15 @@
 .order,
 .del-prod-card {
     background-color: rgb(212, 255, 212) !important;
+}
+
+.order {
+    margin: auto;
+    width: 87%;
+}
+
+.del-prod-card .prod-img img {
+    height: 30vh !important;
 }
 
 .order table tr td,
@@ -75,9 +86,11 @@
     width: 70%;
 }
 
-.del-prod-card input {
-    /* background-color: rgb(212, 255, 212); */
-    background-color: rgb(238, 255, 238) !important;
+.merchant-sel-inp {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 15rem !important;
 }
 
 .merchant table {

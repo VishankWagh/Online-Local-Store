@@ -1,28 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import Select from 'react-select';
 
-const DeleteProduct = () => {
+const DeleteProduct = ({ shopName }) => {
 
-    const [pName, setPName] = useState("");
+    const [selPName, setSelPName] = useState({});
+    const [pName, setPName] = useState();
     const [desc, setDesc] = useState("");
     const [price, setPrice] = useState(0);
     const [prodList, setProdsList] = useState([]);
 
-    let shopName = "Variety";
+    // let shopName = "Variety";
 
 
     useEffect(() => {
         async function getprodlist() {
             const response = await axios.get(`http://localhost:5050/products/getproductlist/${shopName}`);
             if (response.status === 200) {
-                setProdsList(response.data.prods);
+                let nProds = [
+                    // { value: '', label: 'Select Product Name', isFixed: true },
+                    ...response.data.prods.map(prod => { return { value: prod, label: prod } })
+                ];
+                setProdsList(nProds);
+                console.log("prods " + JSON.stringify(response.data.prods));
             }
         }
         getprodlist();
     }, [])
 
+    console.log("pname " + JSON.stringify(pName));
+
     const handleSelect = async () => {
-        const resp = await axios.get(`http://localhost:5050/products/singleproduct/${pName}`);
+        const resp = await axios.get(`http://localhost:5050/products/singleproduct/${selPName.value}`);
         if (resp.data.success) {
             const product = resp.data.product;
             setPName(product.name);
@@ -36,9 +45,19 @@ const DeleteProduct = () => {
 
     const deleteProduct = async () => {
         const response = await axios.post(`http://localhost:5050/products/deleteproduct/${shopName}`, {
-            pName
+            pName: selPName.value
         });
         if (response.status === 200) {
+            setProdsList(() => {
+                const nProds = prodList.filter((prod) => {
+                    return prod !== selPName;
+                });
+                return nProds
+            });
+            setPName("");
+            setDesc("");
+            setPrice("");
+
             alert(response.data.message);
         }
     }
@@ -49,17 +68,20 @@ const DeleteProduct = () => {
                 <div className="search-prod mb-3">
                     <label htmlFor="productName" className="form-label m-3 fs-5">Search Product</label>
                     <div className="input-group m-0 delete-prod-inp w-50">
-                        <input type="text" list="products" className="form-control" id="productName" onChange={(e) => { setPName(e.target.value) }} placeholder="Search & Select Product" />
+                        {/* <input type="text" list="products" className="form-control" id="productName" onChange={(e) => { setPName(e.target.value) }} placeholder="Search & Select Product" />
                         <datalist id="products">
                             {prodList.map((p, ind) => {
                                 return <option value={p} key={ind} />
                             })}
-                        </datalist>
+                        </datalist> */}
+                        {/* <DropDown data={prodList} name={"prods"} /> */}
+                        <Select options={prodList} name="prods" className="form-control merchant-sel-inp" onChange={setSelPName} placeholder="Select Product Name" />
                         <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => handleSelect()} >Select</button>
                     </div>
                 </div>
             </div>
             <div className="card-body">
+                <h3 className="text-center" >Product Details</h3>
                 <div className="prod-img w-50 ms-4">
                     <img src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-math-90946.jpg&fm=jpg" className="object-fit-contain" alt="" />
                 </div>
@@ -70,7 +92,7 @@ const DeleteProduct = () => {
                 <table className="table mb-4">
                     <tbody>
                         <tr>
-                            <th scope="row" className="fs-5 w-15" style={{ width: "24%" }} colSpan={2}>Product Name : </th>
+                            <th scope="row" className="fs-5" style={{ width: "28%" }} colSpan={2}>Product Name : </th>
                             <td className="fw" style={{ fontSize: "17px" }} >{pName}</td>
                         </tr>
                         <tr>

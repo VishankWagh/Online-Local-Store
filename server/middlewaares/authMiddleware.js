@@ -3,14 +3,40 @@ import Jwt from "jsonwebtoken";
 // Protected routes token base
 export const requireSignIn = async (req, res, next) => {
     try {
-        const decode = Jwt.verify(
-            req.headers.authorization,
-            "thisisusw04jsonwebtoken"
-        );
-        req.user = decode;
-        next();
+        // const decode = Jwt.verify(
+        //     req.headers.authorization,
+        //     "thisisusw04jsonwebtoken"
+        // );
+
+        const token = req.body.token;
+        Jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+            if (!err) {
+                // console.log("decd " + JSON.stringify(decoded));
+                req.user = decoded;
+                next();
+
+            }
+            else {
+                console.log("er " + JSON.stringify(err));
+                res.status(200).send({ ok: false, decoded: "decoded" });
+                //     /*
+                //     err = {
+                //         name: 'TokenExpiredError',
+                //         message: 'jwt expired',
+                //         expiredAt: 1408621000
+                //     }
+                //     */
+            }
+        });
+
+
     } catch (error) {
         console.log(error);
+        res.status(200).send({
+            success: false,
+            message: "Error in requiresignin middleware",
+            error,
+        })
     }
 }
 
@@ -23,7 +49,7 @@ export const isMerchant = async (req, res, next) => {
         if (token) {
             decode = Jwt.verify(
                 token,
-                "thisisusw04jsonwebtoken"
+                process.env.JWT_SECRET
             );
         }
         else {
@@ -61,7 +87,7 @@ export const isCustomer = async (req, res, next) => {
         if (token) {
             decode = Jwt.verify(
                 token,
-                "thisisusw04jsonwebtoken"
+                process.env.JWT_SECRET
             );
         }
         else {
@@ -99,7 +125,7 @@ export const isDPerson = async (req, res, next) => {
         if (token) {
             decode = Jwt.verify(
                 token,
-                "thisisusw04jsonwebtoken"
+                process.env.JWT_SECRET
             );
         }
         else {

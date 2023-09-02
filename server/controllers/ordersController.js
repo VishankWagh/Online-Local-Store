@@ -135,3 +135,32 @@ export const getOrdersByNameController = async (req, res) => {
         })
     }
 }
+
+// get number of delivered order 
+
+export const getDeliveredOrdersController = async (req, res) => {
+    try {
+        const { shopName } = req.params;
+        const orders = await qbDB.collection("orders").find({ shopName }).toArray();
+        const dOrdersLength = orders.filter((o) => {
+            return o.status === "delivered"
+        }).length;
+
+        if (!dOrdersLength) {
+            res.status(200).send({
+                success: false,
+                message: "No Delivered Orders"
+            });
+        }
+        res.status(200).send({
+            success: true,
+            dOrdersLength
+        })
+
+    } catch (error) {
+        res.status(400).send({
+            success: false,
+            message: "Error in order controller"
+        })
+    }
+}

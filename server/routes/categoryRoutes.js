@@ -1,5 +1,5 @@
 import express from "express";
-import { addCategoryController, deleteCategoryController, getCategorylistController } from "../controllers/categoryController.js";
+import { addCategoryController, deleteCategoryController, getAllCategoriesController, getCategorylistController } from "../controllers/categoryController.js";
 
 const router = express.Router();
 
@@ -14,5 +14,8 @@ router.post("/deletecategory", deleteCategoryController);
 
 // get category list from shop
 router.get("/getcategorylist/:sname", getCategorylistController);
+
+// get all categories
+router.get("/getallcategories", getAllCategoriesController);
 
 export default router;

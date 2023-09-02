@@ -10,7 +10,7 @@ const Header = () => {
     useEffect(() => { }, [auth]);
 
     function regSelect(sel) {
-        console.log("reg " + sel);
+        // console.log("reg " + sel);
         if (sel === "Customer") {
             window.location.href = "/customer-register";
         }
@@ -43,10 +43,10 @@ const Header = () => {
                         <a className="nav-link active" aria-current="page" href="#">Orders</a>
                     </li>*/}
                     <li className="nav-item me-5 fs-5">
-                        {/* <a className="nav-link page-link" href="/">Home</a> */}
                         <Link className="nav-link page-link" to="/">Home</Link>
                     </li>
                     <li className="nav-item me-5 fs-5">
+                        <Link className="nav-link page-link" to="/about">About Us</Link>
                         <Link className="nav-link page-link" to="/about">About Us</Link>
                     </li>
                     {/* {console.log("autn " + JSON.stringify(auth))} */}
@@ -78,7 +78,7 @@ const Header = () => {
                         </li>
                         <li className="nav-item fs-5 signup-btn">
                             <span className="nav-link reglog-link">
-                                <span class="material-symbols-outlined sec-logo">
+                                <span className="material-symbols-outlined sec-logo">
                                     app_registration
                                 </span>
                                 <select className='reg-select' name="" id="" onChange={(e) => regSelect(e.target.value)}>

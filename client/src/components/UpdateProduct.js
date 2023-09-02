@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import Select from 'react-select';
 
-const UpdateProduct = () => {
+const UpdateProduct = (props) => {
 
     const [searched, setSearched] = useState(false);
-    const [pName, setPName] = useState("");
+    const [pName, setPName] = useState({});
+    const [prevName, setPrevName] = useState({});
     const [category, setCategory] = useState("");
     const [desc, setDesc] = useState("");
     const [price, setPrice] = useState(0);
     const [qty, setQty] = useState(0);
     const [prodList, setProdsList] = useState([]);
 
-    let shopName = "Variety";
-    let prevName;
+    // let shopName = "Variety";
+    // let prevName;
 
     useEffect(() => {
         async function getprodlist() {
-            const response = await axios.get(`http://localhost:5050/products/getproductlist/${shopName}`);
+            const response = await axios.get(`http://localhost:5050/products/getproductlist/${props.shopName}`);
             if (response.status === 200) {
-                setProdsList(response.data.prods);
+                let nProds = [
+                    // { value: '', label: 'Select Product Name', isFixed: true },
+                    ...response.data.prods.map(prod => { return { value: prod, label: prod } })
+                ];
+                setProdsList(nProds);
             }
         }
         getprodlist();
-    }, [])
+    }, []);
+
+    console.log("prls " + JSON.stringify(prodList));
 
     const handleSelect = async () => {
-        const resp = await axios.get(`http://localhost:5050/products/singleproduct/${pName}`);
+        const resp = await axios.get(`http://localhost:5050/products/singleproduct/${pName.value}`);
 
         if (resp.data.success) {
             const product = resp.data.product;
-            prevName = product.name;
+            // prevName = product.name;
+            setPrevName(product.name);
             setPName(product.name);
             setCategory(product.category);
             setDesc(product.desc);
@@ -44,7 +53,8 @@ const UpdateProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post(`http://localhost:5050/products/updateproduct/${shopName}`, {
+        // console.log("prev ", prevName);
+        const response = await axios.post(`http://localhost:5050/products/updateproduct/${props.shopName}`, {
             pName,
             category,
             desc,
@@ -54,6 +64,13 @@ const UpdateProduct = () => {
         });
 
         if (response.status === 200) {
+            setPrevName("");
+            setPName("");
+            setCategory("");
+            setDesc("");
+            setPrice("");
+            setQty("");
+            setSearched(false);
             alert(response.data.message);
         } else {
             alert("Update Unsuccessfull");
@@ -64,15 +81,16 @@ const UpdateProduct = () => {
     return (<div className="col m-5">
         {!searched ?
 
-            <div className="search-prod mb-3">
-                <label htmlFor="productName" className="form-label m-3 fs-5">Search Product by Name</label>
-                <div className="input-group m-0  manage-cat-inp">
-                    <input type="text" list="products" className="form-control" id="productName" onChange={(e) => { setPName(e.target.value) }} placeholder="Search Product Name" />
+            <div className="search-prod mb-3 p-3">
+                <label htmlFor="productName" className="form-label fs-5">Search Product by Name</label>
+                <div className="input-group m-0 mt-2 manage-cat-inp">
+                    {/* <input type="text" list="products" className="form-control" id="productName" onChange={(e) => { setPName(e.target.value) }} placeholder="Search Product Name" />
                     <datalist id="products">
                         {prodList.map((p, ind) => {
                             return <option value={p} key={ind} />
                         })}
-                    </datalist>
+                    </datalist> */}
+                    <Select options={prodList} name="prods" className="form-control merchant-sel-inp" onChange={setPName} placeholder="Select Product Name" />
                     <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => handleSelect()}>Select</button>
                 </div>
             </div>
@@ -97,8 +115,8 @@ const UpdateProduct = () => {
                     <input type="number" className="form-control bg-body-secondary" id="price" value={price} onChange={(e) => setPrice(e.target.value)}></input>
                 </div>
                 <div className="mb-3 w-25">
-                    <label htmlFor="qty" className="form-label">Quantity</label>
-                    <input type="number" className="form-control bg-body-secondary" id="qty" value={qty} onChange={(e) => setQty(e.target.value)}></input>
+                    <label htmlFor="quantity" className="form-label">Quantity</label>
+                    <input type="number" className="form-control bg-body-secondary" id="quantity" value={qty} onChange={(e) => setQty(e.target.value)}></input>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

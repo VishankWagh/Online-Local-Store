@@ -70,9 +70,11 @@ const Order = (props) => {
                         <option value="delivered">Delivered</option>
                     </select>
                     <button className="btn btn-primary d-inline mx-4 rounded-0 w-25" onClick={() => {
-                        const status = document.getElementById("status").value;
-                        console.log(status);
-                        props.updateStatus(props.id, status);
+                        if (props.updateStatus) {
+                            const status = document.getElementById("status").value;
+                            console.log(status);
+                            props.updateStatus(props.id, status);
+                        }
                     }}>Update</button>
                 </>
                 }

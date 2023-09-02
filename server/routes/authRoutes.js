@@ -31,6 +31,11 @@ router.get("/user-auth/dperson", isDPerson, (req, res) => {
     res.status(200).send({ ok: true });
 });
 
+// check logged in
+router.post("/loggedin", requireSignIn, (req, res) => {
+    res.status(200).send({ ok: true });
+})
+
 // protected user route
 // router.get("/cust", isCustomer, (req, res) => {
 //     res.status(200).send({ ok: true });

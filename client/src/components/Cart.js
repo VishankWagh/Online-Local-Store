@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react"
 import "../styles/Cart.css"
 
 function Cart({ shopCart, deleteCartItem, incdecQty }) {
+    let qty = 0;
+    shopCart?.map((sc) => {
+        qty += sc.cartItems.length;
+    })
 
     useEffect(() => {
         async function fetchCart() {
@@ -11,11 +15,13 @@ function Cart({ shopCart, deleteCartItem, incdecQty }) {
 
             // const crt = JSON.parse(localStorage.getItem("cart"));
             // setCart(crt);
+
         }
         fetchCart();
     }, [])
 
     let totprice = 0;
+    let copn = 0;
     // console.log("0 0 " + JSON.stringify(shopCart[0].cartItems[0]));
     return (
         <>
@@ -26,12 +32,12 @@ function Cart({ shopCart, deleteCartItem, incdecQty }) {
                     // isCartOpen = !isCartOpen;
                     // changeIsCartOpen(isCartOpen);
                 }}>
-                    {/* <span><b>&lt;</b></span> */}
+                    {/* {copn && <span><b>&lt;</b></span>} */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-cart2" viewBox="0 0 16 16">
                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                     </svg>
-                    {/* <span className="crt-qty">{cart?.length}</span> */}
-                    {/* <span><b>{isCartOpen && ">"}</b></span> */}
+                    <span className="crt-qty">{qty}</span>
+                    {/* {!copn && <span><b>&gt;</b></span>} */}
                 </div>
                 <div className="cart-items">
                     {/* {(!shopCart?.length) ? console.log("slen " + shopCart.length) : "hello"} */}
@@ -53,7 +59,6 @@ function Cart({ shopCart, deleteCartItem, incdecQty }) {
                                     <tbody>
                                         {shop.cartItems.map((citem, cartInd) => {
                                             totprice += citem.qty * citem.price;
-
                                             return (
                                                 <tr key={cartInd}>
                                                     <th scope="row">{cartInd + 1}</th>
@@ -82,7 +87,7 @@ function Cart({ shopCart, deleteCartItem, incdecQty }) {
                                         })}
                                         <tr>
                                             <th scope="row" colSpan='3'>Total</th>
-                                            <td colSpan='2'>&#8377; {totprice}</td>
+                                            <td colSpan='2'><b>&#8377; {totprice}</b></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -33,17 +33,6 @@
     font-size: 1.5rem;
 }
 
-.prod-desc {
-    background-color: rgb(212, 255, 212);
-    margin-top: 4rem;
-    border-top: 1px solid #0a5616;
-    font-size: 1.2rem;
-    font-weight: 500;
-    /* padding-top: 2rem; */
-    padding: 2rem 4rem;
-    /* padding-bottom: 1rem; */
-}
-
 .prod-price p {
     font-size: 1.5rem;
     font-weight: 700;
@@ -61,6 +50,16 @@
 .similar-prods .card-body a {
     margin-bottom: 10px;
     color: white;
+}
+
+.similar-prods .card {
+    padding: 0;
+    width: 21%;
+    margin: 1rem 1.3rem !important;
+}
+
+.similar-prods .card:last-child {
+    margin-left: 0;
 }
 
 .addcartbtn {
@@ -86,12 +85,219 @@
 
 .ofr-price {
     color: rgb(184 0 0);
-    font-weight: 300;
-    font-size: 2rem;
+    font-weight: 400;
+    font-size: 1.3rem;
 }
 
 .org-price {
     padding: 0 1rem;
     font-weight: 500;
     font-size: 2rem;
+}
+
+
+
+.prod-secs {
+    background-color: rgb(212, 255, 212);
+    margin-top: 4rem;
+    border-top: 1px solid #0a5616;
+    font-size: 1.2rem;
+    font-weight: 500;
+    /* padding-top: 2rem; */
+    padding: 2rem 4rem;
+    /* padding-bottom: 1rem; */
+}
+
+.psec {
+    margin-bottom: 2rem;
+}
+
+.psec-head {
+    font-size: 1.5rem;
+    font-weight: 700;
+    /* margin-bottom: 1rem; */
+}
+
+.psec-cntnt {
+    padding: 1rem 0;
+}
+
+
+
+/* product review */
+
+.give-rvw-btn {
+    margin-top: 1rem;
+    padding: 5px;
+    border: none;
+    border-left: 5px solid #0a5616;
+    color: #0a5616;
+    background-color: rgb(238, 255, 238);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.give-rvw-btn span {
+    padding-right: 5px;
+}
+
+.give-rvw {
+    z-index: 10;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.24);
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    padding: 14rem 30%;
+}
+
+.give-rvw form {
+    padding: 3rem 1rem;
+    background-color: rgba(238, 255, 238);
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+.give-rvw h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.give-rvw h4 span {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.cross {
+    cursor: pointer;
+    position: absolute;
+    background-color: red;
+    border: 1px solid black;
+    color: #fff;
+    top: 5%;
+    right: 5%;
+    padding: 0 7px;
+    border-radius: 50px;
+}
+
+.rvw-inp {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rvw-inp label {
+    padding-right: 15px;
+    width: 30%;
+    font-size: 18px;
+    text-align: left;
+    font-weight: 700;
+    color: #0a5616;
+}
+
+.rvw-inp input,
+.rvw-inp textarea {
+    padding: 5px;
+    width: 40%;
+    border: none;
+    outline: none;
+    /* background-color: rgb(244, 255, 244); */
+    border-bottom: 3px solid #0a5616;
+    /* border-radius: 50px; */
+}
+
+.rvw-inp input::placeholder,
+.rvw-inp textarea::placeholder {
+    font-size: 1rem;
+}
+
+.sub-rvw-btn {
+    background-color: #0a5616;
+    color: #ffff;
+    padding: 3px 20px;
+    margin-top: 10px;
+    border-radius: 50px;
+}
+
+.give-rvw .light-text {
+    color: #bdbdbd;
+    text-align: right;
+    padding-bottom: 0.5rem;
+    padding-right: 4.7rem;
+    font-size: 14px;
+
+}
+
+.review {
+    background-color: rgb(238, 255, 238);
+    padding: 1rem;
+    padding-bottom: 1.3rem;
+    margin-bottom: 1rem;
+    position: relative;
+    border-left: 5px solid #0a5616;
+    /* border-bottom: 1px solid rgb(224, 224, 224); */
+}
+
+.reviews-list {
+    /* display: flex; */
+    /* flex-direction: column-reverse; */
+    /* overflow: auto; */
+    /* width: 100%; */
+}
+
+.mr-rvw-btn {
+    padding: 0px 5px;
+    margin-right: 10px;
+    font-size: 1rem;
+    background-color: #0a5616;
+    color: #fff;
+}
+
+.psec hr {
+    text-align: center;
+    margin: 0;
+}
+
+.r-clogo {
+    text-transform: uppercase;
+    margin-right: .5rem;
+    background-color: #0a5616;
+    color: white;
+    border-radius: 50%;
+    padding: 1px 8px 2px;
+    font-weight: 400;
+}
+
+.r-cname {
+    /* font-size: 1rem; */
+    font-weight: 400;
+    margin-right: 2rem;
+
+}
+
+.r-head {
+    font-weight: 500;
+    margin: 15px 0 5px;
+}
+
+.r-txt {
+    font-weight: 400;
+}
+
+.r-date {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+    color: gray;
 }

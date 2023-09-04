@@ -13,9 +13,11 @@
 .carousel-item {
     height: 70vh;
     /* background-color: blue; */
-    background-image: url('../images/bgi2.png');
+    /* background-image: url('../images/bgi2.png'); */
+    background-color: #0b3c00;
     /* background-position: ; */
-    background-size: 1519px 551px;
+    /* background-size: cover; */
+    background-size: 1519px 851px;
     background-repeat: no-repeat;
     /* filter: brightness(50%); */
     background-position: left;
@@ -94,15 +96,34 @@
     padding-left: 0;
 }
 
-.shop-comp .details {
-    color: rgb(0, 0, 0);
-    font-size: 1rem;
+.hm-shp-nm {
+    font-size: 1.4rem !important;
+    font-weight: 700;
+    color: black;
+}
 
+.shop-comp .details {
+    /* color: rgb(0, 0, 0); */
+    /* font-size: 1rem; */
+
+}
+
+.shop-comp .card-body {
+    padding-bottom: 0;
+}
+
+.shop-comp .card {
+    font-size: 15px;
+    font-weight: 500;
+    color: #606060;
+    /* border-radius: 0 0 10px 10px !important; */
+    box-shadow: 5px 5px 12px #00000036;
 }
 
 .home-shpimg {
     height: 10rem;
-
+    background-color: #fff;
+    /* border-radius: 10px 10px 0 0 !important; */
 }
 
 .title {
@@ -115,7 +136,8 @@
 
 .card {
     margin: 0;
-    padding: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 5px 5px 12px #00000036;
     background-color: rgb(212, 255, 212);
     border: none;
 }

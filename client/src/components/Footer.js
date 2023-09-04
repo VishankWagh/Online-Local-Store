@@ -47,7 +47,7 @@ function Footer() {
                                     }}></textarea>
                                 </div>
                                 {/* <input type="button" value="Send E-mail" className="btn mail-btn" /> */}
-                                <a className="btn mail-btn" href={`mailto:?subject=To contact you for Subject&body=${mailBody}`}>E-Mail-Us</a>
+                                <a className="btn mail-btn" href={`mailto:?subject=To contact you for [Subject]&body=${mailBody}`}>E-Mail-Us</a>
                             </form>
                         </div>
                     </div>

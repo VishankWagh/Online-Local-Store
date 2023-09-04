@@ -1,5 +1,5 @@
 import express from 'express';
-import { similarProductsController, shopProductsController, singleProductController, createProductController, updateProductController, deleteProductController, getProductlistController } from "../controllers/productController.js"
+import { similarProductsController, shopProductsController, singleProductController, createProductController, updateProductController, deleteProductController, getProductlistController, addReviewController } from "../controllers/productController.js"
 
 const router = express.Router();
 
@@ -18,5 +18,7 @@ router.post("/deleteproduct/:shopName", deleteProductController);
 
 // get product list from shop
 router.get("/getproductlist/:sname", getProductlistController);
+
+router.post("/addreview/:pname", addReviewController);
 
 export default router;

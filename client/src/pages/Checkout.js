@@ -5,8 +5,8 @@ import axios from 'axios';
 function Checkout() {
 
     const [checkoutCart, setCheckoutCart] = useState();
-    const [shopName, setShopName] = useState();
-    const [subTotal, setSubTotal] = useState();
+    const [shopName, setShopName] = useState("Shop");
+    const [subTotal, setSubTotal] = useState(0);
     const [delCharge, setDelCharge] = useState(2);
     const [plcordTxt, setPlcordTxt] = useState("PLACE ORDER");
     const [orderCanceled, setOrderCanceled] = useState(false);
@@ -17,16 +17,21 @@ function Checkout() {
         function getChkCart() {
             const queryParameters = new URLSearchParams(window.location.search)
             let sind = queryParameters.get("sind");
-            if (isNaN(sind)) {
-                sind = 0;
-            }
             let chkitms = JSON.parse(localStorage.getItem("shopCart"));
+            if (isNaN(sind)) {
+                sind = chkitms.findIndex(chitms => {
+                    return chitms.shopName === sind;
+                });
+                // console.log("sind " + sind);
+            }
             // console.log("chkitms " + JSON.stringify(chkitms) + " " + sind);
             chkitms = chkitms[sind];
             setSind(sind);
-            setCheckoutCart(chkitms.cartItems.filter((crtitm) => crtitm.qty != 0));
-            setShopName(chkitms.shopName);
-            setSubTotal(chkitms.cartItems.map((chc) => chc.price * chc.qty).reduce((tot, num) => tot + num, 0));
+            if (chkitms) {
+                setCheckoutCart(chkitms.cartItems.filter((crtitm) => crtitm.qty != 0));
+                setShopName(chkitms.shopName);
+                setSubTotal(chkitms.cartItems?.map((chc) => chc.price * chc.qty).reduce((tot, num) => tot + num, 0));
+            }
         }
         getChkCart();
     }, []);
@@ -41,6 +46,11 @@ function Checkout() {
         // subtotal =
         // delchrg =
         // status
+
+        if (!checkoutCart) {
+            setPlcordTxt("No Items to Order")
+            return;
+        }
 
         let address = document.getElementById('addr').value;
 
@@ -104,9 +114,13 @@ function Checkout() {
                                             <th className="ordtbl-th">Delivery Charges</th>
                                             <th className="ordtbl-val">&#8377; 2</th>
                                         </tr>
+                                        <tr>
+                                            <th className="ordtbl-th">Discount</th>
+                                            <th className="ordtbl-val">&#8377; 0</th>
+                                        </tr>
                                         <tr className="tot">
                                             <th className="ordtbl-th">Total</th>
-                                            <th className="ordtbl-val">&#8377; {subTotal + 2}</th>
+                                            <th className="ordtbl-val">&#8377; {subTotal + 2 - 0}</th>
                                         </tr>
                                     </table>
                                 </div>
@@ -116,7 +130,7 @@ function Checkout() {
                                 <div className="crt-sum">
                                     <h4 className="chkt-heading"><span className="ch-shpnm">{shopName}</span> - Cart Summary</h4>
                                     <div className="chitms">
-                                        {checkoutCart?.map((cartItem) => {
+                                        {checkoutCart ? checkoutCart.map((cartItem) => {
                                             return (
                                                 <div className="card chkt-itm" style={{ maxWidth: "540px" }}>
                                                     <div className="row g-0">
@@ -135,7 +149,7 @@ function Checkout() {
                                                     </div>
                                                 </div>
                                             )
-                                        })}
+                                        }) : <p className="altr-txt">No Products in Cart</p>}
                                     </div>
                                 </div>
                             </div>

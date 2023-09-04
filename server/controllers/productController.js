@@ -5,6 +5,7 @@ export const singleProductController = async (req, res) => {
     const prodName = await req.params.pname;
     const product = await qbDB.collection('products').findOne({ name: prodName });
     // console.log("p ", JSON.stringify(product), JSON.stringify(prodName));
+    product.reviews?.reverse();
     if (product) {
         return res.status(200).send({ success: true, message: "success", product, shpName });
     }
@@ -224,6 +225,22 @@ export const getProductlistController = async (req, res) => {
         res.status(400).send({
             success: false,
             message: "error in getting prod list",
+            error
+        })
+    }
+}
+
+export const addReviewController = async (req, res) => {
+    try {
+        const { pname } = req.params;
+        const { review } = req.body;
+        await qbDB.collection("products").updateOne({ name: pname }, { $push: { reviews: review } })
+
+    }
+    catch (error) {
+        res.status(400).send({
+            success: false,
+            message: "error in adding review",
             error
         })
     }

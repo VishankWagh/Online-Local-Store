@@ -82,36 +82,34 @@ const Header = () => {
                                 </span>
                                 <select className='reg-select' name="" id="" onChange={(e) => regSelect(e.target.value)}>
                                     <option value="Register as">Sign Up as</option>
-                                    <option value="Customer" onClick={() => {
-                                        console.log("cust")
-                                        window.location.href = "/customer-register"
-                                    }}>Customer</option>
-                                    <option value="Shop" onClick={() => {
-                                        window.location.href = "/shop-register"
-                                    }}>Shop</option>
-                                    <option value="Delivery-Person" onClick={() => {
-                                        window.location.href = "/deliveryperson-register"
-                                    }}>Delivery-Person</option>
+                                    <option value="Customer"><Link to="/customer-register">Customer</Link></option>
+                                    <option value="Shop"><Link to="/shop-register">Shop-Owner</Link></option>
+                                    <option value="Delivery-Person"><Link to="/deliveryperson-register">Delivery-Person</Link></option>
                                 </select>
+                                {/* onClick={() => {
+                                        window.location.href = "/deliveryperson-register"
+                                    }} */}
                                 {/* <span className="txt signup-txt">Sign Up</span> */}
                             </span>
                         </li>
                     </>) : (<>
                         <li className="nav-item me-5 fs-5 signin-btn">
-                            <a className="nav-link reglog-link" href="/login" onClick={() => { handleLogout() }} >
+                            <Link className="nav-link reglog-link" to="/login" onClick={() => { handleLogout() }} >
                                 <span className="material-symbols-outlined sec-logo">
                                     power_settings_new
                                 </span>
                                 <span className="txt signin-txt">Sign Out</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item me-4 fs-5">
-                            <span className="nav-link user-profile" to="/customer-register">
-                                <div className="user-logo text-uppercase">
-                                    u
-                                </div>
-                                <div className="uname">{auth.user.uname}</div>
-                            </span>
+                            <Link to={'/customer/profile'}>
+                                <span className="nav-link user-profile">
+                                    <div className="user-logo text-uppercase">
+                                        {auth.user.uname.slice(0, 1)}
+                                    </div>
+                                    <div className="uname">{auth.user.uname}</div>
+                                </span>
+                            </Link>
                         </li>
                     </>)}
                 </ul>

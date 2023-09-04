@@ -5,6 +5,7 @@ import ShopCard from '../components/ShopCard';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cart from '../components/Cart';
+import { useAuth } from '../context/auth';
 
 function Home() {
     document.title = "Quik-Buy | Home";
@@ -16,25 +17,33 @@ function Home() {
         area: "",
         catg: ""
     });
-    const [shop_Cart, setShop_Cart] = useState(JSON.parse(localStorage.getItem("shopCart")));
+    const [shop_Cart, setShop_Cart] = useState();
+    const [page, setPage] = useState(0);
+    const [loadMore, setLoadMore] = useState(false);
+
+    const [auth, setAuth] = useAuth();
 
     useEffect(() => {
-
+        window.scrollTo(0, 0);
+        console.log("usr " + JSON.stringify(auth.user));
+        auth.user && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
         // console.log("use ");
-        async function fetchShopList() {
-            const pincode = 432001;
-            const response = await axios.get('http://localhost:5050/shops/shoplistbypincode/396001');
-            // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
-            const shopLs = await response.data.shopList;
-            const catgs = await response.data.categories;
-            // console.log(JSON.stringify(catgs));
-            setShopList(shopLs);
-            setNShopList(shopLs);
-            setCategories(catgs);
-        }
-        fetchShopList();
+        fetchShopList(page);
         // return;
-    }, []);
+    }, [auth]);
+
+    async function fetchShopList(page) {
+        // const pincode = 432001;
+        const response = await axios.get(`http://localhost:5050/shops/shoplistbypincode/396001/${page}`);
+        // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
+        const shopLs = await response.data.shopList;
+        setLoadMore(shopLs.length < 4 ? false : true);
+        const catgs = await response.data.categories;
+        console.log(JSON.stringify(catgs));
+        setShopList([...shopList, ...shopLs]);
+        setNShopList([...nshopList, ...shopLs]);
+        setCategories([...categories, ...catgs]);
+    }
 
     // let area = [
     //     { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
@@ -58,37 +67,37 @@ function Home() {
         { value: 'Chandni-Chowk', label: 'Chandni-Chowk' }
     ];
     // https://cloud.mongodb.com/v2/6436e4ddfc447b15f06aeafa#/clusters
-
+    console.log("ct " + JSON.stringify(categories));
     let category = [
         { value: '', label: 'Select Category', isFixed: true },
-        ...categories.map(cat => { return { value: cat.name, label: cat.name } })
+        ...categories?.map(cat => { return { value: cat.name, label: cat.name } })
     ];
 
     function updateSearched(srch, name) {
-        const area = filter.area;
-        const catg = filter.catg;
+        // const area = filter.area;
+        // const catg = filter.catg;
         // // console.log("updsrchd " + srch);
         // // console.log("shplstu " + JSON.stringify(shopList));
-        if (name == "") {
+        if (name === "") {
             // console.log("nn");
             setNShopList(shopList)
-            if (srch == "area") {
+            if (srch === "area") {
                 setFilter(p => { return { ...p, area: name } })
 
-                if (filter.catg == "") setNShopList(shopList)
+                if (filter.catg === "") setNShopList(shopList)
                 else {
                     setNShopList(shopList.filter((shp) => {
                         return shp.categories.includes(filter.catg);
                     }))
                 }
             }
-            else if (srch == "category") {
+            else if (srch === "category") {
                 setFilter(p => { return { ...p, catg: name } })
 
-                if (filter.area == "") setNShopList(shopList)
+                if (filter.area === "") setNShopList(shopList)
                 else {
                     setNShopList(shopList.filter((shp) => {
-                        return (shp.area == filter.area);
+                        return (shp.area === filter.area);
                     }))
                 }
             }
@@ -113,12 +122,12 @@ function Home() {
             //     }))
             // }
         }
-        else if (srch == "area") {
+        else if (srch === "area") {
             // console.log("catg " + (filter.catg === ""));
             setFilter(p => { return { ...p, area: name } })
 
             let nshp = shopList.filter((shop) => {
-                return shop.area == name;
+                return shop.area === name;
             })
             if (filter.catg !== "") {
                 nshp = nshp.filter((shp) => {
@@ -128,7 +137,7 @@ function Home() {
             // console.log("nshp " + JSON.stringify(nshp));
             setNShopList(nshp);
         }
-        else if (srch == "category") {
+        else if (srch === "category") {
             // console.log("area " + filter.area);
             setFilter(p => { return { ...p, catg: name } })
 
@@ -137,7 +146,7 @@ function Home() {
             })
             if (filter.area !== "") {
                 nshp = nshp.filter((shp) => {
-                    return (shp.area == filter.area);
+                    return (shp.area === filter.area);
                 });
             }
             // console.log("nshpc " + JSON.stringify(nshp));
@@ -162,7 +171,7 @@ function Home() {
 
     // inc qty
     function incdecQty(shpind, crtind, inc) {
-        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || shop_Cart[shpind].cartItems[crtind].qty == 0 && inc) {
+        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || (shop_Cart[shpind].cartItems[crtind].qty === 0 && inc)) {
             let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
             inc ? newShopCart[shpind].cartItems[crtind].qty += 1 : newShopCart[shpind].cartItems[crtind].qty -= 1;
             setShop_Cart(newShopCart);
@@ -170,16 +179,12 @@ function Home() {
         }
     }
 
-    const shopImgArr =
-        [
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCatveyiU5Ji4sQjTCydq-Cs0H-49jsK0EbQ&usqp=CAU',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXsjiZGfBkq3fdal8BYjQRkLwNVKx3hCnEA&usqp=CAU',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRa-uc1ljm3iuPu5fq4zOK_KTXT9jxOQJitrAEPvxsQ0ybxB0972ZaxfenGQpGJ564Ygg&usqp=CAU',
-            'https://5.imimg.com/data5/HR/BA/WN/SELLER-13309345/shop-name-board.jpg',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFGydmvCaRm32-wk_A8MzX6J1tVRtLc20CS1bRupC0Cu3_Br_2KZg3UIxRx7WT7ycWTGc&usqp=CAU',
-            'https://c4.wallpaperflare.com/wallpaper/805/668/874/lofi-neon-coffee-house-shop-neon-glow-hd-wallpaper-preview.jpg',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW9t9eVPaKzySOMDSPGwp-D0vzYkRtFmTOXUaZtIz0LQ&s'
-        ]
+
+    //Loadmore shops
+    function loadMoreShop() {
+        setPage(page + 1);
+        fetchShopList(page + 1);
+    }
 
     return (
         <>
@@ -192,7 +197,7 @@ function Home() {
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div className="carousel-inner">
-                        <div className="carousel-item active" style={{ backgroundImage: "url('https://img.freepik.com/premium-photo/top-view-black-friday-decoration-concept-with-gift-box-shopping-cart-shopping-bag-dark-background-shopping-concept-boxing-day-black-friday-composition_53476-6274.jpg')" }}>
+                        <div className="carousel-item active" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/arrangement-black-friday-shopping-carts-with-copy-space_23-2148667047.jpg?w=1060&t=st=1693850649~exp=1693851249~hmac=d32e24095778ccade4eaf02de78daed2f1b2abeb56eb987394e9a28cfe674b1a')" }}>
                             <div className="bg">
                                 <div className="home-txt">
                                     Welcome to Quik-Buy
@@ -203,9 +208,8 @@ function Home() {
                                     <span className="dbl-quote">"</span>
                                 </div>
                             </div>
-                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
                         </div>
-                        <div className="carousel-item" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/front-view-cyber-monday-shopping-cart-with-bags-copy-space_23-2148657638.jpg?w=1380&t=st=1689565890~exp=1689566490~hmac=850f8ef733898efd555a555b28232d9f893f4887ee458e81de908a5e33a9734a')" }}>
+                        <div className="carousel-item" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/sale-concept-with-copy-space_23-2148313074.jpg?w=1060&t=st=1693851231~exp=1693851831~hmac=6b29b3b2e502a9ae7d25a899a8ab1c351696937bb4c08e89cc7e7e5b084ddc3c')" }}>
                             <div className="bg">
 
                                 <div className="home-txt">
@@ -219,9 +223,8 @@ function Home() {
 
                                 </div>
                             </div>
-                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
-                        </div>4
-                        <div className="carousel-item" style={{ backgroundImage: "url('https://png.pngtree.com/thumb_back/fw800/background/20230624/pngtree-online-e-commerce-store-in-sleek-3d-black-design-image_3661423.png ')" }}>
+                        </div>
+                        <div className="carousel-item" style={{ backgroundImage: "url('https://img.freepik.com/premium-photo/top-view-black-friday-decoration-concept-with-gift-box-shopping-cart-shopping-bag-dark-background-shopping-concept-boxing-day-black-friday-composition_53476-6274.jpg')" }}>
                             <div className="bg">
 
                                 <div className="home-txt">
@@ -235,7 +238,6 @@ function Home() {
 
                                 </div>
                             </div>
-                            {/* <img src="https://themeforest.img.customer.envatousercontent.com/files/424116306/01_preview.png?auto=compress%2Cformat&fit=crop&crop=top&w=590&h=300&s=29e3059c07d9c39ff6eb3d63e3c52395" className="d-block w-100" alt="..." /> */}
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -250,7 +252,8 @@ function Home() {
 
                 <div className="content">
 
-                    <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
+                    {shop_Cart && <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />}
+                    {/* {auth.user && <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />} */}
                     <div className="drop-downs d-flex">
                         <DropDown data={areaLs} updSrchd={updateSearched} name={"area"} />
                         <DropDown data={category} updSrchd={updateSearched} name={"category"} />
@@ -258,7 +261,13 @@ function Home() {
                     </div>
                     <h3 className="title" >Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
+                        {nshopList.length <= 0 && <div className="altr-txt">No Shop in selected preferences</div>}
                         {nshopList.map((shop, index) => {
+                            return (
+                                <ShopCard shopDetails={shop} index={index} />
+                            )
+                        })}
+                        {/* {nshopList.map((shop, index) => {
                             return (
                                 <div className="shop-comp mr-1 mb-5 col-3" key={index}>
                                     <div className="card" style={{ width: "18rem" }}>
@@ -267,53 +276,21 @@ function Home() {
                                             <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
                                             <span className="details">{shop.area} - {shop.pincode}</span>
                                         </div>
-                                        <ul className="list-group list-group-flush">
-                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
-                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
-                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
-                                        </ul>
-                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
+                                        <div className="ratings line">Ratings: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
                                         <p className="own line">
                                             <span className="ownedby">Owned By - </span>
                                             <span className="ownername">{shop.ownerName}</span>
                                         </p>
                                         <div className="card-body">
-                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
-                                            {/* <a href="/" className="card-link">Another link</a> */}
+                                            <Link to={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</Link>
                                         </div>
                                     </div>
                                 </div>
                             )
-                        })}
-                        {nshopList.map((shop, index) => {
-                            return (
-                                <div className="shop-comp mr-1 mb-5 col-3" key={index}>
-                                    <div className="card" style={{ width: "18rem" }}>
-                                        <img src={shopImgArr[index]} className="card-img-top home-shpimg" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title mb-3 fs-3">{shop.shopName}</h5>
-                                            <span className="details">{shop.area} - {shop.pincode}</span>
-                                        </div>
-                                        <ul className="list-group list-group-flush">
-                                            {/* <li className="list-group-item">Area: {shop.area}</li> */}
-                                            {/* <li className="list-group-item">Owner: {shop.ownerName}</li> */}
-                                            {/* <li className="list-group-item">Pincode: {shop.pincode}</li> */}
-                                        </ul>
-                                        <div className="ratings line">Rating: <span>&#9733; &#9733; &#9733; &#9733; &#9734;</span></div>
-                                        <p className="own line">
-                                            <span className="ownedby">Owned By - </span>
-                                            <span className="ownername">{shop.ownerName}</span>
-                                        </p>
-                                        <div className="card-body">
-                                            <a href={`/customer/shop?sname=${shop.shopName}`} className="btn btn-primary">More Details</a>
-                                            {/* <a href="/" className="card-link">Another link</a> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
+                        })} */}
                     </div>
-                    {nshopList.length ? <button type="button" className="btn load-more">Load More...</button> : "No Products Here"}
+                    {/* No Shop in selected preferences */}
+                    {(loadMore && nshopList.length > 0) && <button type="button" onClick={loadMoreShop} className="btn load-more">Load More &darr;</button>}
                 </div>
             </div>
         </>

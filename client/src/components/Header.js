@@ -47,7 +47,6 @@ const Header = () => {
                     </li>
                     <li className="nav-item me-5 fs-5">
                         <Link className="nav-link page-link" to="/about">About Us</Link>
-                        <Link className="nav-link page-link" to="/about">About Us</Link>
                     </li>
                     {/* {console.log("autn " + JSON.stringify(auth))} */}
                     {auth.user?.role === "Customer" &&
@@ -70,7 +69,7 @@ const Header = () => {
                     {!auth.user ? (<>
                         <li className="nav-item fs-5 signin-btn">
                             <Link className="nav-link reglog-link" to="/login">
-                                <span class="material-symbols-outlined sec-logo">
+                                <span className="material-symbols-outlined sec-logo">
                                     login
                                 </span>
                                 <span className="txt signin-txt">Sign In</span>
@@ -96,7 +95,7 @@ const Header = () => {
                     </>) : (<>
                         <li className="nav-item me-5 fs-5 signin-btn">
                             <Link className="nav-link reglog-link" to="/login" onClick={() => { handleLogout() }} >
-                                <span class="material-symbols-outlined sec-logo">
+                                <span className="material-symbols-outlined sec-logo">
                                     power_settings_new
                                 </span>
                                 <span className="txt signin-txt">Sign Out</span>

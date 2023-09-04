@@ -41,3 +41,23 @@ export const UpdateUserController = async (req, res) => {
         })
     }
 }
+
+export const getNameController = async (req, res) => {
+    try {
+        const { uname } = req.params;
+        const { name } = await qbDB.collection("customer").findOne({ uname });
+
+        res.status(200).send({
+            name,
+            success: true,
+            message: "Name found"
+        });
+    }
+    catch (err) {
+        res.status(200).send({
+            err,
+            success: false,
+            message: "err getting name"
+        })
+    }
+}

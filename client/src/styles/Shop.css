@@ -5,12 +5,18 @@
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
+    background-color: #0a5616;
 }
 
 .shop-head {
     padding: 8rem;
     height: 100%;
     backdrop-filter: brightness(47%);
+    /* background-color: #fff; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .shop-name h2 {
@@ -24,6 +30,10 @@
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 1rem;
+}
+
+.shop-oth-dets {
+    backdrop-filter: blur(10px);
 }
 
 .shop-area {
@@ -87,27 +97,37 @@
 }
 
 .card-text {
-    margin: 1rem 0;
+    margin: 10px 0;
 }
 
 /* prodcard */
+
+.products {
+    gap: 1.5rem;
+}
+
+.products .card {
+    width: 18rem;
+    font-size: 1rem;
+    padding: 0;
+}
 
 .price {
     font-size: 1.2rem;
     font-weight: 500;
     padding-right: .5rem;
-    margin-top: 1rem;
+    margin-top: 10px;
 }
 
 .offer-price {
     color: rgb(184 0 0);
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .prd-nm {
-    margin-right: 10px;
+    margin-right: 6px;
     height: 40px;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: 700;
 }

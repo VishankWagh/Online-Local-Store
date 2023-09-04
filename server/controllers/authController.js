@@ -1,23 +1,32 @@
 import bcrypt from 'bcrypt'
 import qbDB from "../config/db.js"
 import JWT from 'jsonwebtoken';
+import nodeMailer from 'nodemailer'
 
-// const hashPassword = async (password) => {
-//     try {
-//         const saltRounds = 10;
-//         await bcrypt.hash(password, saltRounds).then(function (hash) {
-//             return hash
-//         });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
 
-// const comparePassword = async (password, hashedPassword) => {
-//     bcrypt.compare(password, hashedPassword).then(function (result) {
-//         return result
-//     });
-// }
+// send Email for reset password
+
+const sendEmail = async (options) => {
+
+    const transporter = nodeMailer.createTransport({
+        service: process.env.SMTP_SEVICE,
+        auth: {
+            user: process.env.SMTP_MAIL,
+            pass: process.env.SMTP_PASSWORD
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.SMTP_MAIL,
+        to: options.email,
+        subject: options.subject,
+        text: options.message,
+        html: "<b>hello</b>"
+    }
+
+    await transporter.sendMail(mailOptions);
+
+}
 
 
 // customer controller
@@ -62,17 +71,22 @@ export const cregisterController = async (req, res) => {
         await qbDB.collection("customer").insertOne({ name, email, uname, password: hashedPassword, address, pincode });
 
         //token
+
+        // const token = JWT.sign({
+        //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        //     role: "Customer"
+        // }, process.env.JWT_SECRET);
+
         const token = JWT.sign({
-            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            role: "Customer"
-        }, process.env.JWT_SECRET);
+            role: 'Customer'
+        }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
         res.status(200).send({
             success: true,
             message: "Customer Registered Successfully",
             user: {
                 role: "Customer",
-                uname: existingUser.uname
+                uname: uname
             },
             token: token
         });
@@ -114,17 +128,22 @@ export const sregisterController = async (req, res) => {
         await qbDB.collection("shops").insertOne({ id: currId, shopName, desc: shopDesc, shopImg, area, pincode: Npincode, ownerName, email, uname, password: hashedPassword, categories: [], prods: [] });
 
         //token
+
+        // const token = JWT.sign({
+        //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        //     role: "Merchant"
+        // }, process.env.JWT_SECRET);
+
         const token = JWT.sign({
-            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            role: "Merchant"
-        }, process.env.JWT_SECRET);
+            role: 'Merchant'
+        }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
         res.status(200).send({
             success: true,
             message: "Shop Registered Successfully",
             user: {
                 role: "Merchant",
-                uname: existingShop.uname
+                uname: uname
             },
             token: token
         })
@@ -178,9 +197,25 @@ export const dregisterController = async (req, res) => {
 
         await qbDB.collection("deliveryperson").insertOne({ name, shopName, email, uname, password: hashedPassword });
 
+        //token
+
+        // const token = JWT.sign({
+        //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        //     role: "DeliveryPerson"
+        // }, process.env.JWT_SECRET);
+
+        const token = JWT.sign({
+            role: 'DeliveryPerson'
+        }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+
         res.status(200).send({
             success: true,
             message: "User Registered Successfully",
+            user: {
+                role: "dperson",
+                uname: uname
+            },
+            token: token
         })
     }
     catch (error) {
@@ -230,10 +265,15 @@ export const loginController = async (req, res) => {
             }
 
             //token
+
+            // const token = JWT.sign({
+            //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            //     role: "Customer"
+            // }, process.env.JWT_SECRET);
+
             const token = JWT.sign({
-                exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                role: "Customer"
-            }, process.env.JWT_SECRET);
+                role: 'Customer'
+            }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
             res.status(200).send({
                 success: true,
@@ -266,10 +306,15 @@ export const loginController = async (req, res) => {
             }
 
             //token
+
+            // const token = JWT.sign({
+            //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            //     role: "Merchant"
+            // }, process.env.JWT_SECRET);
+
             const token = JWT.sign({
-                exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                role: "Merchant"
-            }, process.env.JWT_SECRET);
+                role: 'Merchant'
+            }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
             res.status(200).send({
                 success: true,
@@ -304,10 +349,15 @@ export const loginController = async (req, res) => {
             }
 
             //token
+
+            // const token = JWT.sign({
+            //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            //     role: "DeliveryPerson"
+            // }, process.env.JWT_SECRET);
+
             const token = JWT.sign({
-                exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                role: "DeliveryPerson"
-            }, process.env.JWT_SECRET);
+                role: 'DeliveryPerson'
+            }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
             res.status(200).send({
                 success: true,
@@ -329,4 +379,58 @@ export const loginController = async (req, res) => {
             error
         })
     }
+}
+
+
+// Forgot Password controller 
+
+export const forgotPasswordController = async (req, res) => {
+
+    const { email } = req.body;
+
+    const user = qbDB.collection("customer").findOne({ email });
+
+    if (!user) {
+        req.status(404).send({
+            success: false,
+            message: "User Not Found"
+        });
+    }
+
+    //token
+
+    // const token = JWT.sign({
+    //     exp: Math.floor(Date.now() / 1000) + (30 * 30),
+    //     uname: user.uname
+    // }, process.env.JWT_SECRET);
+
+    const token = JWT.sign({
+        uname: user.uname
+    }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+
+    const resetPasswordUrl = `http://localhost:5050/auth/resetpassword/${token}`;
+
+    const message = `Click the below link to Reset Your Password :- \n\n ${resetPasswordUrl} \n\n If not Requested by you then, Please ignore it.`;
+
+    try {
+        console.log("fg");
+        await sendEmail({
+            email,
+            subject: "Quik Buy Password Recovery",
+            message
+        });
+
+        res.status(200).send({
+            success: true,
+            message: `Email Sent to ${email} Successfully`
+        })
+
+    } catch (error) {
+
+        res.status(404).send({
+            message: error.message,
+            error
+        })
+    }
+
 }

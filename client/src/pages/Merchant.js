@@ -63,11 +63,13 @@ const Merchant = () => {
 
     async function displayOrders() {
         try {
-            const response = await axios.get(`http://localhost:5050/orders/getorders/${shopName}`);
-            const neworders = response.data.orders
-            // console.log("orders " + JSON.stringify(neworders));
-            // setSelectedMenuOpt("Orders")
-            setOrders(neworders);
+            if (shopName) {
+                const response = await axios.get(`http://localhost:5050/orders/getorders/${shopName}`);
+                const neworders = response.data.orders
+                // console.log("orders " + JSON.stringify(neworders));
+                // setSelectedMenuOpt("Orders")
+                setOrders(neworders);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -128,7 +130,7 @@ const Merchant = () => {
 
     return <div className="merchant row position-sticky" >
         <div className="merchant-menu list-group mx-5 mt-4 col-3 position-fixed bottom-20 text-start" style={{ marginTop: "10rem" }}>
-            <h1 className='mer-shpnm'>{shopName}</h1>
+            <h1 className='mer-shpnm'>{shopName ? shopName : "Shop Menu"}</h1>
             <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" aria-current="true" onClick={(e) => { setSelectedMenuOpt("Dashboard"); }}>
                 <span className="material-symbols-outlined mx-3 fs-2">apps</span>
                 Dashboard

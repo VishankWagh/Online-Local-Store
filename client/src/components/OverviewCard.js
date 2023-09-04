@@ -11,7 +11,7 @@ const OverviewCard = (props) => {
           {props.icon}
         </span>
       </div>
-      <div className="o-value">{props.oValue}</div>
+      <div className="o-value">{props.oValue ? props.oValue : 0}</div>
     </div>
   )
 }

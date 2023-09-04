@@ -1,5 +1,5 @@
 import express from "express";
-import { cregisterController, dregisterController, loginController, sregisterController } from "../controllers/authController.js";
+import { cregisterController, dregisterController, forgotPasswordController, loginController, sregisterController } from "../controllers/authController.js";
 import { isCustomer, isDPerson, isMerchant, requireSignIn } from "../middlewaares/authMiddleware.js";
 
 const router = express.Router();
@@ -35,6 +35,9 @@ router.get("/user-auth/dperson", isDPerson, (req, res) => {
 router.post("/loggedin", requireSignIn, (req, res) => {
     res.status(200).send({ ok: true });
 })
+
+// forgot password
+router.post("/forgotpassword", forgotPasswordController);
 
 // protected user route
 // router.get("/cust", isCustomer, (req, res) => {

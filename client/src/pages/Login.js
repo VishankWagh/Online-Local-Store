@@ -93,6 +93,7 @@ function Login() {
                     <div className="mb-3">
                         <label htmlFor="pswd" className="form-label">Password</label>
                         <input type="password" className="form-control" id="pswd" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Password' required />
+                        <p className="fg-pswd" ><span className="">Forgot Password ?</span></p>
                     </div>
                     <button type="submit" className="mb-3 btn btn-primary" >LOGIN</button>
                     <p className="text-center" >Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary text-decoration-underline">Register</span></p>

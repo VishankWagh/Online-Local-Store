@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Order = (props) => {
+
+    const [status, setStatus] = useState("");
+
+    useEffect(() => {
+
+    })
 
     return (
         <div className="p-0 border-0 rounded-0 mb-5 card order">
@@ -25,7 +31,7 @@ const Order = (props) => {
                         </tr>
                         {!props.isDperson && <tr>
                             <th scope="row" className="fs-5" colSpan={2}>Status : </th>
-                            <td className="w-50 fs-6 fw-bold" >{props.status}</td>
+                            <td className="w-50 fs-6 fw-bold text-capitalize" >{props.status}</td>
                         </tr>}
                     </tbody>
                 </table>
@@ -64,7 +70,7 @@ const Order = (props) => {
                 </table>
 
                 {props.isDperson && <>
-                    <select className="order-status form-select d-inline rounded-0 w-25" id="status">
+                    <select className="order-status form-select d-inline rounded-0 w-25" id="status" value={status} onChange={(e) => { setStatus(e.target.value); }}>
                         <option value="pending">Pending</option>
                         <option value="on the way">On The Way</option>
                         <option value="delivered">Delivered</option>

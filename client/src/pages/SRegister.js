@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import "../styles/Register.css"
+import { useAuth } from '../context/auth';
+import { useNavigate } from 'react-router-dom';
 
 const SRegister = () => {
 
@@ -16,6 +18,9 @@ const SRegister = () => {
     const [uname, setUname] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
+    const [auth, setAuth] = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,7 +43,14 @@ const SRegister = () => {
                 password,
             });
             if (response.status === 200) {
+                setAuth({
+                    ...auth,
+                    user: response.data.user,
+                    token: response.data.token
+                });
+                localStorage.setItem("auth", JSON.stringify(response.data));
                 alert(response.data.message);
+                navigate("/merchant");
             }
             else {
                 alert("Unsuccessful Registration")
@@ -104,6 +116,7 @@ const SRegister = () => {
                 <input type="password" className="form-control" id="cpassword" required></input>
             </div>
             <button type="submit" className="btn btn-primary">Register</button>
+            <p className="reglgn-txt">Already have an Account? <a href='/login' className="btn btn-primary reg-lgnbtn">Login</a></p>
         </form>
     </div>
 

@@ -31,3 +31,15 @@
     letter-spacing: 2px;
     background-color: #0a5616;
 }
+
+.login .fg-pswd {
+    margin: 1.3rem 2rem 0;
+    text-align: end;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(91, 91, 91);
+}
+
+.fg-pswd>span:hover {
+    color: black;
+}

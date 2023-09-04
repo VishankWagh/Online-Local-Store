@@ -32,14 +32,16 @@ export const updataStatusController = async (req, res) => {
         // const _id = ObjectId('64892e97384f7a5496dee3f0');
 
         const status = req.body.status;
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
         console.log("status " + req.body.status);
         console.log("id " + id);
-        await qbDB.collection("orders").update({ orderId: id }, { $set: { status: status } });
-        res.status(200).send({
-            success: true,
-            message: "Order status Updated"
-        })
+        const updated = await qbDB.collection("orders").updateOne({ orderId: id }, { $set: { status } });
+        if (updated) {
+            res.status(200).send({
+                success: true,
+                message: "Order status Updated"
+            });
+        }
     } catch (error) {
         res.status(400).send({
             success: false,
@@ -158,6 +160,7 @@ export const getDeliveredOrdersController = async (req, res) => {
         })
 
     } catch (error) {
+        console.log("orcon", error, "st")
         res.status(400).send({
             success: false,
             message: "Error in order controller"

@@ -15,6 +15,7 @@ const DelPerson = () => {
     async function fetchData() {
       const response = await axios.post("http://localhost:5050/shops/getdpshopname", { uname: auth.user.uname });
       if (response.data.success) {
+
         setShopName(response.data.shopName);
       }
 

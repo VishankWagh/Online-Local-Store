@@ -24,6 +24,7 @@
 }
 
 .merchant-menu {
+    position: fixed;
     z-index: -10;
     background-color: rgb(170 236 170);
     padding: 0;

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import "../styles/Register.css"
 import axios from "axios";
 import "../styles/Register.css"
+import { useAuth } from '../context/auth';
 
 /*
     name
@@ -26,6 +27,9 @@ const CRegister = () => {
 
     const navigate = useNavigate();
 
+    const [auth, setAuth] = useAuth();
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const passwd = document.getElementById("passwd").value;
@@ -44,8 +48,14 @@ const CRegister = () => {
                 pincode
             });
             if (response.data.success) {
+                setAuth({
+                    ...auth,
+                    user: response.data.user,
+                    token: response.data.token
+                });
+                localStorage.setItem("auth", JSON.stringify(response.data));
                 alert(response.data.message);
-                navigate("/login");
+                navigate("/");
             }
             else {
                 alert("Unsuccessful Registration")

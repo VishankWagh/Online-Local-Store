@@ -21,6 +21,8 @@ import PrivateRoute from './components/Routes/Private';
 import DelPerson from './pages/DelPerson';
 import Checkout from './pages/Checkout';
 import OrderHist from './pages/OrderHist';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
             <Route path='/shop-register' element={<SRegister />} />
             <Route path='/deliveryperson-register' element={<DRegister />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/forgotpassword' element={<ForgotPassword />} />
+            <Route path='/resetpassword' element={<ResetPassword />} />
             <Route path='/' element={<Home />} />
             {/* <Route path='/Merchant' element={<Merchant />} /> */}
             <Route path='/merchant' element={<PrivateRoute role="merchant" />} >

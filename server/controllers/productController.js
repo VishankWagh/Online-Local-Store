@@ -49,12 +49,14 @@ export const similarProductsController = async (req, res) => {
 
 export const createProductController = async (req, res) => {
     const shopName = req.params.shopName;
-    const { pName, category, desc, price, qty } = req.body;
+    const { pName, category, imageUrl, desc, price, qty } = req.body;
 
     if (!pName) {
         return res.send({ message: "Product Name is Required" });
     } if (!category) {
         return res.send({ message: "category is Required" });
+    } if (!imageUrl) {
+        return res.send({ message: "Image Url is Required" });
     } if (!desc) {
         return res.send({ message: "Product description is Required" });
     } if (!price) {
@@ -70,7 +72,7 @@ export const createProductController = async (req, res) => {
         if (!(shop.prods.includes(pName))) {
             await qbDB.collection("shops").updateOne({ shopName }, { $push: { prods: pName } })
             if (!product) {
-                const nProduct = { name: pName, category, desc, image: "...", price, qty };
+                const nProduct = { name: pName, category, desc, image: imageUrl, price, qty };
                 await qbDB.collection('products').insertOne(nProduct);
                 // const Nqty = product.qty + qty;
                 // await qbDB.collection('products').update({ name: pName }, { $set: { qty: Nqty } })
@@ -100,10 +102,12 @@ export const createProductController = async (req, res) => {
 
 export const updateProductController = async (req, res) => {
     const shopName = req.params.shopName;
-    const { pName, category, desc, price, qty, prevName } = req.body;
+    const { pName, category, imageUrl, desc, price, qty, prevName } = req.body;
 
     if (!pName) {
         return res.send({ message: "Product Name is Required" });
+    } if (!imageUrl) {
+        return res.send({ message: "Image URL is Required" });
     } if (!category) {
         return res.send({ message: "category is Required" });
     } if (!desc) {
@@ -116,7 +120,7 @@ export const updateProductController = async (req, res) => {
 
     try {
 
-        const nProduct = { name: pName, category, desc, image: "...", price, qty };
+        const nProduct = { name: pName, category, desc, image: imageUrl, price, qty };
         // const product = await qbDB.collection('products').updateOne({ name: pName }, { $set : {} });
         const productUpdate = await qbDB.collection('products').updateOne({ name: pName }, { $set: nProduct }, { upsert: true });
 

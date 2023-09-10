@@ -76,6 +76,7 @@ const Merchant = () => {
     }
     // console.log("sn " + shopName);
     // console.log("orders " + JSON.stringify(sCatList));
+    console.log("c ", JSON.stringify(category));
 
     async function updateStatus(id, status) {
         try {
@@ -147,11 +148,11 @@ const Merchant = () => {
                 <span className="material-symbols-outlined mx-3 fs-2">delete</span>
                 Delete Product
             </p>
-            <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" onClick={(e) => { setSelectedMenuOpt("Add Category"); }}>
+            <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" onClick={(e) => { setSelectedMenuOpt("Add Category"); setCategory({}); }}>
                 <span className="material-symbols-outlined mx-3 fs-2">add_notes</span>
                 Add Category
             </p>
-            <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" onClick={(e) => { setSelectedMenuOpt("Delete Category"); }}>
+            <p className="list-group-item m-0 py-3 px-4 border-black user-select-none list-group-item-action fs-4" onClick={(e) => { setSelectedMenuOpt("Delete Category"); setCategory({}); }}>
                 <span className="material-symbols-outlined mx-3 fs-2">delete</span>
                 Delete Category
             </p>
@@ -192,7 +193,7 @@ const Merchant = () => {
                             })}
                         </datalist> */}
                         <Select options={catList} name="prods" className="form-control merchant-sel-inp" onChange={setCategory} placeholder="Select Category" />
-                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => { addCategory() }} >Add</button>
+                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" disabled={category.value ? false : true} type="button" onClick={() => { addCategory() }} >Add</button>
                     </div>
                 </div>}
 
@@ -207,7 +208,7 @@ const Merchant = () => {
                             })}
                         </datalist> */}
                         <Select options={sCatList} name="prods" className="form-control merchant-sel-inp" onChange={setCategory} placeholder="Select Category" />
-                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => { deleteCategory() }}>Delete</button>
+                        <button className="btn btn-outline-secondary h-100 btn-danger text-light" disabled={category.value ? false : true} type="button" onClick={() => { deleteCategory() }}>Delete</button>
                     </div>
                 </div>
             }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import toast, { toastConfig } from 'react-simple-toasts';
 import 'react-simple-toasts/dist/theme/success.css';
+import { useAuth } from '../context/auth';
 
 const Spinner = () => {
 
@@ -9,6 +10,8 @@ const Spinner = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const [auth, setAuth] = useAuth();
 
     toastConfig({
         theme: 'success',
@@ -24,6 +27,12 @@ const Spinner = () => {
             toast('You are not LoggedIn Please LogIn', {
                 position: 'top-center'
             });
+            setAuth({
+                ...auth,
+                user: null,
+                token: ""
+            });
+            localStorage.removeItem("auth");
             navigate("/login", {
                 state: currURL
             });

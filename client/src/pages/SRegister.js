@@ -10,7 +10,8 @@ const SRegister = () => {
 
     const [shopName, setShopName] = useState("");
     const [shopDesc, setShopDesc] = useState("");
-    const [shopImg, setShopImg] = useState("shop image");
+    // const [shopImg, setShopImg] = useState("shop image");
+    const [imageUrl, setImageUrl] = useState("");
     const [area, setArea] = useState("Nanakwada");
     const [pincode, setPincode] = useState("");
     const [ownerName, setOwnerName] = useState("");
@@ -34,7 +35,7 @@ const SRegister = () => {
             const response = await axios.post("http://localhost:5050/auth/s-register", {
                 shopName,
                 shopDesc,
-                shopImg,
+                imageUrl,
                 area,
                 pincode,
                 ownerName,
@@ -81,7 +82,7 @@ const SRegister = () => {
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="shopImage">Shop image</label>
-                <input type="file" className="form-control bg-body-secondary" id="shopImg"></input>
+                <input type="url" className="form-control bg-body-secondary" id="shopImg" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required></input>
             </div>
             <div className="mb-3">
                 <label htmlFor="area" className="form-label">Select Shop Area</label>

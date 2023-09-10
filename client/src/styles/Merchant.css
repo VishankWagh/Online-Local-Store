@@ -6,7 +6,7 @@
 }
 
 .merchant button {
-    background-color: #0a5616;
+    background-color: #0a5616 !important;
     border-color: #0a5616;
 }
 

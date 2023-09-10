@@ -59,12 +59,12 @@
     flex-basis: 70%;
     letter-spacing: 0.1px;
     font-size: 1.3rem;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 1.8rem;
 }
 
 .o-head span {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .o-value {

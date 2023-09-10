@@ -72,14 +72,14 @@ export const cregisterController = async (req, res) => {
 
         //token
 
-        // const token = JWT.sign({
-        //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        //     role: "Customer"
-        // }, process.env.JWT_SECRET);
-
         const token = JWT.sign({
-            role: 'Customer'
-        }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            role: "Customer"
+        }, process.env.JWT_SECRET);
+
+        // const token = JWT.sign({
+        //     role: 'Customer'
+        // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
         res.status(200).send({
             success: true,
@@ -105,7 +105,7 @@ export const cregisterController = async (req, res) => {
 //shop register controller
 export const sregisterController = async (req, res) => {
     try {
-        const { shopName, shopDesc, shopImg, area, pincode, ownerName, email, uname, password } = req.body;
+        const { shopName, shopDesc, imageUrl, area, pincode, ownerName, email, uname, password } = req.body;
         const Npincode = parseInt(pincode);
 
         const existingShop = await qbDB.collection("shops").findOne({ shopName: shopName });
@@ -125,18 +125,18 @@ export const sregisterController = async (req, res) => {
         await qbDB.collection("shops").updateOne({ name: "shopId" }, { $inc: { currId: 1 } })
         const shopId = await qbDB.collection("shops").findOne({ name: "shopId" });
         const currId = shopId.currId;
-        await qbDB.collection("shops").insertOne({ id: currId, shopName, desc: shopDesc, shopImg, area, pincode: Npincode, ownerName, email, uname, password: hashedPassword, categories: [], prods: [] });
+        await qbDB.collection("shops").insertOne({ id: currId, shopName, desc: shopDesc, shopImg: imageUrl, area, pincode: Npincode, ownerName, email, uname, password: hashedPassword, categories: [], prods: [] });
 
         //token
 
-        // const token = JWT.sign({
-        //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        //     role: "Merchant"
-        // }, process.env.JWT_SECRET);
-
         const token = JWT.sign({
-            role: 'Merchant'
-        }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            role: "Merchant"
+        }, process.env.JWT_SECRET);
+
+        // const token = JWT.sign({
+        //     role: 'Merchant'
+        // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
         res.status(200).send({
             success: true,
@@ -199,14 +199,14 @@ export const dregisterController = async (req, res) => {
 
         //token
 
-        // const token = JWT.sign({
-        //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        //     role: "DeliveryPerson"
-        // }, process.env.JWT_SECRET);
-
         const token = JWT.sign({
-            role: 'DeliveryPerson'
-        }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            role: "DeliveryPerson"
+        }, process.env.JWT_SECRET);
+
+        // const token = JWT.sign({
+        //     role: 'DeliveryPerson'
+        // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
         res.status(200).send({
             success: true,
@@ -249,7 +249,7 @@ export const loginController = async (req, res) => {
             if (!customer) {
                 return res.status(200).send({
                     success: false,
-                    message: "Customer is does not Exist Please Register"
+                    message: "Customer does not Exist Please Register"
                 })
             }
             // console.log("customer.password " + JSON.stringify(customer.password));
@@ -266,14 +266,14 @@ export const loginController = async (req, res) => {
 
             //token
 
-            // const token = JWT.sign({
-            //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            //     role: "Customer"
-            // }, process.env.JWT_SECRET);
-
             const token = JWT.sign({
-                role: 'Customer'
-            }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                role: "Customer"
+            }, process.env.JWT_SECRET);
+
+            // const token = JWT.sign({
+            //     role: 'Customer'
+            // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
             res.status(200).send({
                 success: true,
@@ -307,14 +307,14 @@ export const loginController = async (req, res) => {
 
             //token
 
-            // const token = JWT.sign({
-            //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            //     role: "Merchant"
-            // }, process.env.JWT_SECRET);
-
             const token = JWT.sign({
-                role: 'Merchant'
-            }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                role: "Merchant"
+            }, process.env.JWT_SECRET);
+
+            // const token = JWT.sign({
+            //     role: 'Merchant'
+            // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
             res.status(200).send({
                 success: true,
@@ -350,14 +350,14 @@ export const loginController = async (req, res) => {
 
             //token
 
-            // const token = JWT.sign({
-            //     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            //     role: "DeliveryPerson"
-            // }, process.env.JWT_SECRET);
-
             const token = JWT.sign({
-                role: 'DeliveryPerson'
-            }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                role: "DeliveryPerson"
+            }, process.env.JWT_SECRET);
+
+            // const token = JWT.sign({
+            //     role: 'DeliveryPerson'
+            // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
             res.status(200).send({
                 success: true,
@@ -399,14 +399,14 @@ export const forgotPasswordController = async (req, res) => {
 
     //token
 
-    // const token = JWT.sign({
-    //     exp: Math.floor(Date.now() / 1000) + (30 * 30),
-    //     uname: user.uname
-    // }, process.env.JWT_SECRET);
-
     const token = JWT.sign({
+        exp: Math.floor(Date.now() / 1000) + (30 * 30),
         uname: user.uname
-    }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
+    }, process.env.JWT_SECRET);
+
+    // const token = JWT.sign({
+    //     uname: user.uname
+    // }, process.env.JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) });
 
     const resetPasswordUrl = `http://localhost:5050/auth/resetpassword/${token}`;
 
@@ -433,4 +433,19 @@ export const forgotPasswordController = async (req, res) => {
         })
     }
 
+}
+
+
+export const getHashPasswordController = async (req, res) => {
+
+    const password = req.params.password;
+
+    let hashedPassword;
+    await bcrypt.hash(password, 10).then(function (hash) {
+        hashedPassword = hash;
+    });
+
+    res.status(200).send({
+        hashedPassword
+    });
 }

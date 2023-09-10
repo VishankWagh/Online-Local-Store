@@ -6,6 +6,7 @@ const UpdateProduct = (props) => {
 
     const [searched, setSearched] = useState(false);
     const [pName, setPName] = useState({});
+    const [imageUrl, setImageUrl] = useState("");
     const [prevName, setPrevName] = useState({});
     const [category, setCategory] = useState("");
     const [desc, setDesc] = useState("");
@@ -30,7 +31,7 @@ const UpdateProduct = (props) => {
         getprodlist();
     }, []);
 
-    console.log("prls " + JSON.stringify(prodList));
+    // console.log("prls " + JSON.stringify(prodList), pName);
 
     const handleSelect = async () => {
         const resp = await axios.get(`http://localhost:5050/products/singleproduct/${pName.value}`);
@@ -56,6 +57,7 @@ const UpdateProduct = (props) => {
         // console.log("prev ", prevName);
         const response = await axios.post(`http://localhost:5050/products/updateproduct/${props.shopName}`, {
             pName,
+            imageUrl,
             category,
             desc,
             price,
@@ -91,7 +93,7 @@ const UpdateProduct = (props) => {
                         })}
                     </datalist> */}
                     <Select options={prodList} name="prods" className="form-control merchant-sel-inp" onChange={setPName} placeholder="Select Product Name" />
-                    <button className="btn btn-outline-secondary h-100 btn-danger text-light" type="button" onClick={() => handleSelect()}>Select</button>
+                    <button className="btn btn-outline-secondary h-100 btn-danger text-light" disabled={pName.value ? false : true} type="button" onClick={() => handleSelect()}>Select</button>
                 </div>
             </div>
 
@@ -104,7 +106,7 @@ const UpdateProduct = (props) => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="pimg">Product image</label>
-                    <input type="file" className="form-control bg-body-secondary" id="pimg"></input>
+                    <input type="url" className="form-control bg-body-secondary" id="pimg" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="desc" className="form-label">description</label>

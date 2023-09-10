@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const Order = (props) => {
 
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState(props.status);
 
     useEffect(() => {
 
@@ -77,8 +77,8 @@ const Order = (props) => {
                     </select>
                     <button className="btn btn-primary d-inline mx-4 rounded-0 w-25" onClick={() => {
                         if (props.updateStatus) {
-                            const status = document.getElementById("status").value;
-                            console.log(status);
+                            // const Nstatus = document.getElementById("status").value;
+                            // console.log("nstatus ", Nstatus);
                             props.updateStatus(props.id, status);
                         }
                     }}>Update</button>

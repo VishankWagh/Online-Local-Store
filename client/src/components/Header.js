@@ -102,7 +102,7 @@ const Header = () => {
                             </Link>
                         </li>
                         <li className="nav-item me-4 fs-5">
-                            <Link to={'/customer/profile'}>
+                            <Link to={`/${auth.user.role}/profile`}>
                                 <span className="nav-link user-profile">
                                     <div className="user-logo text-uppercase">
                                         {auth.user.uname.slice(0, 1)}

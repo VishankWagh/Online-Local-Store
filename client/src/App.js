@@ -49,11 +49,13 @@ function App() {
             <Route path='/resetpassword' element={<ResetPassword />} />
             <Route path='/' element={<Home />} />
             {/* <Route path='/Merchant' element={<Merchant />} /> */}
-            <Route path='/merchant' element={<PrivateRoute role="merchant" />} >
+            <Route path='/merchant/' element={<PrivateRoute role="merchant" />} >
               <Route path='' element={<Merchant />} />
+              <Route path='Profile' element={<Profile />} />
             </Route>
-            <Route path='/deliveryperson' element={<PrivateRoute role="dperson" />} >
+            <Route path='/deliveryperson/' element={<PrivateRoute role="dperson" />} >
               <Route path='' element={<DelPerson />} />
+              <Route path='Profile' element={<Profile />} />
             </Route>
             {/* <Route path='deliveryperson' element={<DelPerson />} /> */}
             <Route path='/about' element={<About />} />

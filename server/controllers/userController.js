@@ -2,8 +2,22 @@ import qbDB from "../config/db.js";
 
 export const getProfileController = async (req, res) => {
     try {
-        const { uname } = req.params;
-        const user = await qbDB.collection("customer").findOne({ uname });
+        const { uname, role } = req.params;
+        let coll = "";
+        switch (role) {
+            case "Customer":
+                coll = "customer";
+                break;
+            case "Merchant":
+                coll = "shops";
+                break;
+            case "DeliveryPerson":
+                coll = "deliveryperson";
+                break;
+            default:
+                break;
+        }
+        const user = await qbDB.collection(coll).findOne({ uname });
         console.log("un " + uname);
         delete user._id;
         delete user.password;

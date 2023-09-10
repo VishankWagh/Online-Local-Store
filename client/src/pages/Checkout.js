@@ -54,6 +54,12 @@ function Checkout() {
 
         let address = document.getElementById('addr').value;
 
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear();
+        let date = (dd > 9 ? dd : `0${dd}`) + '-' + (mm > 9 ? mm : `0${mm}`) + '-' + yyyy;
+
         const response = await axios.post("http://localhost:5050/orders/placeorder", {
             uname: "vis",
             address,
@@ -61,7 +67,8 @@ function Checkout() {
             plcordcrt: checkoutCart,
             shopName,
             subtotal: subTotal,
-            delchrg: delCharge
+            delchrg: delCharge,
+            date
         });
         console.log("res " + JSON.stringify(response.data.message));
         if (response.data.success) {
@@ -84,6 +91,17 @@ function Checkout() {
     }
     // console.log("chc " + JSON.stringify(checkoutCart));
 
+    const imgUrls = [
+        "https://img.freepik.com/free-photo/minimal-living-room-interior-design-with-leaf-shadow-wall_53876-129802.jpg?w=1060&t=st=1693848674~exp=1693849274~hmac=2389949896c2f9e9d6ab223e4801bba38f9b9c7339412f7ae3cd6db94cf421c1",
+        "https://img.freepik.com/free-psd/table-with-tablecloth-dishware-chairs_176382-803.jpg?w=740&t=st=1693848802~exp=1693849402~hmac=970ae2a692dc64ea5341cff73119be25bdb2ba043b416b36c2f529211d535c87",
+        "https://img.freepik.com/free-photo/modern-small-chair-with-blue-cushion-it-room_181624-44108.jpg?w=1060&t=st=1693848907~exp=1693849507~hmac=b3f4ed0c1c8d5c3202bfde8209d8365387fc743ab0e0cfae58a53ee6f26fbf8f",
+        "https://img.freepik.com/free-psd/interior-room-with-shelves-decoration_176382-526.jpg?w=900&t=st=1693848966~exp=1693849566~hmac=98bec9e0c2eda050154aa1ee2609085c569fbc8dfc16b3d37450c44a6ae37bad",
+        "https://img.freepik.com/free-photo/background-pillow-contemporary-elegance-furniture_1203-4867.jpg?w=1060&t=st=1693849031~exp=1693849631~hmac=8e5e31ead6bdc6f7ab2c10bcb3fab72578d1fff21d874d2c0e0c6e692293ac9c",
+        "https://img.freepik.com/free-photo/front-view-photo-frames-as-interior-decor_23-2149390850.jpg?w=1060&t=st=1693849160~exp=1693849760~hmac=f96510ada6ec09ce005d4911bfad15edab56bc13c8e5940716a6bcd0e9b3aa62",
+        "https://img.freepik.com/free-photo/top-view-religious-textile_23-2148630006.jpg?w=1060&t=st=1693849209~exp=1693849809~hmac=7ff0e6da52acb50e0635ed5e089b573bc30ece22a495e498dc8abcaf9d33143a",
+        "https://img.freepik.com/free-photo/person-holding-cactus-plant-inside-light-bulb-white-desk-against-wooden-wall_23-2148053521.jpg?w=1060&t=st=1693849258~exp=1693849858~hmac=3c3a32dad08a0d27a8029baeedfc6e9cacf2d53d3be4f1bc16ecd3bae394de87"
+    ]
+
     return (
         <>
             <div className="checkout">
@@ -96,7 +114,7 @@ function Checkout() {
                                     <h4 className="chkt-heading">Shipping Details</h4>
                                     <div className="col-12">
                                         <label htmlFor="addr" className="form-label">Address</label><br />
-                                        <textarea name="addr" placeholder="Enter your Address" id="addr" cols="70" rows="3" required></textarea>
+                                        <textarea name="addr" placeholder="Enter your Address" id="addr" cols="70" rows="2" required></textarea>
                                     </div>
                                     <div className="col-12">
                                         <p><b>Shipping Method:</b> Cash On Delivery (COD)</p>
@@ -130,12 +148,12 @@ function Checkout() {
                                 <div className="crt-sum">
                                     <h4 className="chkt-heading"><span className="ch-shpnm">{shopName}</span> - Cart Summary</h4>
                                     <div className="chitms">
-                                        {checkoutCart ? checkoutCart.map((cartItem) => {
+                                        {checkoutCart ? checkoutCart.map((cartItem, ind) => {
                                             return (
                                                 <div className="card chkt-itm" style={{ maxWidth: "540px" }}>
                                                     <div className="row g-0">
                                                         <div className="col-md-4 chimg">
-                                                            <img src="https://img.freepik.com/free-photo/man-wearing-hoodie-with-hoodie-it_188544-40017.jpg" className="img-fluid rounded-start" alt="..." />
+                                                            <img src={cartItem.image || imgUrls[ind]} className="img-fluid rounded-start" alt="..." />
                                                         </div>
                                                         <div className="col-md-8 chdet">
                                                             <div className="card-body">

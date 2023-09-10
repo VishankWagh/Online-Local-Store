@@ -3,7 +3,7 @@ import { UpdateUserController, getNameController, getProfileController } from '.
 
 const router = express.Router();
 
-router.get('/getprofile/:uname', getProfileController);
+router.get('/getprofile/:role/:uname', getProfileController);
 router.post('/updateuser/:uname', UpdateUserController);
 router.get("/getname/:uname", getNameController);
 

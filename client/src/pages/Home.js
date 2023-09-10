@@ -37,6 +37,7 @@ function Home() {
         const response = await axios.get(`http://localhost:5050/shops/shoplistbypincode/396001/${page}`);
         // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
         const shopLs = await response.data.shopList;
+        console.log("shln " + shopLs.length);
         setLoadMore(shopLs.length < 4 ? false : true);
         const catgs = await response.data.categories;
         console.log(JSON.stringify(catgs));
@@ -80,6 +81,7 @@ function Home() {
         // // console.log("shplstu " + JSON.stringify(shopList));
         if (name === "") {
             // console.log("nn");
+            setLoadMore(shopList.length < 4 ? false : true);
             setNShopList(shopList)
             if (srch === "area") {
                 setFilter(p => { return { ...p, area: name } })
@@ -135,6 +137,7 @@ function Home() {
                 });
             }
             // console.log("nshp " + JSON.stringify(nshp));
+            setLoadMore(nshp.length < 4 ? false : true);
             setNShopList(nshp);
         }
         else if (srch === "category") {
@@ -150,6 +153,7 @@ function Home() {
                 });
             }
             // console.log("nshpc " + JSON.stringify(nshp));
+            setLoadMore(nshp.length < 4 ? false : true);
             setNShopList(nshp);
         }
     }
@@ -261,6 +265,8 @@ function Home() {
                     </div>
                     <h3 className="title" >Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
+                        {/* {console.log("nsh " + JSON.stringify(nshopList))} */}
+                        {/* {console.log("nsh " + nshopList.length)} */}
                         {nshopList.length <= 0 && <div className="altr-txt">No Shop in selected preferences</div>}
                         {nshopList.map((shop, index) => {
                             return (
@@ -290,6 +296,7 @@ function Home() {
                         })} */}
                     </div>
                     {/* No Shop in selected preferences */}
+                    {console.log("nsl " + nshopList.length)}
                     {(loadMore && nshopList.length > 0) && <button type="button" onClick={loadMoreShop} className="btn load-more">Load More &darr;</button>}
                 </div>
             </div>

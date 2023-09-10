@@ -73,7 +73,8 @@ export const placeOrderController = async (req, res) => {
             deliveryCharge: req.body.delchrg,
             paymentMode: req.body.pymm,
             shopName: req.body.shopName,
-            status: "pending"
+            status: "pending",
+            date: req.body.date
         });
 
         res.status(200).send({

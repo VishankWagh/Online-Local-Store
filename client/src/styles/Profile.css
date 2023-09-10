@@ -53,6 +53,7 @@
     width: 15rem;
     border-radius: 50%;
     border: 10px solid #0a5616;
+    object-fit: cover;
 }
 
 .pf-name {
@@ -168,7 +169,7 @@
 .cross {
     cursor: pointer;
     position: absolute;
-    background-color: red;
+    background-color: #0a5616;
     border: 1px solid black;
     color: #fff;
     top: 5%;

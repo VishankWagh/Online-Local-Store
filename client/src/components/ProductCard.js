@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 
 function ProductCard({ prod, removeDesc, addToCart, imgUrl, sname }) {
-    const { name, desc, price, qty, reviews } = prod;
+    const { name, desc, price, qty, reviews, image } = prod;
 
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ function ProductCard({ prod, removeDesc, addToCart, imgUrl, sname }) {
     return (
         <>
             <div className="card col-3 mx-2">
-                <img src={imgUrl || "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-math-90946.jpg&fm=jpg"} height="187px" className="card-img-top" alt="..." />
+                <img src={image || imgUrl} height="187px" className="card-img-top" alt="..." />
                 <div className="card-body">
                     <h5 className="card-title">
                         {/* <span className="prd-nm">{name.slice(0, 18)}<br />{name.slice(18, name.length)}</span> */}
@@ -54,7 +54,8 @@ function ProductCard({ prod, removeDesc, addToCart, imgUrl, sname }) {
                         let citm = {
                             "prodName": name,
                             "qty": 1,
-                            "price": price
+                            "price": price,
+                            image
                         }
                         addToCart(sname, citm);
                     }}>Add To Cart</a>

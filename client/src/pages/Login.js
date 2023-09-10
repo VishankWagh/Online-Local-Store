@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../styles/Login.css'
@@ -17,6 +17,10 @@ function Login() {
     const location = useLocation();
 
     const [auth, setAuth] = useAuth();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
     function reg_redirect() {
         // navigate("/customer-register")
@@ -96,7 +100,7 @@ function Login() {
                         <p className="fg-pswd" ><span className="">Forgot Password ?</span></p>
                     </div>
                     <button type="submit" className="mb-3 btn btn-primary" >LOGIN</button>
-                    <p className="text-center" >Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary text-decoration-underline">Register</span></p>
+                    <p className="text-center" >Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary btn reg-btn">Register</span></p>
                 </form>
             </div>
         </>

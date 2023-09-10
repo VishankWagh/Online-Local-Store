@@ -21,6 +21,7 @@ export const shoplistByPincodeController = async (req, res) => {
     let shopList = await qbDB.collection("shops").find({ pincode: pincd }).skip(page * perPage).limit(perPage).toArray();
     let categories = await qbDB.collection("category").find().toArray();
     // let shopList = await qbDB.collection("category").find().toArray();
+    console.log("cc " + JSON.stringify(categories));
     res.send({ shopList, categories }).status(200);
 };
 

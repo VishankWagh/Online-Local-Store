@@ -218,7 +218,7 @@ function Shop() {
             <div className="shop">
 
                 {shop_Cart && <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />}
-                <div className="shop-img" style={{ backgroundImage: `url("${shopImgArr[sind]}")` }}>
+                <div className="shop-img" style={{ backgroundImage: `url("${shop.shopImg || shopImgArr[sind]}")` }}>
                     {/* <img src={car} alt="" /> */}
                     <div className="shop-head">
                         <div className="shop-name"><h2>{shop.shopName}</h2></div>

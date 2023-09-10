@@ -43,3 +43,9 @@
 .fg-pswd>span:hover {
     color: black;
 }
+
+.reg-btn {
+    color: black !important;
+    background-color: rgb(212, 255, 212);
+    padding: 1px 5px;
+}

@@ -295,7 +295,7 @@ function Product() {
                 <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
                 <div className="row prod-row">
                     <div className="prod-img col-6">
-                        <img src={imgurl || "https://images.bestofbharat.com/2022/08/il_1500xN.3074781435_qutg.jpg"} alt="" />
+                        <img src={product.image || imgurl} alt="" />
                     </div>
                     <div className="col-6 prod-details">
                         <div className="prod-name">
@@ -348,16 +348,16 @@ function Product() {
                                         </span> Give Review</h4>
                                         <div className="rvw-inp">
                                             <label htmlFor="rvw-head">Heading: </label>
-                                            <input type="text" name="rvw-head" id="rvw-head" placeholder="Enter 1-3 word for heading" />
+                                            <input type="text" name="rvw-head" id="rvw-head" placeholder="Enter 1-3 word for heading" required />
                                         </div>
                                         <div className="rvw-inp">
                                             <label htmlFor="rvw-desc">Review: </label>
-                                            <textarea name="rvw-desc" id="rvw-desc" cols="10" rows="1" placeholder="Describe review"></textarea>
+                                            <textarea name="rvw-desc" id="rvw-desc" cols="10" rows="1" placeholder="Describe review" required></textarea>
                                             {/* <input type="text" name="rvw-desc" id="rvw-desc" placeholder="Describe review" /> */}
                                         </div>
                                         <div className="rvw-inp">
                                             <label htmlFor="rating">Ratings: </label>
-                                            <input type="text" name="rating" id="rating" placeholder="Star ratings" />
+                                            <input type="text" name="rating" id="rating" placeholder="Star ratings" required />
                                         </div>
                                         <p className="light-text">Enter number from 1-5 for star ratings</p>
                                         <input type="submit" value="Submit" className="sub-rvw-btn" />

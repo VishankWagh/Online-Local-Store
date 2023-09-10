@@ -41,3 +41,10 @@
     font-size: 17px;
     font-weight: 500;
 }
+
+.ord-hist-date {
+    float: right;
+    font-weight: 600;
+    font-size: 13px;
+    color: #9b9b9b;
+}

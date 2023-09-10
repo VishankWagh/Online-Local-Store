@@ -28,6 +28,7 @@ function OrderHist() {
         // setPlcordTxt("PLACE ORDER");
     }
     let ordNo = 0;
+    let ordHistNo = 0;
 
     return (
         <>
@@ -40,18 +41,13 @@ function OrderHist() {
                             ordNo += 1;
                             return (
                                 <div className="card mb-3 col-6" id="ord">
-                                    <div className="card-header">Order {ordNo} - <b>{ordr.shopName}</b></div>
+                                    <div className="card-header">Order {ordNo} - <b>{ordr.shopName}</b><span className="ord-hist-date">Placed At : {ordr.date} | Status : {ordr.status}</span></div>
                                     <div className="card-body">
                                         <table className="ord-tbl">
                                             <tr>
                                                 <th>Product Name</th>
                                                 <th>Product Qty</th>
                                                 <th>Product Price</th>
-                                            </tr>
-                                            <tr>
-                                                <td>potato</td>
-                                                <td>3</td>
-                                                <td>&#8377; 30</td>
                                             </tr>
                                             {ordr.products.map((prd) => {
                                                 return (
@@ -85,28 +81,23 @@ function OrderHist() {
                         })}
                     </div>
                 </div>
-                {ordNo = 0 && ""}
+                {/* {ordNo = 0} */}
                 <div id="deldord">
                     <h2 className="mt-5 mb-3">Order History</h2>
                     <div id="ord-lst" className="row">
                         {orderList?.length <= 0 && <div className="altr-txt">No Orders in History</div>}
 
                         {orderList?.map((ord) => {
-                            ordNo += 1;
+                            ordHistNo += 1;
                             return (
                                 <div className="card mb-3 col-6" id="ord">
-                                    <div className="card-header">Order {ordNo} - <b>{ord.shopName}</b></div>
+                                    <div className="card-header">Order {ordHistNo} - <b>{ord.shopName}</b><span className="ord-hist-date">Placed At : {ord.date} | Status : {ord.status}</span></div>
                                     <div className="card-body pb-4">
                                         <table className="ord-tbl">
                                             <tr>
                                                 <th>Product Name</th>
                                                 <th>Product Qty</th>
                                                 <th>Product Price</th>
-                                            </tr>
-                                            <tr>
-                                                <td>potato</td>
-                                                <td>3</td>
-                                                <td>&#8377; 30</td>
                                             </tr>
                                             {ord.products.map((prd) => {
                                                 return (

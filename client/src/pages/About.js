@@ -35,7 +35,7 @@ function About() {
                 <div className="container">
 
                     <h3 className="text-center team-head">Meet Our Team</h3>
-                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div className="row d-flex align-center justify-content-evenly row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div className="col">
                             <div className="card shadow-sm">
                                 <img className="bd-placeholder-img dev-img card-img-top" src={tmv} />
@@ -49,7 +49,7 @@ function About() {
                                     <div className="d-flex justify-content-between align-items-center">
                                         <div className="btn-group">
                                             <button type="button" className="soc-link btn btn-sm btn-outline-secondary"><i class="bi bi-linkedin"></i> Linked-In</button>
-                                            <button type="button" className="soc-link btn btn-sm btn-outline-secondary">abc@123.com</button>
+                                            <button type="button" className="soc-link btn btn-sm btn-outline-secondary">vishankswagh@gmail.com</button>
                                         </div>
                                         {/* <small className="text-body-secondary">9 mins</small> */}
                                     </div>
@@ -69,14 +69,14 @@ function About() {
                                     <div className="d-flex justify-content-between align-items-center">
                                         <div className="btn-group">
                                             <button type="button" className="soc-link btn btn-sm btn-outline-secondary"><i class="bi bi-linkedin"></i> Linked-In</button>
-                                            <button type="button" className="soc-link btn btn-sm btn-outline-secondary">def@456.com</button>
+                                            <button type="button" className="soc-link btn btn-sm btn-outline-secondary">ushankswagh@gmail.com</button>
                                         </div>
                                         {/* <small className="text-body-secondary">9 mins</small> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col">
+                        {/* <div className="col">
                             <div className="card shadow-sm">
                                 <img className="bd-placeholder-img dev-img card-img-top" src={tma} />
                                 <div className="card-body">
@@ -91,11 +91,10 @@ function About() {
                                             <button type="button" className="soc-link btn btn-sm btn-outline-secondary"><i class="bi bi-linkedin"></i> Linked-In</button>
                                             <button type="button" className="soc-link btn btn-sm btn-outline-secondary">ghi@789.com</button>
                                         </div>
-                                        {/* <small className="text-body-secondary">9 mins</small> */}
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

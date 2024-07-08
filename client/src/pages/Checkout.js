@@ -1,6 +1,7 @@
 import "../styles/Checkout.css"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from "../context/auth";
 
 function Checkout() {
 
@@ -12,6 +13,7 @@ function Checkout() {
     const [orderCanceled, setOrderCanceled] = useState(false);
     const [ordId, setOrdId] = useState(null);
     const [sind, setSind] = useState();
+    const [auth, setAuth] = useAuth();
 
     useEffect(() => {
         function getChkCart() {
@@ -61,7 +63,7 @@ function Checkout() {
         let date = (dd > 9 ? dd : `0${dd}`) + '-' + (mm > 9 ? mm : `0${mm}`) + '-' + yyyy;
 
         const response = await axios.post("http://localhost:5050/orders/placeorder", {
-            uname: "vis",
+            uname: auth.user.uname,
             address,
             pymm: "COD",
             plcordcrt: checkoutCart,

@@ -69,9 +69,14 @@ const DRegister = () => {
             <div className="mb-3">
                 <label htmlFor="shopName" className="form-label">Select Shop</label>
                 <select className="form-select w-25 mb-3" name="shopName" value={shopName} onChange={(e) => { setShopName(e.target.value) }}>
-                    <option value="Home-Harmony">Home-Harmony</option>
                     <option value="Variety">Variety</option>
                     <option value="Jay-Ambe">Jay-Ambe</option>
+                    <option value="Home-Harmony">Home-Harmony</option>
+                    <option value="Apna-Sweets">Apna-Sweets</option>
+                    <option value="Saree-Emporium">Saree-Emporium</option>
+                    <option value="Cafe-Coffee-Day">Cafe-Coffee-Day</option>
+                    <option value="Kala-BookStore">Kala-BookStore</option>
+
                 </select>
             </div>
             <div className="mb-3">

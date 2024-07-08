@@ -13,7 +13,7 @@ router.post("/placeorder", placeOrderController);
 
 router.get("/cancelorder/:oid", cancelOrderController);
 
-router.get("/getordersbyname/:name", getOrdersByNameController);
+router.get("/getordersbyname/:uname", getOrdersByNameController);
 
 // get delivered orders count
 router.get("/deliveredorderscount/:shopName", getDeliveredOrdersController);

@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import "../styles/OrderHist.css";
 import axios from "axios";
+import { useAuth } from "../context/auth";
 
 function OrderHist() {
 
     const [pendOrderList, setPendOrderList] = useState();
     const [orderList, setOrderList] = useState();
 
+    const [auth, setAuth] = useAuth();
+
     useEffect(() => {
         async function fetchOrders() {
-            const response = await axios.get(`http://localhost:5050/orders/getordersbyname/${"Vishank Wagh"}`)
+            // const nameRes = await axios.get(`http://localhost:5050/user/getname/${auth.user.uname}`);
+            const response = await axios.get(`http://localhost:5050/orders/getordersbyname/${auth.user.uname}`);
             const pendord = response.data.orderList.filter((ord) => ord.status === "pending");
             const ord = response.data.orderList.filter((ord) => ord.status !== "pending");
             setPendOrderList(pendord);

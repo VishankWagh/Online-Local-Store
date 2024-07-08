@@ -59,8 +59,8 @@ export const UpdateUserController = async (req, res) => {
 export const getNameController = async (req, res) => {
     try {
         const { uname } = req.params;
+        console.log("un", uname);
         const { name } = await qbDB.collection("customer").findOne({ uname });
-
         res.status(200).send({
             name,
             success: true,

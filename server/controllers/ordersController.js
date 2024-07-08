@@ -55,7 +55,7 @@ export const updataStatusController = async (req, res) => {
 export const placeOrderController = async (req, res) => {
     try {
         console.log("plccntrlr");
-        let uname = req.uname;
+        let uname = req.body.uname;
         let fName = "Vishank";
         let lName = "Wagh";
 
@@ -67,6 +67,7 @@ export const placeOrderController = async (req, res) => {
         await qbDB.collection("orders").insertOne({
             orderId: ordId,
             name: fName + " " + lName,
+            uname,
             address: req.body.address,
             products: req.body.plcordcrt,
             subTotal: req.body.subtotal,
@@ -121,9 +122,9 @@ export const cancelOrderController = async (req, res) => {
 
 export const getOrdersByNameController = async (req, res) => {
     try {
-        const name = req.params.name;
-
-        const orderList = await qbDB.collection("orders").find({ name }).toArray();
+        const uname = req.params.uname;
+        console.log("nm", uname);
+        const orderList = await qbDB.collection("orders").find({ uname }).toArray();
 
         res.status(200).send({
             orderList,

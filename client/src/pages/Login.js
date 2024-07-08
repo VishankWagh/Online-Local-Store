@@ -8,8 +8,8 @@ function Login() {
 
     document.title = "Quik-Buy | Login";
 
-    const [uname, setUname] = useState("");
-    const [password, setPassword] = useState("");
+    const [uname, setUname] = useState("a");
+    const [password, setPassword] = useState("a");
     const [role, setRole] = useState("c");
     const [errMsg, setErrMsg] = useState("");
 
@@ -20,7 +20,25 @@ function Login() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [])
+    }, []);
+
+    function handleLoginDets(userRole) {
+        setRole(userRole);
+        switch (userRole) {
+            case "c":
+                setUname("a")
+                setPassword("a")
+                break;
+            case "s":
+                setUname("emily")
+                setPassword("hh")
+                break;
+            case "d":
+                setUname("dphh")
+                setPassword("dphh")
+                break;
+        }
+    }
 
     function reg_redirect() {
         // navigate("/customer-register")
@@ -82,9 +100,10 @@ function Login() {
                     </h2>
                     <div className="mb-3 text-center text-danger">{errMsg}</div>
                     {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
+                    <p>The Username and Password are already filled. You can directly login.</p>
                     <div className="mb-3">
                         <label htmlFor="user" className="form-label">Select User</label>
-                        <select name="user" className="form-control" id="user" value={role} onChange={e => setRole(e.target.value)} required>
+                        <select name="user" className="form-control" id="user" value={role} onChange={e => handleLoginDets(e.target.value)} required>
                             <option value="c">Customer</option>
                             <option value="s">Shop Keeper</option>
                             <option value="d">Delivery - person</option>

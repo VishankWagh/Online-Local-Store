@@ -229,6 +229,15 @@ export const dregisterController = async (req, res) => {
 }
 
 
+// export const pswd = async (req, res) => {
+//     let hashedPassword;
+//     await bcrypt.hash("hh", 10).then(function (hash) {
+//         hashedPassword = hash;
+//     });
+//     await qbDB.collection("shops").updateOne({ shopName: "Home-Harmony" }, { $set: { password: hashedPassword } });
+// }
+
+
 
 // Login Controller
 

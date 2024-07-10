@@ -12,7 +12,6 @@ function ShopCard({ shopDetails, index }) {
             // "https://img.freepik.com/premium-photo/international-coffee-day-delicious-coffee-beautiful-latte-decoration-business-afternoon-tea-drinks_911849-239358.jpg",
             // "https://img.freepik.com/premium-photo/photo-inside-empty-stationary-shop-photography-ai-generated_925376-7269.jpg?w=1060"
         ]
-    console.log("indsc " + JSON.stringify(index));
     return (
         <>
             <div className="shop-comp mr-1 mb-5 col-3" key={index}>

@@ -27,7 +27,6 @@ function OrderHist() {
     //cancel order
     async function cancelOrder(ordId) {
         const response = await axios.get(`http://localhost:5050/orders/cancelorder/${ordId}`);
-        console.log("cncl " + response.data.message);
         // setOrderCanceled(true);
         // setPlcordTxt("PLACE ORDER");
     }

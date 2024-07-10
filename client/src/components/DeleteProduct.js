@@ -23,13 +23,11 @@ const DeleteProduct = ({ shopName }) => {
                     ...response.data.prods.map(prod => { return { value: prod, label: prod } })
                 ];
                 setProdsList(nProds);
-                console.log("prods " + JSON.stringify(response.data.prods));
             }
         }
         getprodlist();
     }, [])
 
-    console.log("pname " + JSON.stringify(pName), selPName);
 
     const handleSelect = async () => {
         const resp = await axios.get(`http://localhost:5050/products/singleproduct/${selPName.value}`);

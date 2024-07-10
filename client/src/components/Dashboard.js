@@ -18,7 +18,7 @@ const Dashboard = ({ orders, shopName, sCatList }) => {
 
 
     useEffect(() => {
-        console.log("eff");
+        // console.log("eff");
 
         const getData = async () => {
 
@@ -48,7 +48,7 @@ const Dashboard = ({ orders, shopName, sCatList }) => {
         getData();
     }, [shopName]);
 
-    console.log("p", products, prodLst);
+    // console.log("p", products, prodLst);
 
     return (<>
         <div className="menuOpt" >

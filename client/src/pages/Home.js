@@ -25,9 +25,7 @@ function Home() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        console.log("usr " + JSON.stringify(auth.user));
         auth.user && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
-        // console.log("use ");
         fetchShopList(page);
         // return;
     }, [auth]);
@@ -37,10 +35,8 @@ function Home() {
         const response = await axios.get(`http://localhost:5050/shops/shoplistbypincode/396001/${page}`);
         // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
         const shopLs = await response.data.shopList;
-        console.log("shln " + shopLs.length);
         setLoadMore(shopLs.length < 4 ? false : true);
         const catgs = await response.data.categories;
-        console.log(JSON.stringify(catgs));
         setShopList([...shopList, ...shopLs]);
         setNShopList([...nshopList, ...shopLs]);
         setCategories([...categories, ...catgs]);
@@ -68,7 +64,6 @@ function Home() {
         { value: 'Chandni-Chowk', label: 'Chandni-Chowk' }
     ];
     // https://cloud.mongodb.com/v2/6436e4ddfc447b15f06aeafa#/clusters
-    console.log("ct " + JSON.stringify(categories));
     let category = [
         { value: '', label: 'Select Category', isFixed: true },
         ...categories?.map(cat => { return { value: cat.name, label: cat.name } })
@@ -77,10 +72,7 @@ function Home() {
     function updateSearched(srch, name) {
         // const area = filter.area;
         // const catg = filter.catg;
-        // // console.log("updsrchd " + srch);
-        // // console.log("shplstu " + JSON.stringify(shopList));
         if (name === "") {
-            // console.log("nn");
             setLoadMore(shopList.length < 4 ? false : true);
             setNShopList(shopList)
             if (srch === "area") {
@@ -104,28 +96,21 @@ function Home() {
                 }
             }
 
-            // // console.log("nn");
             // if (area + catg === "") {
-            //     // console.log("b nn");
             //     setNShopList(shopList)
             // }
             // else if (filter.area === "" && filter.catg !== "") {
-            //     // console.log("a nn");
-            //     // console.log("if catg " + filter.catg);
             // setNShopList(shopList.filter((shp) => {
             //     return shp.categories.includes(catg);
             // }))
             // }
             // else if (filter.area !== "" && filter.catg === "") {
-            //     // console.log("c nn");
-            //     // console.log("if area " + filter.area);
             //     setNShopList(shopList.filter((shp) => {
             //         return (shp.area == area);
             //     }))
             // }
         }
         else if (srch === "area") {
-            // console.log("catg " + (filter.catg === ""));
             setFilter(p => { return { ...p, area: name } })
 
             let nshp = shopList.filter((shop) => {
@@ -136,12 +121,10 @@ function Home() {
                     return shp.categories.includes(filter.catg);
                 });
             }
-            // console.log("nshp " + JSON.stringify(nshp));
             setLoadMore(nshp.length < 4 ? false : true);
             setNShopList(nshp);
         }
         else if (srch === "category") {
-            // console.log("area " + filter.area);
             setFilter(p => { return { ...p, catg: name } })
 
             let nshp = shopList.filter((shop) => {
@@ -152,7 +135,6 @@ function Home() {
                     return (shp.area === filter.area);
                 });
             }
-            // console.log("nshpc " + JSON.stringify(nshp));
             setLoadMore(nshp.length < 4 ? false : true);
             setNShopList(nshp);
         }
@@ -265,12 +247,10 @@ function Home() {
                     </div>
                     <h3 className="title" >Find Your Desired Shop...</h3>
                     <div className="shops d-flex container row">
-                        {/* {console.log("nsh " + JSON.stringify(nshopList))} */}
-                        {/* {console.log("nsh " + nshopList.length)} */}
                         {nshopList.length <= 0 && <div className="altr-txt">No Shop in selected preferences</div>}
                         {nshopList.map((shop, index) => {
                             return (
-                                <ShopCard shopDetails={shop} index={index} />
+                                <ShopCard shopDetails={shop} key={index} index={index} />
                             )
                         })}
                         {/* {nshopList.map((shop, index) => {
@@ -296,7 +276,6 @@ function Home() {
                         })} */}
                     </div>
                     {/* No Shop in selected preferences */}
-                    {console.log("nsl " + nshopList.length)}
                     {(loadMore && nshopList.length > 0) && <button type="button" onClick={loadMoreShop} className="btn load-more">Load More &darr;</button>}
                 </div>
             </div>

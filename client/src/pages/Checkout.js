@@ -72,7 +72,6 @@ function Checkout() {
             delchrg: delCharge,
             date
         });
-        console.log("res " + JSON.stringify(response.data.message));
         if (response.data.success) {
             setOrdId(response.data.ordId);
             setPlcordTxt("Order Placed Successfully");
@@ -87,7 +86,6 @@ function Checkout() {
 
     async function cancelOrder() {
         const response = await axios.get(`http://localhost:5050/orders/cancelorder/${ordId}`);
-        console.log("cncl " + response.data.message);
         setOrderCanceled(true);
         setPlcordTxt("PLACE ORDER");
     }

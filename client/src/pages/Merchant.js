@@ -76,7 +76,6 @@ const Merchant = () => {
     }
     // console.log("sn " + shopName);
     // console.log("orders " + JSON.stringify(sCatList));
-    console.log("c ", JSON.stringify(category));
 
     async function updateStatus(id, status) {
         try {
@@ -88,7 +87,6 @@ const Merchant = () => {
             //     url: `http://localhost:5050/orders/setstatus/${id}`,
             //     body: { status }
             // })
-            console.log("update status called " + status);
             const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, {
                 status
             });
@@ -99,7 +97,6 @@ const Merchant = () => {
                 alert("Update Status Unsuccessful !!")
             }
 
-            console.log("update " + JSON.stringify(response.data.message));
         } catch (error) {
             console.log(error);
         }

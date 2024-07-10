@@ -33,8 +33,6 @@ export const updataStatusController = async (req, res) => {
 
         const status = req.body.status;
         const id = parseInt(req.params.id);
-        console.log("status " + req.body.status);
-        console.log("id " + id);
         const updated = await qbDB.collection("orders").updateOne({ orderId: id }, { $set: { status } });
         if (updated) {
             res.status(200).send({
@@ -54,14 +52,12 @@ export const updataStatusController = async (req, res) => {
 // place order
 export const placeOrderController = async (req, res) => {
     try {
-        console.log("plccntrlr");
         let uname = req.body.uname;
         let fName = "Vishank";
         let lName = "Wagh";
 
         let ordDoc = await qbDB.collection("orders").findOne({ name: "orderId" });
         let ordId = +ordDoc.currId + 1;
-        console.log("oid " + JSON.stringify(ordDoc));
         await qbDB.collection("orders").updateOne({ name: "orderId" }, { $set: { currId: ordId } })
 
         await qbDB.collection("orders").insertOne({
@@ -103,7 +99,6 @@ export const cancelOrderController = async (req, res) => {
                 message: "Order cannot be cancelled now"
             })
         }
-        console.log("vs " + ordId);
 
         qbDB.collection("orders").deleteOne({ "orderId": ordId });
 
@@ -123,7 +118,6 @@ export const cancelOrderController = async (req, res) => {
 export const getOrdersByNameController = async (req, res) => {
     try {
         const uname = req.params.uname;
-        console.log("nm", uname);
         const orderList = await qbDB.collection("orders").find({ uname }).toArray();
 
         res.status(200).send({
@@ -162,7 +156,7 @@ export const getDeliveredOrdersController = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("orcon", error, "st")
+        console.log(error)
         res.status(400).send({
             success: false,
             message: "Error in order controller"

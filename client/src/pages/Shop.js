@@ -15,10 +15,10 @@ function Shop() {
     const [productList, setProductList] = useState([]);
     const [nproductList, setNProductList] = useState([]);
     const [shopProds, setShopProds] = useState([]);
-    const [catSelected, setCatSelected] = useState(null);
+    const [setCatSelected] = useState(null);
     const [shop_Cart, setShop_Cart] = useState();
 
-    const [auth, setAuth] = useAuth();
+    const [auth] = useAuth();
 
     // just for loading temporary static images. remove when upload images in db
     const [sind, setSind] = useState();
@@ -26,7 +26,7 @@ function Shop() {
 
     // const [isCartOpen, setIsCartOpen] = useState(false);
 
-    let dummydata = { "_id": { "$oid": "64c2a2742f3006ed8f135171" }, "shopName": "gopal-dairy", "shopImg": "shop image", "area": "azad chowk", "pincode": { "$numberInt": "391760" }, "ownerName": "Raj thakkar", "email": "raj@gmail.com", "uname": "raj", "password": "$2b$fmsodifd10$4VHpjRdS/S3zqi0D6eJ9Du7dpGu88KwlD6vy3ukypORWmMxGbD7Ai", "categories": [], "prods": [], "id": { "$numberInt": "6" } }
+    // let dummydata = { "_id": { "$oid": "64c2a2742f3006ed8f135171" }, "shopName": "gopal-dairy", "shopImg": "shop image", "area": "azad chowk", "pincode": { "$numberInt": "391760" }, "ownerName": "Raj thakkar", "email": "raj@gmail.com", "uname": "raj", "password": "$2b$fmsodifd10$4VHpjRdS/S3zqi0D6eJ9Du7dpGu88KwlD6vy3ukypORWmMxGbD7Ai", "categories": [], "prods": [], "id": { "$numberInt": "6" } }
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -163,7 +163,7 @@ function Shop() {
 
     // inc qty
     function incdecQty(shpind, crtind, inc) {
-        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || shop_Cart[shpind].cartItems[crtind].qty == 0 && inc) {
+        if (shop_Cart[shpind].cartItems[crtind].qty > 0 || shop_Cart[shpind].cartItems[crtind].qty === 0 && inc) {
             let newShopCart = JSON.parse(localStorage.getItem("shopCart"));
             inc ? newShopCart[shpind].cartItems[crtind].qty += 1 : newShopCart[shpind].cartItems[crtind].qty -= 1;
             setShop_Cart(newShopCart);
@@ -248,8 +248,6 @@ function Shop() {
                             if (shop.shopName === "Home-Harmony") {
                                 imgUrls = hmhr;
                             }
-                            {/* imgUrls = shop.shopName == "Jay-Ambe" ? catg == "Traditionals" ? jayambetrad : jayambecasu : null
-                            imgUrls = shop.shopName == "Home-Harmony" ? catg == "Furniture" ? homeharmonyfur : homeharmonydec : null */}
                             return (
                                 <div className="category" key={ind}>
                                     <div className="category" key={ind}>

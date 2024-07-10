@@ -18,7 +18,6 @@ export const getProfileController = async (req, res) => {
                 break;
         }
         const user = await qbDB.collection(coll).findOne({ uname });
-        console.log("un " + uname);
         delete user._id;
         delete user.password;
 
@@ -59,7 +58,6 @@ export const UpdateUserController = async (req, res) => {
 export const getNameController = async (req, res) => {
     try {
         const { uname } = req.params;
-        console.log("un", uname);
         const { name } = await qbDB.collection("customer").findOne({ uname });
         res.status(200).send({
             name,

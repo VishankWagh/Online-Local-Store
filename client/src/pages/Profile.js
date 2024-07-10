@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Profile() {
 
-    const [auth, setAuth] = useAuth();
+    const [auth] = useAuth();
     const [user, setUser] = useState();
     const [dupUser, setDupUser] = useState();
 
@@ -32,10 +32,8 @@ function Profile() {
             }
             return 1;
         })
-        console.log(" upu " + JSON.stringify(updUser));
-        let resp;
         if (Object.keys(updUser).length) {
-            resp = await axios.post("http://localhost:5050/user/updateuser/vis", { updUser, role: auth.user.role });
+            await axios.post("http://localhost:5050/user/updateuser/vis", { updUser, role: auth.user.role });
             // console.log("res " + JSON.stringify(resp));
         }
         document.querySelector(".edt-p-form").style.display = "none";

@@ -21,7 +21,6 @@ const DelPerson = () => {
 
       //disporders
       try {
-        console.log("snp " + response.data.shopName);
         const res = await axios.get(`http://localhost:5050/orders/getorders/${response.data.shopName}`);
         const neworders = res.data.orders;
         // console.log("orders " + JSON.stringify(neworders));
@@ -48,7 +47,6 @@ const DelPerson = () => {
       //     url: `http://localhost:5050/orders/setstatus/${id}`,
       //     body: { status }
       // })
-      console.log("update status called " + status);
       const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, {
         status
       });
@@ -59,7 +57,6 @@ const DelPerson = () => {
         alert("Update Status Unsuccessful !!")
       }
 
-      console.log("update " + JSON.stringify(response.data.message));
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +67,6 @@ const DelPerson = () => {
     <div className="d-person mx-auto w-75">
       <h2 className="mb-5 mx-5 pb-4 ps-5 fw-bold fs-1 border-bottom border-5 merchant-head">{shopName} - Customer Orders</h2>
       {orders.map((order, index) => {
-        console.log(JSON.stringify(order));
         return <Order key={index} ind={index} id={order.orderId} name={order.name} address={order.address} products={order.products} status={order.status} subTotal={order.subTotal} dcharge={order.deliveryCharge} isDperson={true} updateStatus={updateStatus} />
       })}
     </div>

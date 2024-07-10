@@ -21,11 +21,8 @@ function ProductCard({ prod, removeDesc, addToCart, imgUrl, sname }) {
             avg += rv.rating;
             n++;
         })
-        console.log("avg " + avg);
         return avg / n;
     }
-
-    console.log("rmvd " + removeDesc);
 
     return (
         <>

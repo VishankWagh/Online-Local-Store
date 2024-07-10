@@ -288,7 +288,6 @@ function Product() {
 
     }
     const today = new Date();
-    console.log("render");
     return (
         <>
             <div className="product">

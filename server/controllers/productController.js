@@ -4,7 +4,6 @@ export const singleProductController = async (req, res) => {
     const shpName = await req.body.shopName;
     const prodName = await req.params.pname;
     const product = await qbDB.collection('products').findOne({ name: prodName });
-    // console.log("p ", JSON.stringify(product), JSON.stringify(prodName));
     product.reviews?.reverse();
     if (product) {
         return res.status(200).send({ success: true, message: "success", product, shpName });
@@ -16,9 +15,7 @@ export const singleProductController = async (req, res) => {
 
 export const shopProductsController = async (req, res) => {
     const { prodLst } = await req.body;
-    // console.log("prdls " + JSON.stringify(req.body));
     const prodArr = await qbDB.collection('products').find({ name: { $in: prodLst } }).toArray();
-    // console.log("prar " + JSON.stringify(prodArr));
     // res.send(prodArr).status(200);
     res.status(200).send({
         success: true,

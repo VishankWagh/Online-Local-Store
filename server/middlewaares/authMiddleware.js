@@ -136,7 +136,6 @@ export const isDPerson = async (req, res, next) => {
         const role = decode.role;
 
         if (role !== "DeliveryPerson") {
-            console.log("if del" + role + "f");
             return res.status(200).send({
                 success: false,
                 message: "UnAuthorized Access"

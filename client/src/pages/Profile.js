@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Profile() {
 
-    const [auth] = useAuth();
+    const [auth, setAuth] = useAuth();
     const [user, setUser] = useState();
     const [dupUser, setDupUser] = useState();
 

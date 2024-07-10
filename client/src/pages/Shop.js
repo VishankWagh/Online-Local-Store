@@ -15,10 +15,10 @@ function Shop() {
     const [productList, setProductList] = useState([]);
     const [nproductList, setNProductList] = useState([]);
     const [shopProds, setShopProds] = useState([]);
-    const [setCatSelected] = useState(null);
+    const [catSelected, setCatSelected] = useState(null);
     const [shop_Cart, setShop_Cart] = useState();
 
-    const [auth] = useAuth();
+    const [auth, setAuth] = useAuth();
 
     // just for loading temporary static images. remove when upload images in db
     const [sind, setSind] = useState();

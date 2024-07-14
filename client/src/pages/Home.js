@@ -32,8 +32,8 @@ function Home() {
 
     async function fetchShopList(page) {
         // const pincode = 432001;
-        const response = await axios.get(`http://localhost:5050/shops/shoplistbypincode/396001/${page}`);
-        // const response = await axios.get('http://localhost:5050/shops/shoplistbyarea/tithal');
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/shops/shoplistbypincode/396001/${page}`);
+        // const response = await axios.get('${process.env.REACT_APP_SERVER_URL}/shops/shoplistbyarea/tithal');
         const shopLs = await response.data.shopList;
         setLoadMore(shopLs.length < 4 ? false : true);
         const catgs = await response.data.categories;

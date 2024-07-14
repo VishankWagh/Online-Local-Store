@@ -34,7 +34,7 @@ function Shop() {
             const queryParameters = new URLSearchParams(window.location.search)
             const sname = queryParameters.get("sname")
             setSind(queryParameters.get('sind'));
-            const response = await axios.get(`http://localhost:5050/shops/singleshop/${sname}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/shops/singleshop/${sname}`);
             // // console.log(JSON.stringify(response));
             const shp = await response.data;
             setShop(shp);
@@ -44,7 +44,7 @@ function Shop() {
 
             const prodLst = shp.prods;
 
-            const { data } = await axios.post('http://localhost:5050/products/shopproducts', { prodLst });
+            const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/products/shopproducts`, { prodLst });
             setProductList(data?.prodArr);
             setNProductList(data?.prodArr);
 

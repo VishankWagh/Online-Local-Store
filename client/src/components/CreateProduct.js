@@ -16,7 +16,7 @@ const CreateProduct = (props) => {
 
     useEffect(() => {
         // async function getcatlist() {
-        //     const response = await axios.get(`http://localhost:5050/categories/getcategorylist/${shopName}`);
+        //     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/categories/getcategorylist/${shopName}`);
         //     if (response.status === 200) {
         // setCatList(props.catlist);
         //     }
@@ -29,7 +29,7 @@ const CreateProduct = (props) => {
 
 
         try {
-            const response = await axios.post(`http://localhost:5050/products/${shopName}/create`, {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/products/${shopName}/create`, {
                 pName,
                 category: category.value,
                 imageUrl,

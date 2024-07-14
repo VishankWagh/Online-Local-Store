@@ -32,7 +32,7 @@ const SRegister = () => {
             return;
         }
         try {
-            const response = await axios.post("http://localhost:5050/auth/s-register", {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/s-register`, {
                 shopName,
                 shopDesc,
                 imageUrl,

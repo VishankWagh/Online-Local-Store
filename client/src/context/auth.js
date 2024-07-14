@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
                 const parseData = JSON.parse(data);
                 // console.log("auth " + JSON.stringify(data));
 
-                const response = await axios.post("http://localhost:5050/auth/loggedin", { token: parseData.token });
+                const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/loggedin`, { token: parseData.token });
                 // if (response.data) {
                 if (response.data.ok) {
                     setAuth(au => ({

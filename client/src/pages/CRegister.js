@@ -39,7 +39,7 @@ const CRegister = () => {
             return;
         }
         try {
-            const response = await axios.post("http://localhost:5050/auth/c-register", {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/c-register`, {
                 name,
                 email,
                 uname,

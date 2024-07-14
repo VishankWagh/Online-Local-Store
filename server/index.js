@@ -12,7 +12,7 @@ import categoryRoutes from "./routes/categoryRoutes.js"
 import userRoutes from "./routes/userRoute.js"
 // import qbDB from "./config/db.js"
 
-dotenv.config("../.env");
+dotenv.config("./.env");
 
 const app = express();
 app.use(cors());
@@ -40,6 +40,6 @@ app.use("/products", productRoutes);
 app.use("/shops", shopRoutes);
 app.use("/user", userRoutes);
 
-app.listen(5050, () => {
-    console.log(`Server running on Port 5050`);
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server running on Port ${process.env.SERVER_PORT}`);
 })

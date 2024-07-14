@@ -23,14 +23,14 @@ const Dashboard = ({ orders, shopName, sCatList }) => {
         const getData = async () => {
 
             if (shopName) {
-                const res1 = await axios.get(`http://localhost:5050/products/getproductlist/${shopName}`);
-                // const response = await axios.get(`http://localhost:5050/products/getproductlist/${shopName}`);
+                const res1 = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/getproductlist/${shopName}`);
+                // const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/getproductlist/${shopName}`);
                 if (res1.status === 200) {
                     setProdLst(res1.data.prods);
                 } else {
                     alert(res1.data);
                 }
-                const res2 = await axios.post("http://localhost:5050/products/shopproducts", {
+                const res2 = await axios.post(`${process.env.REACT_APP_SERVER_URL}/products/shopproducts`, {
                     prodLst: res1.data.prods
                 });
                 if (res2.data.success) {
@@ -39,7 +39,7 @@ const Dashboard = ({ orders, shopName, sCatList }) => {
                     setProducts(p => [...x]);
                 }
 
-                // const res3 = await axios.get("http://localhost:5050/orders/deliveredorderscount/Kala-BookStore");
+                // const res3 = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/deliveredorderscount/Kala-BookStore`);
                 // if (res3.data.success) {
                 //     setODelivered(res3.data.dOrdersLength);
                 // }

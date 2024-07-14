@@ -62,7 +62,7 @@ function Checkout() {
         let yyyy = today.getFullYear();
         let date = (dd > 9 ? dd : `0${dd}`) + '-' + (mm > 9 ? mm : `0${mm}`) + '-' + yyyy;
 
-        const response = await axios.post("http://localhost:5050/orders/placeorder", {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/placeorder`, {
             uname: auth.user.uname,
             address,
             pymm: "COD",
@@ -85,7 +85,7 @@ function Checkout() {
     }
 
     async function cancelOrder() {
-        const response = await axios.get(`http://localhost:5050/orders/cancelorder/${ordId}`);
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/cancelorder/${ordId}`);
         setOrderCanceled(true);
         setPlcordTxt("PLACE ORDER");
     }

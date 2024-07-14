@@ -14,7 +14,7 @@ function Profile() {
     useEffect(() => {
         window.scrollTo(0, 0);
         async function fetchProfile() {
-            const response = auth.user ? await axios.get(`http://localhost:5050/user/getprofile/${auth.user.role}/${auth.user.uname}`) : null;
+            const response = auth.user ? await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/getprofile/${auth.user.role}/${auth.user.uname}`) : null;
             if (response) {
                 setUser(response.data.user);
                 setDupUser(response.data.user);
@@ -33,7 +33,7 @@ function Profile() {
             return 1;
         })
         if (Object.keys(updUser).length) {
-            await axios.post("http://localhost:5050/user/updateuser/vis", { updUser, role: auth.user.role });
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/updateuser/${auth.user.uname}`, { updUser, role: auth.user.role });
             // console.log("res " + JSON.stringify(resp));
         }
         document.querySelector(".edt-p-form").style.display = "none";
@@ -52,8 +52,8 @@ function Profile() {
                     </div>
                 </div>
                 <div className="prof-2 pf-blk">
+                    <p className='tbl-head'>Profile Details</p>
                     <table class="table">
-                        <h4>Profile Details</h4>
                         <tbody>
                             {/* <tr>
                                 <th>

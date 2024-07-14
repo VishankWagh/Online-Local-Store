@@ -39,7 +39,7 @@ export const getProfileController = async (req, res) => {
 export const UpdateUserController = async (req, res) => {
     try {
         const { uname } = req.params;
-        const updUser = req.body;
+        const { updUser } = req.body;
         await qbDB.collection('customer').updateOne({ uname }, { $set: updUser })
         res.status(200).send({
             success: true,

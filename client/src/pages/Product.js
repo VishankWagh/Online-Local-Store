@@ -27,7 +27,7 @@ function Product() {
             const sname = queryParameters.get("sname");
             setShopName(sname);
 
-            const response = await axios.get(`http://localhost:5050/products/singleproduct/${pname}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/singleproduct/${pname}`);
             // console.log("repn " + JSON.stringify(response));
             setProduct(response.data.product);
             // console.log("shpName " + shopName);
@@ -35,7 +35,7 @@ function Product() {
             // fetch similar products
             const cname = response.data.product.category;
             // console.log("sn cn " + JSON.stringify(response.data), cname);
-            const res = await axios.get(`http://localhost:5050/products/similarproducts/${sname}/${cname}/${pname}`);
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/similarproducts/${sname}/${cname}/${pname}`);
             setSimilarProducts(res.data.prodList);
         }
 
@@ -265,7 +265,7 @@ function Product() {
 
         let date = (dd > 9 ? dd : `0${dd}`) + '-' + (mm > 9 ? mm : `0${mm}`) + '-' + yyyy;
 
-        await axios.get(`http://localhost:5050/user/getname/${uname}`).then(async function ({ data }) {
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/getname/${uname}`).then(async function ({ data }) {
             let review = {
                 uname,
                 name: data.name,
@@ -280,7 +280,7 @@ function Product() {
                 return prdct;
             });
 
-            const rvwRes = await axios.post(`http://localhost:5050/products/addreview/${product.name}`,
+            const rvwRes = await axios.post(`${process.env.REACT_APP_SERVER_URL}/products/addreview/${product.name}`,
                 {
                     review
                 })

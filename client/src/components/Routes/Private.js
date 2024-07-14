@@ -12,19 +12,19 @@ export default function PrivateRoute({ role }) {
         const authCheck = async () => {
             let res;
             if (role === "customer") {
-                res = await axios.get("http://localhost:5050/auth/user-auth/customer", {
+                res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/user-auth/customer`, {
                     headers: {
                         Authorization: auth?.token
                     },
                 });
             } else if (role === "merchant") {
-                res = await axios.get("http://localhost:5050/auth/user-auth/merchant", {
+                res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/user-auth/merchant`, {
                     headers: {
                         Authorization: auth?.token
                     },
                 });
             } else if (role === "dperson") {
-                res = await axios.get("http://localhost:5050/auth/user-auth/dperson", {
+                res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/user-auth/dperson`, {
                     headers: {
                         Authorization: auth?.token
                     },

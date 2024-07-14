@@ -13,7 +13,7 @@ const DelPerson = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.post("http://localhost:5050/shops/getdpshopname", { uname: auth.user.uname });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/shops/getdpshopname`, { uname: auth.user.uname });
       if (response.data.success) {
 
         setShopName(response.data.shopName);
@@ -21,7 +21,7 @@ const DelPerson = () => {
 
       //disporders
       try {
-        const res = await axios.get(`http://localhost:5050/orders/getorders/${response.data.shopName}`);
+        const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/getorders/${response.data.shopName}`);
         const neworders = res.data.orders;
         // console.log("orders " + JSON.stringify(neworders));
         // setSelectedMenuOpt("Orders")
@@ -39,15 +39,15 @@ const DelPerson = () => {
 
   async function updateStatus(id, status) {
     try {
-      // const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, { status });
-      // const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}/${status}`, { status });
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}`, { status });
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}/${status}`, { status });
 
       // const response = await axios({
       //     method: 'POST',
-      //     url: `http://localhost:5050/orders/setstatus/${id}`,
+      //     url: `${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}`,
       //     body: { status }
       // })
-      const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}`, {
         status
       });
       if (response.status === 200) {

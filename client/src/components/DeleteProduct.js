@@ -16,7 +16,7 @@ const DeleteProduct = ({ shopName }) => {
 
     useEffect(() => {
         async function getprodlist() {
-            const response = await axios.get(`http://localhost:5050/products/getproductlist/${shopName}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/getproductlist/${shopName}`);
             if (response.status === 200) {
                 let nProds = [
                     // { value: '', label: 'Select Product Name', isFixed: true },
@@ -30,7 +30,7 @@ const DeleteProduct = ({ shopName }) => {
 
 
     const handleSelect = async () => {
-        const resp = await axios.get(`http://localhost:5050/products/singleproduct/${selPName.value}`);
+        const resp = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/singleproduct/${selPName.value}`);
         if (resp.data.success) {
             const product = resp.data.product;
             setPName(product.name);
@@ -44,7 +44,7 @@ const DeleteProduct = ({ shopName }) => {
     }
 
     const deleteProduct = async () => {
-        const response = await axios.post(`http://localhost:5050/products/deleteproduct/${shopName}`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/products/deleteproduct/${shopName}`, {
             pName: selPName.value
         });
         if (response.status === 200) {

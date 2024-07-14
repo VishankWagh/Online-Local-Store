@@ -27,13 +27,13 @@ const Merchant = () => {
 
         async function fetchData() {
             //get shopname
-            const res1 = await axios.post("http://localhost:5050/shops/getshopName", { uname: auth.user.uname });
+            const res1 = await axios.post(`${process.env.REACT_APP_SERVER_URL}/shops/getshopName`, { uname: auth.user.uname });
             if (res1.data.success) {
                 setShopName(res1.data.shopName);
             }
 
             //get shop catlist
-            const res2 = await axios.get(`http://localhost:5050/categories/getcategorylist/${res1.data.shopName}`);
+            const res2 = await axios.get(`${process.env.REACT_APP_SERVER_URL}/categories/getcategorylist/${res1.data.shopName}`);
             if (res2.status === 200) {
                 let nSCat = [
                     // { value: '', label: 'Select Category Name', isFixed: true },
@@ -43,7 +43,7 @@ const Merchant = () => {
             }
 
             //get all catlist
-            const res3 = await axios.get("http://localhost:5050/categories/getallcategories");
+            const res3 = await axios.get(`${process.env.REACT_APP_SERVER_URL}/categories/getallcategories`);
             if (res3.status === 200) {
                 let nCat = [
                     // { value: '', label: 'Select Category', isFixed: true },
@@ -64,7 +64,7 @@ const Merchant = () => {
     async function displayOrders() {
         try {
             if (shopName) {
-                const response = await axios.get(`http://localhost:5050/orders/getorders/${shopName}`);
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/getorders/${shopName}`);
                 const neworders = response.data.orders
                 // console.log("orders " + JSON.stringify(neworders));
                 // setSelectedMenuOpt("Orders")
@@ -79,15 +79,15 @@ const Merchant = () => {
 
     async function updateStatus(id, status) {
         try {
-            // const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, { status });
-            // const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}/${status}`, { status });
+            // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}`, { status });
+            // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}/${status}`, { status });
 
             // const response = await axios({
             //     method: 'POST',
-            //     url: `http://localhost:5050/orders/setstatus/${id}`,
+            //     url: `${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}`,
             //     body: { status }
             // })
-            const response = await axios.post(`http://localhost:5050/orders/setstatus/${id}`, {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders/setstatus/${id}`, {
                 status
             });
             if (response.status === 200) {
@@ -103,7 +103,7 @@ const Merchant = () => {
     }
 
     const addCategory = async () => {
-        const response = await axios.post("http://localhost:5050/categories/addcategory", { categoryName: category.value, shopName });
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/categories/addcategory`, { categoryName: category.value, shopName });
 
         if (response.status === 200) {
             alert(response.data.message);
@@ -114,7 +114,7 @@ const Merchant = () => {
     }
 
     const deleteCategory = async () => {
-        const response = await axios.post("http://localhost:5050/categories/deletecategory", { categoryName: category.value, shopName });
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/categories/deletecategory`, { categoryName: category.value, shopName });
 
         if (response.status === 200) {
             alert(response.data.message);

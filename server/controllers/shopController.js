@@ -59,7 +59,7 @@ export const getShopController = async (req, res) => {
 
 // get shopname 
 export const getShopNameController = async (req, res) => {
-    const uname = req.body.uname;
+    const { uname } = req.body;
     // console.log("u " + uname);
     try {
         const shop = await qbDB.collection("shops").findOne({ uname });

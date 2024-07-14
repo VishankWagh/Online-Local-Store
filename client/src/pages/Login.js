@@ -60,11 +60,10 @@ function Login() {
         }
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await axios.post(`http://localhost:5050/auth/login/${role}`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login/${role}`, {
             uname,
             password
         });

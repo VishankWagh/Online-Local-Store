@@ -19,7 +19,7 @@ const UpdateProduct = (props) => {
 
     useEffect(() => {
         async function getprodlist() {
-            const response = await axios.get(`http://localhost:5050/products/getproductlist/${props.shopName}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/getproductlist/${props.shopName}`);
             if (response.status === 200) {
                 let nProds = [
                     // { value: '', label: 'Select Product Name', isFixed: true },
@@ -34,7 +34,7 @@ const UpdateProduct = (props) => {
     // console.log("prls " + JSON.stringify(prodList), pName);
 
     const handleSelect = async () => {
-        const resp = await axios.get(`http://localhost:5050/products/singleproduct/${pName.value}`);
+        const resp = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/singleproduct/${pName.value}`);
 
         if (resp.data.success) {
             const product = resp.data.product;
@@ -55,7 +55,7 @@ const UpdateProduct = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log("prev ", prevName);
-        const response = await axios.post(`http://localhost:5050/products/updateproduct/${props.shopName}`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/products/updateproduct/${props.shopName}`, {
             pName,
             imageUrl,
             category,

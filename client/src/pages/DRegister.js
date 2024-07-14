@@ -27,7 +27,7 @@ const DRegister = () => {
             return;
         }
         try {
-            const response = await axios.post("http://localhost:5050/auth/d-register", {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/d-register`, {
                 name,
                 shopName,
                 email,

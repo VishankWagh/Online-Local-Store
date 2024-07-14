@@ -8,7 +8,7 @@ function Login() {
 
     document.title = "Quik-Buy | Login";
 
-    const [uname, setUname] = useState("a");
+    const [uname, setUname] = useState("gaurav");
     const [password, setPassword] = useState("a");
     const [role, setRole] = useState("c");
     const [errMsg, setErrMsg] = useState("");
@@ -26,7 +26,7 @@ function Login() {
         setRole(userRole);
         switch (userRole) {
             case "c":
-                setUname("a")
+                setUname("gaurav")
                 setPassword("a")
                 break;
             case "s":
@@ -34,7 +34,7 @@ function Login() {
                 setPassword("hh")
                 break;
             case "d":
-                setUname("dphh")
+                setUname("harsh")
                 setPassword("dphh")
                 break;
         }
@@ -115,7 +115,7 @@ function Login() {
                     <div className="mb-3">
                         <label htmlFor="pswd" className="form-label">Password</label>
                         <input type="password" className="form-control" id="pswd" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Password' required />
-                        <p className="fg-pswd" ><span className="">Forgot Password ?</span></p>
+                        {/* <p className="fg-pswd" ><span className="">Forgot Password ?</span></p> */}
                     </div>
                     <button type="submit" className="mb-3 btn btn-primary" >LOGIN</button>
                     <p className="text-center" >Don't have an Account?  Please <span onClick={() => reg_redirect()} className="text-primary btn reg-btn">Register</span></p>

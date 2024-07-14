@@ -1,13 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../images/QBuy-logo.jpg';
 import { useAuth } from '../context/auth';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 const Header = () => {
 
     const [auth, setAuth] = useAuth();
+    const [fullName, setFullName] = useState("fname");
 
-    useEffect(() => { }, [auth]);
+    useEffect(() => {
+        auth.user && (async () => {
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/getname/${auth.user.uname}`);
+            console.log(response);
+            if (response.data.success) {
+                setFullName(response.data.name);
+            }
+            else {
+                console.log("Error", response.data.message);
+            }
+        })();
+    }, [auth]);
+
 
     function regSelect(sel) {
         // console.log("reg " + sel);
@@ -105,9 +119,9 @@ const Header = () => {
                             <Link to={`/${auth.user.role.toLowerCase()}/profile`}>
                                 <span className="nav-link user-profile">
                                     <div className="user-logo text-uppercase">
-                                        {auth.user.uname.slice(0, 1)}
+                                        {fullName.slice(0, 1)}
                                     </div>
-                                    <div className="uname">{auth.user.uname}</div>
+                                    <div className="uname">{fullName.split(" ")[0]}</div>
                                 </span>
                             </Link>
                         </li>

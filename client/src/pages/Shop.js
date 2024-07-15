@@ -16,7 +16,7 @@ function Shop() {
     const [nproductList, setNProductList] = useState([]);
     const [shopProds, setShopProds] = useState([]);
     const [catSelected, setCatSelected] = useState(null);
-    const [shop_Cart, setShop_Cart] = useState();
+    const [shop_Cart, setShop_Cart] = useState([]);
 
     const [auth, setAuth] = useAuth();
 
@@ -50,7 +50,7 @@ function Shop() {
 
             // // console.log("prarr " + JSON.stringify(data.prodArr));
             setShopProds(prodLst);
-            auth?.user?.uname && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
+            auth.user && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
         }
         fetchShop(shop_Cart);
     }, [])
@@ -217,7 +217,7 @@ function Shop() {
         <>
             <div className="shop">
 
-                {shop_Cart && <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />}
+                <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
                 <div className="shop-img" style={{ backgroundImage: `url("${shop.shopImg || shopImgArr[sind]}")` }}>
                     {/* <img src={car} alt="" /> */}
                     <div className="shop-head">

@@ -50,7 +50,7 @@ function Shop() {
 
             // // console.log("prarr " + JSON.stringify(data.prodArr));
             setShopProds(prodLst);
-            auth.user.uname && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
+            auth?.user?.uname && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
         }
         fetchShop(shop_Cart);
     }, [])

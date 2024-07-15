@@ -13,7 +13,7 @@ function OrderHist() {
     useEffect(() => {
         async function fetchOrders() {
             // const nameRes = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/getname/${auth.user.uname}`);
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/getordersbyname/${auth.user.uname}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/getordersbyname/${auth.user?.uname}`);
             const pendord = response.data.orderList.filter((ord) => ord.status === "pending");
             const ord = response.data.orderList.filter((ord) => ord.status !== "pending");
             setPendOrderList(pendord);

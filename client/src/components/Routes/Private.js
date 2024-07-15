@@ -39,6 +39,5 @@ export default function PrivateRoute({ role }) {
         }
         if (auth?.token) authCheck();
     }, [auth?.token])
-
     return ok ? <Outlet /> : <Spinner />
 }

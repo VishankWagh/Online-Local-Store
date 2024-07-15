@@ -6,7 +6,7 @@ import { useAuth } from '../context/auth';
 
 const Spinner = () => {
 
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(2);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,7 +21,6 @@ const Spinner = () => {
         const interval = setInterval(() => {
             setCount(prev => --prev);
         }, 1000);
-
         const currURL = location.pathname + location.search;
         if (count === 0) {
             toast('You are not LoggedIn Please LogIn', {

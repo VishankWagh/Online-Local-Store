@@ -68,11 +68,3 @@ function App() {
 }
 
 export default App;
-
-// Home
-// Cart
-// Shop
-// Update Products
-// Delivery
-// Orders
-// Feedback

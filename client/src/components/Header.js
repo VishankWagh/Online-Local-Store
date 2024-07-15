@@ -12,7 +12,6 @@ const Header = () => {
     useEffect(() => {
         auth.user && (async () => {
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/getname/${auth.user.uname}`);
-            console.log(response);
             if (response.data.success) {
                 setFullName(response.data.name);
             }

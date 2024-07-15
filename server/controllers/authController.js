@@ -339,7 +339,6 @@ export const loginController = async (req, res) => {
         } else if (req.params.user === "d") {
 
             const dperson = await qbDB.collection("deliveryperson").findOne({ uname });
-            console.log("dp " + JSON.stringify(dperson));
             if (!dperson) {
                 return res.status(200).send({
                     success: false,

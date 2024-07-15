@@ -121,29 +121,32 @@ function Shop() {
     function addToCart(shopName, cartItem) {
         // Check if the shopName exists in the shopCart
         // let shopCart = JSON.parse(localStorage.getItem("shopCart"));
-        let shopCart = shop_Cart;
-        if (shopCart.filter((shp) => { return shp.shopName === shopName }).length) {
+        // let shopCart = shop_Cart;
+        document.getElementById("cart").style.right = "0%";
+        if (shop_Cart.filter((shp) => { return shp.shopName === shopName }).length) {
             // Check if the cartItem exists in the shopCart
-            for (let item of shopCart) {
-                if (item["shopName"] === shopName) {
-                    // If the cartItem exists, increment the qty property
-                    let citmFndAt = -1;
-                    item.cartItems.map((citm, ind) => { if (citm.prodName === cartItem.prodName) citmFndAt = ind })
-                    if (citmFndAt >= 0) {
-                        item.cartItems[citmFndAt].qty += 1;
-                    } else {
-                        // If the cartItem does not exist, push it to the array of cartItems
-                        item["cartItems"].push(cartItem);
+            setShop_Cart(prvShopCart => {
+                for (let item of prvShopCart) {
+                    if (item["shopName"] === shopName) {
+                        // If the cartItem exists, increment the qty property
+                        let citmFndAt = -1;
+                        item.cartItems.map((citm, ind) => { if (citm.prodName === cartItem.prodName) citmFndAt = ind })
+                        if (citmFndAt >= 0) {
+                            item.cartItems[citmFndAt].qty += 1;
+                        } else {
+                            // If the cartItem does not exist, push it to the array of cartItems
+                            item["cartItems"].push(cartItem);
+                        }
                     }
                 }
-            }
+                return [...prvShopCart];
+            });
         } else {
-            // If the shopName does not exist, push the shopName and cartItem to the shopCart array
-            shopCart.push({ "shopName": shopName, "cartItems": [cartItem] })
+            // If the shopName does not exist, push the shopName and cartItem to the shop_Cart array
+            setShop_Cart(p => [...p, { "shopName": shopName, "cartItems": [cartItem] }]);
         }
-        localStorage.setItem("shopCart", JSON.stringify(shopCart));
-        setShop_Cart(JSON.parse(localStorage.getItem("shopCart")))
-        document.getElementById("cart").style.right = "0%";
+        localStorage.setItem("shopCart", JSON.stringify(shop_Cart));
+        // setShop_Cart(JSON.parse(localStorage.getItem("shopCart")))
     }
 
     // delete cart item

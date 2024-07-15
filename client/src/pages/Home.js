@@ -238,7 +238,7 @@ function Home() {
 
                 <div className="content">
 
-                    {shop_Cart && <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />}
+                    <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />
                     {/* {auth.user && <Cart shopCart={shop_Cart} deleteCartItem={deleteCartItem} incdecQty={incdecQty} />} */}
                     <div className="drop-downs d-flex">
                         <DropDown data={areaLs} updSrchd={updateSearched} name={"area"} />

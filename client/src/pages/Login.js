@@ -70,11 +70,6 @@ function Login() {
 
         if (response.data.success) {
 
-            (async () => {
-                const response = await axios.get(`https://slms-backend.vercel.app/get/visitor-count/quik-buy`);
-                console.log("Visitor Count:", response.data.visitCount);
-            })();
-
             setAuth({
                 ...auth,
                 user: response.data.user,

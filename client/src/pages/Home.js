@@ -24,6 +24,10 @@ function Home() {
     const [auth, setAuth] = useAuth();
 
     useEffect(() => {
+        (async () => {
+            const response = await axios.get(`https://slms-backend.vercel.app/get/visitor-count/quik-buy`);
+            console.log("Visitor Count:", response.data.visitCount);
+        })();
         window.scrollTo(0, 0);
         auth.user && setShop_Cart(JSON.parse(localStorage.getItem("shopCart")));
         fetchShopList(page);
